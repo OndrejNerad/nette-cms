@@ -1,14 +1,22 @@
 {
-	"type": "module",
-	"dependencies": {
-		"nette-forms": "^3.3"
-	},
-	"devDependencies": {
-		"@nette/vite-plugin": "^1.0.1",
-		"vite": "^6.3.5"
-	},
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build"
-	}
+    "type": "module",
+    "dependencies": {
+        "nette-forms": "^3.3"
+    },
+    "devDependencies": {
+        "@nette/vite-plugin": "^1.0.1",
+        "bootstrap": "5.3",
+        "jquery": "^3.7.1",
+        "npm-run-all": "^4.1.5",
+        "sass": "^1.94.2",
+        "vite": "^6.3.5"
+    },
+    "scripts": {
+        "dev:js": "cp node_modules/jquery/dist/jquery.min.js www/assets/js/jquery.min.js && cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js www/assets/js/bootstrap.bundle.min.js && cp assets/js/script.js www/assets/js/script.js",
+        "build:js": "cp node_modules/jquery/dist/jquery.min.js www/assets/js/jquery.min.js && cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js www/assets/js/bootstrap.bundle.min.js && cp assets/js/script.js www/assets/js/script.js",
+        "dev:css": "sass --watch assets/scss/index.scss:www/assets/css/index.css --load-path=node_modules",
+        "build:css": "sass assets/scss/index.scss:www/assets/css/index.css --style=compressed --load-path=node_modules",
+        "dev": "npm-run-all --parallel dev:css dev:js",
+        "prod": "npm run build:css && npm run build:js"
+    }
 }

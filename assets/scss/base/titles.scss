@@ -1,0 +1,13 @@
+.title {
+    &--h2 {
+        font-size: 104px; font-weight: 700;
+    }
+
+    &--gray {
+
+    }
+
+    .text-outline {
+        color: transparent; -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: #fff;
+    }
+}

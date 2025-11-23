@@ -18,7 +18,6 @@ final class RouterFactory
         $router->addRoute('/', 'StaticPage:default');
         $router->addRoute('<url>', 'StaticPage:default');
 
-//        $router->addRoute('<presenter>/<action>[/<id>]', 'Home:default');
 		return $router;
 	}
 }

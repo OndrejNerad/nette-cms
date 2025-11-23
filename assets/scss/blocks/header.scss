@@ -1,0 +1,13 @@
+.header-block {
+    min-height: 80svh; padding-top: 120px; padding-bottom: 80px; display: flex; align-items: center;
+
+    .stamp {
+        position: absolute; bottom: 0; right: 10%; transform: translateY(50%); z-index: 1;
+    }
+
+    .title { color: $white;}
+    .btn-wrap { margin-top: 20px;
+        .btn + .btn { margin-left: 8px;}
+    }
+
+}

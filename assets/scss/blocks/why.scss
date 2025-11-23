@@ -1,0 +1,75 @@
+.why-block {
+    min-height: 80svh; padding-top: 20svh; padding-bottom: 12svh; overflow: hidden;
+
+    .gradient {
+        position: absolute; inset: 0;
+        background: linear-gradient(187.4deg, #C41716 15%, #D47D7D 30%, #E4E4E4 50%);
+    }
+
+    .title--lg {
+        position: absolute; top: 0; color: transparent; line-height: 1; font-size: 840px; left: -10%;
+        font-weight: 700; -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: #C4171769;
+    }
+
+
+    .col-st {
+        .boxes {
+            display: flex; justify-content: flex-end;
+
+            .box {
+                padding: 20px 26px; color: $white; text-align: center; background-color: $dark-bck; height: 100%;
+                border-radius: 8px; font-size: 20px; line-height: 1.08em; letter-spacing: -.02em;
+
+                &:nth-child(1) { flex: 0 0 35%;}
+                &:nth-child(2) { flex: 0 0 25%; transform: translateY(60%);}
+                &:nth-child(3) { flex: 0 0 20%; transform: translateY(50%);}
+
+                & + .box { margin-left: 6px;}
+
+                &.red {
+                    background-color: $red;
+                }
+
+                .arrow {
+                    position: absolute; bottom: 0; left: 0; transform: translateY(90%);
+                }
+            }
+        }
+
+        .images {
+            .car { transform: translate(5%, 20%);}
+            .person { position: absolute; bottom: 0;}
+            .person-nd { position: absolute; bottom: -40px; left: 40%;}
+        }
+    }
+
+
+    .col-nd {
+        padding-left: 10%; padding-right: 20%;
+
+        .circles {
+            display: flex; flex-wrap: wrap;
+
+            .circle {
+                display: flex; flex-direction: column; justify-content: center; align-items: center;
+                background-color: $red; border-radius: 100%; text-align: center; padding: 20px;
+
+                .icon { margin-bottom: 16px;}
+
+                .text { color: $white; font-size: 24px; line-height: 1.08em;}
+
+                &.st { width: 11vw; height: 11vw;}
+                &.nd { width: 16vw; height: 16vw; transform: translateY(10%);}
+                &.rd { width: 12vw; height: 12vw; transform: translate(5%, -30%);}
+                &.th {
+                    background-color: $white; width: 10vw; height: 10vw; transform: translate(4%, 20%);
+
+                    .text { color: $red;}
+                    .icon { margin-bottom: 0; margin-top: 10px;}
+                }
+            }
+        }
+    }
+
+
+}

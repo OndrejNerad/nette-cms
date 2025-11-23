@@ -1,0 +1,41 @@
+.product-carousel-block {
+    padding-top: 10svh; padding-bottom: 12svh;
+
+    .title {
+        text-transform: uppercase; color: #C9C9C9; line-height: 1.08em;
+
+        .text-outline {
+            color: transparent; -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: $red; opacity: .2;
+        }
+    }
+
+    .product-carousel {}
+
+    .product-slide {
+        display: flex; border-radius: 8px; overflow: hidden;
+
+        .image {
+            flex: 0 0 60%; background-size: cover; background-position: center;
+        }
+
+        .text-content {
+            flex: 0 0 40%; padding: 68px; background-color: $dark-bck; color: $white;
+
+            .title {}
+            .price {}
+            .dph-note {}
+            .subtitle {}
+            .text {}
+
+            .tags {
+                .tag {
+
+                }
+            }
+
+            .btn-wrap {
+                .btn {}
+            }
+        }
+    }
+}

@@ -51,6 +51,14 @@ services:
         networks:
             - app-network
 
+    node:
+        image: node:20
+        container_name: cms-node
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html
+        command: ["tail", "-f", "/dev/null"]  # keep container running for npm tasks
+
 networks:
     app-network:
         driver: bridge

@@ -1,1 +1,50 @@
-<h1>STATIC PAGE PRESENTER - default</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Nette CMS</title>
+
+
+    <link rel="stylesheet" href="/assets/css/index.css">
+
+    <!-- JS order is important -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrap">
+        <a href="/" class="logo">
+            <img src="/assets/img/logo.png" alt="">
+        </a>
+        <div class="menu">
+            <a href="/nabidka-vozu" class="nav-link">Nabídka vozů</a>
+            <a href="/poptat-vuz" class="nav-link">Poptat vůz</a>
+            <a href="/oceneni" class="nav-link">Ocenění</a>
+            <a href="/autoinspekt" class="nav-link">Autoinspekt</a>
+            <span class="separ">|</span>
+            <a href="/o-nas" class="nav-link">O nás</a>
+            <a href="/faq" class="nav-link">FAQ</a>
+            <a href="/kontakt" class="nav-link">Kontakt</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-wrap">
+    <h1>content</h1>
+    {block content}{/block}
+</div>
+
+<footer>
+    <h1>footer</h1>
+</footer>
+</body>
+</html>

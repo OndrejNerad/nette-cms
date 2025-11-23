@@ -1,0 +1,31 @@
+nav {
+    position: fixed; inset: 0; bottom: unset; z-index: 10;
+
+    .nav-wrap {
+        display: flex; justify-content: space-between; padding: 35px;
+
+        .logo {}
+
+        .menu {
+            display: flex;
+
+            .separ { color: $white; font-weight: 700; margin-left: 33px;}
+
+            .nav-link {
+                color: $white; font-weight: 700;
+
+                &:hover { color: $red;}
+
+                &:not(:first-child) {
+                    margin-left: 33px;
+                }
+            }
+        }
+
+        .lang-switcher { margin-left: 43px;
+            .lang-link {
+
+            }
+        }
+    }
+}

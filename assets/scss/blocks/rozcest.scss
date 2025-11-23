@@ -1,0 +1,34 @@
+.rozcestnik-block {
+
+    .rozcest-wrap {
+        display: flex; flex-wrap: wrap;
+
+    }
+
+    .rozcest-link {
+        padding: 120px 200px; text-decoration: none; display: flex; flex-direction: column; justify-content: center;
+        align-items: center; text-align: center; height: 100%; border-top: 2px solid $gray; flex: 0 0 50%;
+
+        &:hover {
+            .title { color: $red;}
+        }
+
+        &.nd { border-left: 2px solid $gray;}
+        &.hor {
+            flex-direction: row; justify-content: space-between; flex: 0 0 100%;
+
+            .text-wrap { flex: 0 0 60%;}
+            .arrow-link { margin-top: 0;}
+        }
+
+        .title {
+            font-size: 44px; font-weight: 700; color: $dark-bck; line-height: 1.04em; margin-top: 20px;
+        }
+
+        .text {
+            color: $dark-bck; font-size: 24px; font-weight: 700; margin-top: 22px;
+        }
+
+        .arrow-link { margin-top: 36px;}
+    }
+}

@@ -1,0 +1,13 @@
+.btn {
+    background-color: $red; padding: 15px 34px; color: $white; font-weight: 700; border-radius: 47px;
+
+    &:hover, &:focus {
+        background-color: $white; color: $red;
+    }
+
+    &--outline {
+        background-color: transparent; border: 1px solid $red; color: $red;
+
+        &:hover { background-color: $white;}
+    }
+}

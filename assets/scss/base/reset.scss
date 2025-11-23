@@ -1,0 +1,52 @@
+/* Basic CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Reset anchor styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Reset images */
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+/* Smooth rendering */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Inputs and buttons */
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* Remove button tap highlight on mobile */
+button {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}

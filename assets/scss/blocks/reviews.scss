@@ -1,0 +1,35 @@
+.reviews-block { padding-top: 80px; padding-bottom: 80px;
+
+    .review-carousel { margin-bottom: 60px;}
+
+    .review-item {
+        .review-wrap {
+            background-color: #272727; border-radius: 8px; padding: 50px 45px;
+
+            .image {}
+
+            .name { color: $white; font-size: 32px; font-weight: 700; margin-top: 15px;}
+
+            .stars { display: flex;
+                .star + .star { margin-left: 4px;}
+            }
+
+            .text {
+                color: #9D9D9D; font-size: 20px; font-weight: 400; letter-spacing: -.02em; margin-top: 20px;
+            }
+
+            .text-link { color: #929292; font-size: 20px; font-weight: 700; text-decoration: underline;}
+        }
+    }
+
+    .separ {
+        width: 100%; border-top: 2px solid #CACACA; margin-bottom: 36px;
+    }
+
+    .text-wrap {
+        font-size: 20px; letter-spacing: -.03em; color: $dark-bck;
+
+        .lg-text { text-transform: uppercase; margin-right: 48px; font-weight: 700;}
+        .text {}
+    }
+}

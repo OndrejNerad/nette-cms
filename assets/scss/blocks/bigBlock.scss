@@ -1,0 +1,52 @@
+.big-block {
+    .image-block {
+        &.st { min-height: 80svh;
+
+            &::before {
+                content: ""; position: absolute; inset: 0; z-index: 1;
+                background: linear-gradient(0deg, #C41717 0%, rgba(196, 23, 23, 0) 100%)
+            }
+
+            .image-st {}
+            .image-nd { position: absolute; bottom: 10%; right: 20%;}
+        }
+
+        &.nd { min-height: 80svh;
+
+            &::before {
+                content: ""; position: absolute; inset: 0; bottom: 40%; z-index: 1;
+                background: linear-gradient(180deg, #C41717 0%, rgba(196, 23, 23, 0) 100%)
+            }
+
+            &::after {
+                content: ""; position: absolute; inset: 0; top: 60%; z-index: 1;
+                background: linear-gradient(0deg, #252525 4.81%, #252525 25.09%, rgba(37, 37, 37, 0.94) 36.84%, rgba(37, 37, 37, 0.82) 44.76%, rgba(37, 37, 37, 0) 100%);
+            }
+        }
+    }
+
+    .text-block {
+        &.st { background-color: $red;
+            .text-box {
+                &.st { transform: translateY(-30%);}
+                &.nd { transform: translateY(30%);}
+            }
+        }
+
+        &.nd { background-color: #252525;}
+
+        .text-box {
+            color: $white; padding-left: 75px; padding-right: 35%; z-index: 2;
+
+            &.--w-line .separ {
+                position: absolute; left: 0; top: -20%; bottom: -20%;
+            }
+
+            &--hor {
+                display: flex; justify-content: space-between;
+            }
+
+            .btn-wrap { margin-top: 40px;}
+        }
+    }
+}

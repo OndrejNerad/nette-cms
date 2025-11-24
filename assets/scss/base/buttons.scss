@@ -9,5 +9,11 @@
         background-color: transparent; border: 1px solid $red; color: $red;
 
         &:hover { background-color: $white;}
+
+        &--white {
+            border-color: $white; color: $white;
+
+            &:hover { color: $red;}
+        }
     }
 }

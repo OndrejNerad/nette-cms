@@ -1,0 +1,38 @@
+.dovoz-block {
+    background-color: $light-bck; padding-top: 18svh; padding-bottom: 20svh;
+
+    .bck-pattern {
+        position: absolute; inset: 0; right: 40%;
+        background: radial-gradient(circle,rgba(228, 228, 228, 0) 0%, rgba(228, 228, 228, 1) 59%);
+
+        svg { height: 100%;}
+
+        &::before {
+            content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background: radial-gradient(circle, rgba(228, 228, 228, 0) 0%, rgb(228, 228, 228) 80%);
+        }
+    }
+
+    .container { z-index: 1;}
+
+    .text-col .text-wrap {
+        display: flex; flex-direction: column; justify-content: center; height: 100%;
+
+        .text { font-size: 24px; margin-top: 12px;}
+
+        .flag-box { display: flex; margin-top: 24px;
+            .icon { margin-right: 16px;}
+
+            .text {
+                font-size: 20px; text-transform: uppercase; font-weight: 700; letter-spacing: -.03em;
+                margin-top: 0;
+            }
+        }
+
+        .btn-wrap { margin-top: 45px;}
+
+
+    }
+
+
+}

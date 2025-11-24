@@ -1,0 +1,49 @@
+.social-feed-block { padding-top: 80px; padding-bottom: 80px;
+
+    .social-link-wrap {
+        display: flex; height: 100%; justify-content: flex-end; align-items: flex-end; padding-bottom: 16px;
+
+        .social-link { display: flex;
+
+            &:hover .text { text-decoration: none;}
+
+            .text {
+                color: $red; font-size: 20px; font-weight: 700; text-decoration: underline; letter-spacing: -.03em;
+                line-height: 1.15em;
+            }
+
+            .icon { margin-left: 16px;}
+        }
+    }
+
+    .social-wrap {
+        display: flex; flex-wrap: wrap; margin-top: 38px; gap: 42px;
+    }
+
+    .social-item {
+        flex: 0 0 calc(25% - (42px / 4) * 3);
+
+        .image {
+            min-height: 50svh; background-size: cover; background-repeat: no-repeat; background-position: center;
+            border-radius: 8px; overflow: hidden;
+        }
+
+        .text {
+            text-align: center; padding: 27px 20px 6px; font-size: 20px; font-weight: 400; letter-spacing: -.02em;
+            line-height: 1.4em;
+        }
+
+        .reaction { display: flex; justify-content: center;
+            &-item { display: flex; align-items: center;
+                + .reaction-item { margin-left: 21px;}
+
+                .icon { margin-right: 6px;}
+
+                .count {
+                    font-size: 20px; font-weight: 400; letter-spacing: -.03em; color: #AAAAAA;
+                }
+            }
+
+        }
+    }
+}

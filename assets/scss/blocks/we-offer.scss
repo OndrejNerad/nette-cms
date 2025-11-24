@@ -1,0 +1,28 @@
+.we-offer-block { padding-top: 220px; padding-bottom: 80px;
+
+    .title-col {
+        display: flex; flex-direction: column; height: 100%;
+
+        .bottom { margin-top: auto;}
+    }
+
+    .boxes-wrap {
+        display: flex; flex-wrap: wrap; justify-content: space-between;
+
+        .box {
+            flex: 0 0 calc(50% - 20px); padding-right: 12%;
+
+            &:not(:first-child), &:not(:nth-child(2)) { margin-top: 64px;}
+
+            .icon {}
+
+            .name {
+                margin-top: 14px; font-size: 32px; font-weight: 700; line-height: 1.04em;
+            }
+
+            .text {
+                margin-top: 16px; font-size: 20px; font-weight: 400; letter-spacing: -.02em; line-height: 1.5em;
+            }
+        }
+    }
+}

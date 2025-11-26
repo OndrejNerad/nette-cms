@@ -1,7 +1,6 @@
 services:
 	- App\Core\RouterFactory::createRouter
 
-
 search:
 	-	in: %appDir%
 		classes:

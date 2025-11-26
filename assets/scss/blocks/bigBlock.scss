@@ -33,10 +33,28 @@
             }
         }
 
-        &.nd { background-color: #252525;}
+        .text-block-wrap--hor {
+            padding: 0 75px; display: flex; align-items: flex-end;
+
+            .image { flex: 0 0 20%;}
+
+            .text-box {
+                padding-right: 10%; flex: 0 0 60%; padding-bottom: 60px;
+
+                .text { font-size: 24px; letter-spacing: -.02em;}
+            }
+
+            .btn-wrap { padding-bottom: 5%;}
+        }
+
+        &.nd { background-color: #252525; padding-bottom: 160px;}
 
         .text-box {
             color: $white; padding-left: 75px; padding-right: 35%; z-index: 2;
+
+            &--hor {
+
+            }
 
             &.--w-line .separ {
                 position: absolute; left: 0; top: -20%; bottom: -20%;

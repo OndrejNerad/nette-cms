@@ -9,8 +9,6 @@
         }
     }
 
-    .product-carousel {}
-
     .product-slide {
         display: flex; border-radius: 8px; overflow: hidden;
 
@@ -62,6 +60,18 @@
             .btn-wrap { text-align: right;
                 .btn {}
             }
+        }
+    }
+
+    .product-pagination {
+        display: flex; align-items: center; margin-top: 25px;
+
+        .swiper-pagination-bullet {
+            width: 10px; height: 10px; background-color: #C2C2C2;
+
+            &:not(:first-child) { margin-left: 34px;}
+
+            &-active { width: 15px; height: 15px; background-color: #353535;}
         }
     }
 

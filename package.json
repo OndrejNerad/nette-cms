@@ -1,7 +1,8 @@
 {
     "type": "module",
     "dependencies": {
-        "nette-forms": "^3.3"
+        "nette-forms": "^3.3",
+        "nodemon": "^3.1.11"
     },
     "devDependencies": {
         "@nette/vite-plugin": "^1.0.1",
@@ -12,7 +13,7 @@
         "vite": "^6.3.5"
     },
     "scripts": {
-        "dev:js": "cp node_modules/jquery/dist/jquery.min.js www/assets/js/jquery.min.js && cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js www/assets/js/bootstrap.bundle.min.js && cp assets/js/script.js www/assets/js/script.js",
+        "dev:js": "nodemon --watch assets/js/script.js --exec \"cp assets/js/script.js www/assets/js/script.js\"",
         "build:js": "cp node_modules/jquery/dist/jquery.min.js www/assets/js/jquery.min.js && cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js www/assets/js/bootstrap.bundle.min.js && cp assets/js/script.js www/assets/js/script.js",
         "dev:css": "sass --watch assets/scss/index.scss:www/assets/css/index.css --load-path=node_modules",
         "build:css": "sass assets/scss/index.scss:www/assets/css/index.css --style=compressed --load-path=node_modules",

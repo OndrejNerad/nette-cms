@@ -1,0 +1,30 @@
+.team-block { padding-top: 175px; padding-bottom: 170px;
+
+    h1.title {
+        text-align: center; font-size: 14vw; opacity: .15; text-transform: uppercase; line-height: 0.3; z-index: 1;
+        letter-spacing: 0.27em; font-weight: 700;
+    }
+
+    .team-wrap { display: flex; justify-content: space-between;
+        .team-item { text-align: center;
+            img { margin: 0 auto;}
+            .name {
+                font-size: 24px; font-weight: 700; letter-spacing: -.02em; line-height: 1.5em; margin-top: 40px;
+            }
+
+            .position {
+                font-size: 16px; text-transform: uppercase; font-weight: 700; letter-spacing: .03em;
+                margin-bottom: 10px;
+            }
+
+            .contact { display: flex; flex-direction: column;
+                a {
+                    font-size: 20px; letter-spacing: -.02em; line-height: 1.5em;
+                }
+            }
+
+        }
+    }
+
+
+}

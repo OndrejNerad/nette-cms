@@ -1,0 +1,8 @@
+.separ-block {
+    background-color: $white;
+
+    .separ {
+        position: relative; height: 2px;
+        background: linear-gradient(90deg, rgba(224, 224, 224, 0) 0%, #E0E0E0 49.52%, rgba(224, 224, 224, 0) 100%);
+    }
+}

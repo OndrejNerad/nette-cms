@@ -1,0 +1,26 @@
+.cta-block {
+    padding-top: 90px; padding-bottom: 94px; text-align: center;
+
+    .full-bck {
+        &::before {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(106.26deg, #C41717 24.66%, rgba(196, 23, 23, 0) 87.16%);
+        }
+    }
+
+
+    .title {
+        color: $white; font-size: 60px; font-weight: 700;
+    }
+
+    .text { color: $white; font-size: 24px; letter-spacing: -.02em; line-height: 1.5em;}
+
+    .btn-wrap { margin-top: 25px;
+        .btn {
+            margin: 0 auto; background-color: $red;
+
+            .text { font-size: 20px; margin-bottom: 10px;}
+        }
+    }
+
+}

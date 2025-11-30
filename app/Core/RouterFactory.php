@@ -17,8 +17,6 @@ final class RouterFactory
         $router->addRoute('/', 'StaticPage:default');
         $router->addRoute('<url>', 'StaticPage:default');
 
-        bdump($router);
-
         return $router;
     }
 }

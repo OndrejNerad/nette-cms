@@ -1,0 +1,17 @@
+.contact-block {
+    padding-top: 175px; padding-bottom: 80px;
+
+    .contact-wrap {
+        display: flex; flex-wrap: wrap; margin-top: 30px;
+
+        .contact {
+            flex: 0 0 50%; font-size: 24px; letter-spacing: -.02em; margin-bottom: 30px; padding-right: 20px;
+
+            &.--sm { font-size: 20px; color: #777;}
+
+            .label {
+                font-size: 20px; color: #B1B1B1; text-transform: uppercase; font-weight: 700; letter-spacing: .2em;
+            }
+        }
+    }
+}

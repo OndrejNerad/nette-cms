@@ -1,5 +1,5 @@
 .big-block {
-    .image-block {
+    .image-wrap {
         &.st { min-height: 80svh;
 
             &::before {
@@ -25,7 +25,7 @@
         }
     }
 
-    .text-block {
+    .text-wrap {
         &.st { background-color: $red;
             .text-box {
                 &.st { transform: translateY(-30%);}

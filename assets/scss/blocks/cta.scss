@@ -8,19 +8,13 @@
         }
     }
 
-
     .title {
-        color: $white; font-size: 60px; font-weight: 700;
+        color: $white; font-size: 60px; font-weight: 700; margin-bottom: 20px;
     }
 
     .text { color: $white; font-size: 24px; letter-spacing: -.02em; line-height: 1.5em;}
 
     .btn-wrap { margin-top: 25px;
-        .btn {
-            margin: 0 auto; background-color: $red;
-
-            .text { font-size: 20px; margin-bottom: 10px;}
-        }
+        .btn { margin: 0 auto;}
     }
-
 }

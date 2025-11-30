@@ -25,14 +25,9 @@
                 &:nth-child(3) { flex: 0 0 20%; transform: translateY(50%);}
 
                 & + .box { margin-left: 6px;}
+                &.red { background-color: $red;}
 
-                &.red {
-                    background-color: $red;
-                }
-
-                .arrow {
-                    position: absolute; bottom: 0; left: 0; transform: translateY(90%);
-                }
+                .arrow { position: absolute; bottom: 0; left: 0; transform: translateY(90%);}
             }
         }
 

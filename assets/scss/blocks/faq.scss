@@ -1,0 +1,56 @@
+.faq-block {
+    padding-top: 175px; padding-bottom: 80px;
+
+    .image-wrap { height: 42vw;
+
+        //.circle,
+        &::before {
+            content: ""; position: absolute; width: 42vw; height: 42vw; background-color: rgba(0,0,0,.04);
+            border-radius: 100%; top: 0; right: 0;
+        }
+
+        .box {
+            position: absolute; padding: 20px 26px; color: $white; text-align: center; background-color: $red;
+            border-radius: 8px; font-size: 20px; line-height: 1.08em; letter-spacing: -.02em; left: 25%; top: 10%;
+            max-width: 280px; z-index: 1;
+
+            .arrow { position: absolute; bottom: 0; left: 0; transform: translateY(90%);}
+        }
+
+        .person { position: absolute; bottom: 20%; left: 12%; transform: rotate(3deg);
+            svg { max-width: 160px;}
+        }
+
+        .question-icon {
+            position: absolute; inset: 0; display: flex; justify-content: center; align-items: center;
+        }
+
+        .star-icon {
+            position: absolute; bottom: 15%; right: 15%;
+        }
+    }
+
+    .accordionTabs {
+        .accordion-item {
+            padding-top: 32px; padding-bottom: 32px; border-top: 2px solid #BABABA;
+
+            &:last-child { border-bottom: 2px solid #BABABA;}
+        }
+
+        .accordion-button { display: flex;
+            &::after { content: none;}
+            &.collapsed .icon { transform: rotate(0deg); transition: .5s all;}
+
+            .title {
+                font-size: 24px; font-weight: 700; letter-spacing: -.02em; line-height: 1.5em;
+            }
+
+            .icon {
+                margin-left: auto; background-color: $red; display: flex; justify-content: center; align-items: center;
+                width: 30px; height: 30px; border-radius: 100%; transform: rotate(180deg); transition: .5s all;
+            }
+        }
+
+        .accordion-body { padding-top: 32px;}
+    }
+}

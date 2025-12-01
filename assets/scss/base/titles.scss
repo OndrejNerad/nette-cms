@@ -11,13 +11,20 @@
         font-size: 44px; font-weight: 700;
     }
 
+    &--sm {
+        font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: -.03em; line-height: 1.5em;
+        text-align: center;
+    }
+
 
     &--white { color: $white;}
 
     &--gray { }
 
     .text-outline {
-        color: transparent; -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: #fff;
+        //color: transparent; -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: #fff;
+        text-shadow: 0 0 2px #C41717A6, 0 0 2px #C41717A6, 1px 1px 2px #C41717A6, -1px 1px 2px #C41717A6, 1px -1px 2px #C41717A6, -1px -1px 2px #C41717A6;
+        color: #e4e4e4;
 
         &.--red { -webkit-text-stroke-color: $red;}
     }

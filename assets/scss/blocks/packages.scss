@@ -1,0 +1,49 @@
+.packages-block {
+    background-color: #EFEFEF; padding-top: 120px; padding-bottom: 125px;
+
+    .title-row { padding-bottom: 80px;}
+    .packages-wrap { gap: 20px; display: flex;
+
+        .package {
+            flex: 0 0 calc((100% / 3) - (20px / 3) * 2); display: flex; flex-direction: column;
+
+            &.--st .package-head { background: linear-gradient(90deg, #2B2727 0%, #5B2222 100%)}
+            &.--nd .package-head { background: linear-gradient(90deg, #602222 0%, #8C1C1C 100%);}
+            &.--rd .package-head { background: linear-gradient(90deg, #911C1C 0%, #C41717 100%);}
+
+            &-head {
+                padding: 85px 55px 35px; color: $white; line-height: 1.5em; border-radius: 8px 8px 0 0;
+
+                .icon {
+                    position: absolute; top: 0; transform: translateY(-50%); padding: 10px; background: $white;
+                    border-radius: 100%;
+                }
+
+                .title { font-size: 42px; font-weight: 700; letter-spacing: -.02em}
+                .price { font-size: 28px; letter-spacing: -.02em;}
+            }
+
+            &-body {
+                padding: 42px 55px; background-color: $white; height: 100%; display: flex; flex-direction: column;
+
+                ul { list-style: none; padding-right: 34px; margin-bottom: 40px;
+
+                    li { position: relative; font-size: 20px; letter-spacing: -.02em; padding-bottom: 15px;
+
+                        &:not(:first-child) { margin-top: 15px; border-top: 1px solid #E5E5E5; padding-top: 15px;}
+                        &:first-child::before { top: 6px;}
+
+                        &::before {
+                            content: ""; display: block; position: absolute; transform: translateX(-100%); left: -10px;
+                            top: 21px; width: 22px; height: 22px; background-color: $red; border-radius: 100%;
+                            background-repeat: no-repeat; background-position: center; background-size: 12px 9px;
+                            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='9' viewBox='0 0 12 9'><path d='M0.710938 3.75781L4.0324 7.07927L10.404 0.707647' stroke='white' stroke-width='2'/></svg>");
+                        }
+                    }
+                }
+
+                .btn-wrap { margin-top: auto;}
+            }
+        }
+    }
+}

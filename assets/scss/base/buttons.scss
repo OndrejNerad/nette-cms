@@ -10,11 +10,13 @@
 
         &:hover { background-color: $white;}
 
-        &--white {
-            border-color: $white; color: $white;
-
+        &--white { border-color: $white; color: $white;
             &:hover { color: $red;}
         }
+    }
+
+    &--full { width: 100%; background-color: transparent; color: $red; border-color: $red;
+        &:hover { background-color: $red; color: $white;}
     }
 
     &--circle {

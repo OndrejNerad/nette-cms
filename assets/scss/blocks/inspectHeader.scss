@@ -1,0 +1,36 @@
+.inspect-header-block {
+    padding-top: 175px; padding-bottom: 80px; background-color: #EFEFEF;
+
+    .text-wrap {
+        margin-top: 60px; padding-left: 72px; border-left: 2px solid #B1B1B1; font-size: 24px; letter-spacing: -0.02em;
+        line-height: 1.5em; padding-right: 10%;
+
+        .text--lg { font-size: 32px; line-height: 1.5em; letter-spacing: -.02em; margin-bottom: 40px;}
+    }
+
+    .image-wrap { height: 100%;
+        .magnifier-icon {
+            position: absolute; z-index: 1; right: -100px;
+        }
+
+        .box {
+            position: absolute; padding: 20px 26px; color: #fff; text-align: center; background-color: #C41717;
+            border-radius: 8px; font-size: 20px; line-height: 1.08em; letter-spacing: -0.02em; left: 20%; top: 0;
+            max-width: 280px; z-index: 1;
+
+            .arrow { position: absolute; bottom: 0; left: 0; transform: translateY(90%);}
+        }
+
+        .person {
+            position: absolute; top: 30%; z-index: 2; left: 5%;
+        }
+
+        .schema {
+            position: absolute; right: 0; top: 10%; z-index: 1;
+        }
+
+        .car {
+            position: absolute; top: 50%; z-index: 1; transform: translateX(2%);
+        }
+    }
+}

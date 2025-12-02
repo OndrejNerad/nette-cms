@@ -16,7 +16,6 @@ final class StaticPagePresenter extends Nette\Application\UI\Presenter
 
     public function actionDefault(?string $url = ''): void
     {
-
         $this->template->url = $url;
     }
 
@@ -25,7 +24,7 @@ final class StaticPagePresenter extends Nette\Application\UI\Presenter
         $url = $this->getParameter('url') ?? 'home';
 
         return [
-            __DIR__ . "/default-$url.latte",
+            __DIR__ . "/$url.latte",
             __DIR__ . "/default.latte",
         ];
     }

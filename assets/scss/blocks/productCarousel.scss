@@ -1,6 +1,11 @@
 .product-carousel-block {
     padding-top: 10svh; padding-bottom: 12svh; overflow: hidden;
 
+    &.--product-detail { padding-top: 55px; padding-bottom: 20px;
+        .title { font-size: 37px; text-transform: uppercase; margin-bottom: 20px;}
+        .separ { border-top: 2px solid #D3D3D3; margin-bottom: 45px;}
+    }
+
     .title {
         text-transform: uppercase; color: #C9C9C9; line-height: 1.08em;
 

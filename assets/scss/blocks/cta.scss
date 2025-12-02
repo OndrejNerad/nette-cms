@@ -18,3 +18,24 @@
         .btn { margin: 0 auto;}
     }
 }
+
+.cta-sm-block { padding-top: 70px; padding-bottom: 50px;
+
+    .cta-sm-wrap {
+        padding: 70px 74px; color: $white; display: flex; justify-content: space-between; align-items: center;
+        overflow: hidden; border-radius: 8px;
+
+        .full-bck {
+            &::before {
+                content: ""; position: absolute; inset: 0;
+                background: linear-gradient(90deg, #C41717 16.88%, rgba(196, 23, 23, 0) 80.47%);
+            }
+        }
+
+        .text-col { flex: 0 0 55%;
+            .title { margin-bottom: 20px; font-size: 38px; font-weight: 700;}
+        }
+
+        .btn-col { margin-left: auto;}
+    }
+}

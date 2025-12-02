@@ -46,3 +46,42 @@
 
     }
 }
+
+.text-block-rd { padding-top: 175px; padding-bottom: 200px;
+    .text-col {
+        .title { max-width: 80%; line-height: 1.04em;}
+        .subtitle {
+            margin-top: 24px; text-transform: uppercase; font-weight: 700; font-size: 20px; line-height: 1.5em;
+            letter-spacing: -.03em;
+        }
+
+        .citation-wrap { margin-top: 120px;
+            .icon { position: absolute;
+                &.--top { top: 0; left: 0;}
+                &.--bottom { bottom: 0; right: 0;}
+            }
+
+            .citation-text {
+                padding: 40px 80px; font-style: italic; font-size: 32px; letter-spacing: -.02em; line-height: 1.6em;
+            }
+        }
+    }
+
+    .full-bck { border-radius: 8px;}
+}
+
+.text-block-th { padding-top: 120px; padding-bottom: 180px; overflow: hidden;
+    .big-letter { left: -5%; bottom: 0; right: unset; font-size: 42vw;}
+    .text-wrap {
+        padding-top: 76px; border-top: 2px solid rgba(255,255,255,.25); color: $white; padding-right: 60px;
+
+        .text { font-size: 24px; letter-spacing: -.02em; line-height: 1.5em;}
+        .magnifier-box { margin-top: 90px; display: flex; align-items: center;
+            .icon { flex: 0 0 150px;}
+            .magnifier-text {
+                opacity: .65; font-size: 24px; line-height: 1.6em; letter-spacing: -.02em; font-style: italic;
+                padding-left: 50px;
+            }
+        }
+    }
+}

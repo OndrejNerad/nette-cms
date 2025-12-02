@@ -6,7 +6,7 @@
     }
 
     &--outline {
-        background-color: transparent; border: 1px solid $red; color: $red;
+        background-color: transparent; border: 2px solid $red; color: $red;
 
         &:hover { background-color: $white;}
 
@@ -24,13 +24,11 @@
         display: flex; align-items: flex-start; justify-content: center; flex-direction: column; padding: 40px;
         text-align: left;
 
-        &:hover {
-            background-color: $white;
-        }
+        &:hover, &:focus { background-color: $white; color: $red;}
 
         &--sm { width: 150px; height: 150px; align-items: center;}
 
-        &--red { background-color: $red;
+        &--red { background-color: $red; color: $white;
             .text { font-size: 20px; margin-bottom: 10px;}
 
             &:hover {

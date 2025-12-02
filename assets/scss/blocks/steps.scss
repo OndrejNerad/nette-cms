@@ -1,0 +1,28 @@
+.steps-block { padding-top: 140px; padding-bottom: 130px;
+
+    .steps-wrap {
+        .steps-row {
+            display: flex; flex-wrap: wrap; margin-top: 80px;
+
+            &::before {
+                content: ""; position: absolute; top: 22px; height: 2px; background-color: #C2C2C2; left: 0; right: 0;
+            }
+
+            &.--nd::before { right: 25%;}
+
+            .step-item { flex: 0 0 25%; padding-right: 50px;
+
+                .num {
+                    display: flex; justify-content: center; align-items: center; width: 44px; height: 44px;
+                    background-color: $red; color: $white; font-size: 22px; font-weight: 700; letter-spacing: -.02em;
+                    border-radius: 100%; margin-bottom: 32px;
+                }
+
+                .text {
+                    font-size: 24px; line-height: 1.5em; letter-spacing: -.02em;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,107 @@
+.inquiry-form-block { padding-top: 70px; padding-bottom: 230px; background-color: $white;
+
+    .title--h4 { margin-bottom: 16px;}
+
+    .progress {
+        display: flex; justify-content: space-between; background: transparent; height: auto; margin-bottom: 50px;
+
+        &::before {
+            content: ""; position: absolute; top: 22px; height: 2px; background-color: #E9E9E9; right: 15%; left: 15%;
+            transform: translateY(-50%);
+        }
+
+        &-item {
+            text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            flex: 0 0 calc(100% / 3);
+
+            .num {
+                width: 44px; height: 44px; background-color: $white; display: flex; align-items: center;
+                letter-spacing: -.02em; justify-content: center; border-radius: 100%; color: $red; font-size: 22px;
+                font-weight: 700; border: 2px solid #E9E9E9;
+
+                &.active { background-color: $red; color: $white; border-color: $red;}
+            }
+
+            .label {
+                font-size: 20px; letter-spacing: -.02em; color: #C7C7C7; line-height: 1.5em;
+            }
+        }
+    }
+
+
+    .inquiry-wrap {
+        display: flex; flex-direction: column;
+
+        .inquiry-item {
+            padding: 34px 45px; background-color: #F5F5F5; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+
+            & + .inquiry-item { margin-top: 20px;}
+
+            &.--form-inputs {
+                display: flex; flex-wrap: wrap; gap: 20px; flex-direction: row;
+
+                .form-item { flex: 0 0 calc((100% / 3) - (20px / 3) * 2);
+                    label {
+                        .label { font-size: 18px;}
+                        input { background-color: #E4E4E4; font-size: 18px;}
+                    }
+                }
+            }
+
+            .label {
+                font-size: 24px; letter-spacing: -.02em; line-height: 1.5em;
+            }
+
+            .inquiry-range { display: flex; align-items: center; margin-top: 24px;
+                input {
+                    background-color: #E3E3E3; padding: 5px 30px; width: 100%; font-size: 18px; letter-spacing: -.02em;
+                    flex: 0 0 30%; text-align: center;
+                }
+
+                .range-bar {
+                    flex: 1 0 auto; height: 2px; background-color: #CECECE; margin: 0 18px;
+
+                    &::before, &::after {
+                        content: ""; position: absolute; top: 50%; transform: translateY(-50%); display: block;
+                        width: 8px; height: 8px; background-color: #CECECE; border-radius: 100%;
+                    }
+
+                    &::before { left: 0;}
+                    &::after { right: 0;}
+
+                    .fill {
+                        height: 2px; background: $red; position: absolute; top: 0; left: 20%; right: 30%;
+
+                        .point {
+                            position: absolute; top: 1px; width: 20px; height: 20px; display: block;
+                            background: $red; border-radius: 100%; transform: translate(-50%, -50%);
+
+                            &.--start { left: 0;}
+                            &.--end { right: 0; transform: translate(50%, -50%);}
+                        }
+                    }
+                }
+            }
+
+            .inquiry-btns {
+                display: flex; justify-content: center; margin-top: 20px;
+            }
+
+            .inquiry-btn {
+                padding: 9px 50px; font-size: 18px; letter-spacing: -.02em; color: $red; line-height: 1.5em;
+                border-radius: 8px; border: 2px solid $red; font-weight: 700;
+
+                &:hover { background-color: $red; color: $white;}
+
+                & + .inquiry-btn { margin-left: 16px;}
+            }
+        }
+
+        .inquiry-submit { margin-top: 50px; text-align: center;
+            .btn { min-width: 180px;
+                &:hover { background-color: $red; color: $white;}
+            }
+        }
+    }
+}

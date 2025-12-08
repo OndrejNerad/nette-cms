@@ -59,6 +59,13 @@ services:
             - .:/var/www/html
         command: ["tail", "-f", "/dev/null"]  # keep container running for npm tasks
 
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - "8025:8025"   # Web UI: http://localhost:8025
+            - "1025:1025"   # SMTP server
+        restart: unless-stopped
+
 networks:
     app-network:
         driver: bridge

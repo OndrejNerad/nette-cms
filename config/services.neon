@@ -1,10 +1,21 @@
 services:
-	- App\Core\RouterFactory::createRouter
+    - App\Core\RouterFactory::createRouter
+
+    mail.mailer:
+        class: Nette\Mail\SmtpMailer
+        arguments:
+            host: mailhog
+            port: 1025
+            username: ''
+            password: ''
+            encryption: null
+
+    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%)
 
 search:
-	-	in: %appDir%
-		classes:
-			- *Facade
-			- *Factory
-			- *Repository
-			- *Service
+    - in: %appDir%
+      classes:
+        - *Facade
+        - *Factory
+        - *Repository
+        - *Service

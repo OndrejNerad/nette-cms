@@ -1,7 +1,7 @@
 # see https://doc.nette.org/en/configuring
 
 parameters:
-
+    adminEmail: test@localhost # for prod info@automaton.mpotfaj.cz (proste info na domene)
 
 application:
     catchExceptions: true
@@ -34,3 +34,9 @@ di:
 	export:
 		parameters: no
 		tags: no
+
+# STARY SYNTAX -> picovina
+#nette:
+#    mailer:
+#        host: mailhog
+#        port: 1025

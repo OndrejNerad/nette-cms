@@ -6,9 +6,15 @@ namespace App\Presentation\StaticPage;
 
 use Nette;
 use Nette\Application\UI\Presenter;
+use Nette\Forms\Form;
 
 final class StaticPagePresenter extends Presenter
 {
+    public function __construct(private readonly \App\Components\Forms\ContactFormFactory $contactFormFactory)
+    {
+        parent::__construct();
+    }
+
     protected function createTemplate(?string $class = null): Nette\Application\UI\Template
     {
         $template = parent::createTemplate($class);
@@ -42,5 +48,13 @@ final class StaticPagePresenter extends Presenter
         return [
             __DIR__ . "/templates/$lang/$url.latte"
         ];
+    }
+
+    protected function createComponentContactForm(): Form
+    {
+        return $this->contactFormFactory->create(function () {
+            $this->flashMessage('Děkujeme! Zpráva byla odeslána.', 'success');
+            $this->redirect('this');
+        });
     }
 }

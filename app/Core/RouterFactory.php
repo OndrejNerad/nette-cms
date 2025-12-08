@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use Nette;
 use Nette\Application\Routers\RouteList;
 use Nette\Application\Routers\Route;
 
@@ -14,17 +13,30 @@ final class RouterFactory
     {
         $router = new RouteList;
 
-        // Optional: exact home page (so / is also handled nicely)
+        $router->addRoute('en/<url .+>', [
+            'presenter' => 'StaticPage',
+            'action'     => 'default',
+            'lang'       => 'en',
+        ]);
+
+        $router->addRoute('en', [
+            'presenter' => 'StaticPage',
+            'action'     => 'default',
+            'lang'       => 'en',
+            'url'       => null,
+        ]);
+
+        $router->addRoute('<url .*>', [
+            'presenter' => 'StaticPage',
+            'action'     => 'default',
+            'lang'       => 'cs',
+        ]);
+
         $router->addRoute('', [
             'presenter' => 'StaticPage',
             'action'     => 'default',
-            'url'        => 'home', // or whatever your home latte is called
-        ]);
-
-        // This is the magic line – catches everything except real files/folders
-        $router->addRoute('<url .+>', [  // the ".+" means "at least one character"
-            'presenter' => 'StaticPage',
-            'action'     => 'default',
+            'lang'       => 'en',
+            'url'       => null,
         ]);
 
         return $router;

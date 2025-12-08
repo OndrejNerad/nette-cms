@@ -4,24 +4,29 @@ declare(strict_types=1);
 
 namespace App\Presentation\Error\Error4xx;
 
-use Nette;
-use Nette\Application\Attributes\Requires;
+use Nette\Application\BadRequestException;
+use Nette\Application\UI\Presenter;
+use Nette\Application\UI\Template;
 
-
-/**
- * Handles 4xx HTTP error responses.
- */
-#[Requires(methods: '*', forward: true)]
-final class Error4xxPresenter extends Nette\Application\UI\Presenter
+final class Error4xxPresenter extends Presenter
 {
-	public function renderDefault(Nette\Application\BadRequestException $exception): void
-	{
-		// renders the appropriate error template based on the HTTP status code
-		$code = $exception->getCode();
-		$file = is_file($file = __DIR__ . "/$code.latte")
-			? $file
-			: __DIR__ . '/4xx.latte';
-		$this->template->httpCode = $code;
-		$this->template->setFile($file);
-	}
+    public function renderDefault(BadRequestException $exception): void
+    {
+        $path = $this->getHttpRequest()->getUrl()->getPath();
+        $lang = (strpos($path, '/en') === 0 || strpos($path, '/en/') === 0) ? 'en' : 'cs';
+        $this->template->setFile(__DIR__ . "/templates/$lang/404.latte");
+
+        $this->template->lang = $lang;
+        $code = $exception->getCode() ?: 404;
+        $this->getTemplate()->httpCode = $code;
+        $this->getHttpResponse()->setCode($code);
+    }
+
+    protected function createTemplate(?string $class = null): Template
+    {
+        $template = parent::createTemplate($class);
+        $this->setLayout(__DIR__ . '/../../@layout.latte');
+        $template->lightNav = false;
+        return $template;
+    }
 }

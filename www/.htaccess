@@ -12,6 +12,8 @@ Require all granted
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
+    # /cs -> / redirect
+    RewriteRule ^cs/?$ / [R=301,L]
 	# Uncomment the next line if you want to set the base URL for rewrites
 	# RewriteBase /
 

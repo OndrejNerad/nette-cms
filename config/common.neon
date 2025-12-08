@@ -4,11 +4,11 @@ parameters:
 
 
 application:
-	errorPresenter:
-		4xx: Error:Error4xx
-		5xx: Error:Error5xx
-	mapping: App\Presentation\*\**Presenter
-
+    catchExceptions: true
+    errorPresenter:
+        4xx: Error:Error4xx
+        5xx: Error:Error5xx
+    mapping: App\Presentation\*\**Presenter
 
 database:
 	dsn: 'sqlite::memory:'

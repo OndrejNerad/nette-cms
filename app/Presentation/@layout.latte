@@ -29,38 +29,45 @@
             <img src="/assets/img/logo.webp" alt="" class="logo--light">
             <img src="/assets/img/logo-dark.webp" alt="" class="logo--dark">
         </a>
-        <div class="menu">
-            {if $lang == 'en'}
-                <a href="/en/car-listings" class="nav-link">Car listings</a>
-                <a href="/en/car-inquiry" class="nav-link">Car inquiry</a>
-                <a href="/en/appraisal" class="nav-link">Appraisal</a>
-                <a href="/en/autoinspect" class="nav-link">Autoinspect</a>
-                <span class="separ">|</span>
-                <a href="/en/about-us" class="nav-link">About us</a>
-                <a href="/faq" class="nav-link">FAQ</a>
-                <a href="/contact" class="nav-link">Contact</a>
 
-                <div class="lang-switcher">
-                    <a href="/cs" class="lang-link">
-                        <img src="/assets/img/cs.webp" alt="">
-                    </a>
-                </div>
-            {else}
-                <a href="/nabidka-vozu" class="nav-link">Nabídka vozů</a>
-                <a href="/poptat-vuz" class="nav-link">Poptat vůz</a>
-                <a href="/oceneni" class="nav-link">Ocenění</a>
-                <a href="/autoinspect" class="nav-link">Autoinspect</a>
-                <span class="separ">|</span>
-                <a href="/o-nas" class="nav-link">O nás</a>
-                <a href="/faq" class="nav-link">FAQ</a>
-                <a href="/kontakt" class="nav-link">Kontakt</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Zobrazit navigaci">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="lang-switcher">
-                    <a href="/en" class="lang-link">
-                        <img src="/assets/img/en.webp" alt="">
-                    </a>
-                </div>
-            {/if}
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="menu">
+                {if $lang == 'en'}
+                    <a href="/en/car-listings" class="nav-link">Car listings</a>
+                    <a href="/en/car-inquiry" class="nav-link">Car inquiry</a>
+                    <a href="/en/appraisal" class="nav-link">Appraisal</a>
+                    <a href="/en/autoinspect" class="nav-link">Autoinspect</a>
+                    <span class="separ">|</span>
+                    <a href="/en/about-us" class="nav-link">About us</a>
+                    <a href="/faq" class="nav-link">FAQ</a>
+                    <a href="/contact" class="nav-link">Contact</a>
+
+                    <div class="lang-switcher">
+                        <a href="/cs" class="lang-link">
+                            <img src="/assets/img/cs.webp" alt="">
+                        </a>
+                    </div>
+                {else}
+                    <a href="/nabidka-vozu" class="nav-link">Nabídka vozů</a>
+                    <a href="/poptat-vuz" class="nav-link">Poptat vůz</a>
+                    <a href="/oceneni" class="nav-link">Ocenění</a>
+                    <a href="/autoinspect" class="nav-link">Autoinspect</a>
+                    <span class="separ">|</span>
+                    <a href="/o-nas" class="nav-link">O nás</a>
+                    <a href="/faq" class="nav-link">FAQ</a>
+                    <a href="/kontakt" class="nav-link">Kontakt</a>
+
+                    <div class="lang-switcher">
+                        <a href="/en" class="lang-link">
+                            <img src="/assets/img/en.webp" alt="">
+                        </a>
+                    </div>
+                {/if}
+            </div>
         </div>
     </div>
 </nav>

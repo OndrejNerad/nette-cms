@@ -45,4 +45,36 @@ footer {
             margin-top: 10px; display: flex; flex-direction: column;
         }
     }
+
+    @media (max-width: 1400px) {
+        .top-row { flex-wrap: wrap;
+            .footer-col { flex: 0 0 48%; margin-bottom: 40px;}
+        }
+    }
+
+    @media (max-width: 992px) { padding-top: 80px; padding-bottom: 40px;
+        .logo { display: flex; margin-bottom: 60px;}
+        .bottom-row { margin-top: 40px;}
+    }
+
+    @media (max-width: 576px) {
+        .footer-col {
+            .label { font-size: 18px;}
+            .menu-item, .contact-item { font-size: 16px;}
+        }
+        .bottom-row {
+            .copyright { font-size: 16px;}
+            .separ { margin-top: 30px;}
+        }
+    }
+
+    @media (max-width: 500px) {
+        .logo { margin-bottom: 30px;}
+        .top-row .footer-col { flex: 0 0 100%; margin-right: 0;}
+        .bottom-row { flex-direction: column;
+            .copyright { order: 1;}
+            .social-links { margin-bottom: 30px; order: 0;}
+            .separ { order: 2;}
+        }
+    }
 }

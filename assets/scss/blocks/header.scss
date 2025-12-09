@@ -9,6 +9,32 @@
     .btn-wrap { margin-top: 20px;
         .btn + .btn { margin-left: 8px;}
     }
+
+    @media (max-width: 1600px) {
+        .stamp img { max-width: 280px;}
+    }
+
+    @media (max-width: 1400px) { align-items: flex-end;
+        .stamp { right: 5%;
+            img { max-width: 240px;}
+        }
+    }
+
+    @media (max-width: 768px) {
+        .stamp { right: 15px;
+            img { max-width: 180px;}
+        }
+    }
+
+    @media (max-width: 576px) { padding-bottom: 110px;
+        .stamp img { max-width: 160px;}
+    }
+
+    @media (max-width: 380px) {
+        .btn-wrap { display: flex; flex-direction: column;
+            .btn + .btn { margin-left: 0; margin-top: 20px;}
+        }
+    }
 }
 
 .header-sm-block { padding-top: 130px; padding-bottom: 60px; text-align: center;

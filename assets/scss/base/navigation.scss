@@ -1,6 +1,14 @@
 nav {
     position: fixed; inset: 0; bottom: unset; z-index: 10;
 
+    .navbar-toggler { display: none;}
+    .navbar-toggler-icon {
+        &::before {
+            content: ""; display: inline-block; width: 24px; height: 24px; background-size: contain;
+            background-repeat: no-repeat; background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 17H19M5 12H19M5 7H19' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+        }
+    }
+
     .nav-wrap {
         display: flex; justify-content: space-between; padding: 35px; transition: .25s all;
 
@@ -28,7 +36,9 @@ nav {
             &--light { display: none;}
         }
 
-        .menu { display: flex; align-items: center;
+        .menu {
+            display: flex; align-items: center; justify-content: flex-end;
+
             .separ { color: $dark-bck; font-weight: 700; margin-left: 33px;}
 
             .nav-link { color: $dark-bck; font-weight: 700;
@@ -42,6 +52,35 @@ nav {
                 display: block; border-radius: 4px; overflow: hidden;
 
                 img { max-width: 36px;}
+            }
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .nav-wrap { padding: 20px 30px;
+            .menu .nav-link:not(:first-child),
+            .menu .separ,
+            .lang-switcher { margin-left: 20px;}
+
+            .logo img { max-width: 160px;}
+        }
+    }
+
+    @media (min-width: 993px) {
+        #navbar { display: block;}
+    }
+
+    @media (max-width: 992px) {
+        .navbar-toggler { display: block;}
+        .nav-wrap {
+            #navbar {
+                position: absolute; inset: 0; background: #323232; height: fit-content; padding-top: 72px;
+                padding-bottom: 42px; z-index: -1;
+
+                .menu { flex-direction: column;}
+                .nav-link { margin-left: 0; padding: 12px 6px;}
+                .separ { display: none;}
+                .lang-switcher { margin-left: 0; margin-top: 20px;}
             }
         }
     }

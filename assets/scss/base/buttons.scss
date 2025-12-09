@@ -42,5 +42,13 @@
         .text { font-size: 20px;
             &.--sm { font-weight: 400;}
         }
+
+
+        @media (max-width: 1400px) { width: 16vw; height: 16vw;}
+        @media (max-width: 992px) { width: 20vw; height: 20vw;}
+        @media (max-width: 768px) { width: 22vw; height: 22vw; padding: 30px;}
+        @media (max-width: 680px) { width: 28vw; height: 28vw;}
+        @media (max-width: 576px) { width: 35vw; height: 35vw;}
+        @media (max-width: 420px) { width: 42vw; height: 42vw;}
     }
 }

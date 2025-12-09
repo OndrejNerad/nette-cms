@@ -30,9 +30,30 @@
         }
 
         .btn-wrap { margin-top: 45px;}
-
-
     }
 
 
+    @media (max-width: 1200px) { padding-top: 40px; padding-bottom: 120px;
+        .image-wrap {
+            display: flex; flex-direction: column; justify-content: center; height: 100%;
+
+            svg { height: auto;}
+        }
+
+        .text-col .text-wrap { margin-left: 10%;
+            .text { font-size: 20px;}
+        }
+    }
+
+    @media (max-width: 992px) { overflow: hidden;
+        .bck-pattern { display: none;}
+        .image-wrap {
+            position: absolute; min-height: 60svh; transform: translate(20%, -10%); opacity: .5;
+        }
+        .text-col .text-wrap { margin-left: 0;}
+    }
+
+    @media (max-width: 680px) {
+        .image-wrap { opacity: .3;}
+    }
 }

@@ -1,13 +1,11 @@
 .big-block {
     .image-wrap {
         &.st { min-height: 80svh;
-
             &::before {
                 content: ""; position: absolute; inset: 0; z-index: 1;
                 background: linear-gradient(0deg, #C41717 0%, rgba(196, 23, 23, 0) 100%)
             }
 
-            .image-st {}
             .image-nd { position: absolute; bottom: 10%; right: 20%;}
         }
 
@@ -52,19 +50,46 @@
         .text-box {
             color: $white; padding-left: 75px; padding-right: 35%; z-index: 2;
 
-            &--hor {
-
-            }
-
             &.--w-line .separ {
                 position: absolute; left: 0; top: -20%; bottom: -20%;
             }
 
-            &--hor {
-                display: flex; justify-content: space-between;
-            }
-
+            &--hor { display: flex; justify-content: space-between;}
             .btn-wrap { margin-top: 40px;}
+        }
+    }
+
+
+    @media (max-width: 1400px) {
+        .text-wrap {
+            &.nd { padding-bottom: 120px;}
+            .text-box { padding-left: 40px; padding-right: 10%;
+                .text { font-size: 20px;}
+            }
+            .text-block-wrap--hor { padding: 0;
+                .image img { max-width: 180px;}
+                .text-box .text { font-size: 20px;}
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        .text-wrap .text-block-wrap--hor {
+            .image { display: none;}
+            .text-box {
+                flex: 0 0 70%; padding-bottom: 0; padding-left: 0;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .text-wrap .text-block-wrap--hor .text-box .text { font-size: 18px;}
+    }
+
+    @media (max-width: 680px) {
+        .text-wrap .text-block-wrap--hor { flex-direction: column; align-items: flex-start;
+            .text-box { padding-right: 0; flex: 0 0 100%;}
+            .btn-wrap { margin-top: 60px;}
         }
     }
 }

@@ -2,20 +2,15 @@
     font-family: "DM Sans", sans-serif; position: relative;
 }
 
-.page-wrap {
-    //background-color: #F2F2F2;
-    background-color: $light-bck;
+.page-wrap { background-color: $light-bck;}
+
+.container { max-width: calc(100% - 180px);
+    @media (max-width: 1400px) { max-width: calc(100% - 120px);}
+    @media (max-width: 1200px) { max-width: calc(100% - 80px);}
+    @media (max-width: 768px) { max-width: calc(100% - 60px);}
+    @media (max-width: 576px) { max-width: calc(100% - 30px);}
 }
-
-.content-block {
-
-}
-
-.container { max-width: calc(100% - 180px);}
 
 p {
     color: $dark-bck; font-size: 20px;
 }
-
-
-

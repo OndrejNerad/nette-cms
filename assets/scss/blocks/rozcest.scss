@@ -1,13 +1,9 @@
 .rozcestnik-block {
-
-    .rozcest-wrap {
-        display: flex; flex-wrap: wrap;
-
-    }
+    .rozcest-wrap { display: flex; flex-wrap: wrap;}
 
     .rozcest-link {
         padding: 120px 200px; text-decoration: none; display: flex; flex-direction: column; justify-content: center;
-        align-items: center; text-align: center; height: 100%; border-top: 2px solid $gray; flex: 0 0 50%;
+        align-items: center; text-align: center; height: 100%; border-top: 2px solid $gray; flex: 0 0 50%; height: auto;
 
         &:hover {
             .title { color: $red;}
@@ -26,9 +22,43 @@
         }
 
         .text {
-            color: $dark-bck; font-size: 24px; font-weight: 700; margin-top: 22px;
+            color: $dark-bck; font-size: 24px; font-weight: 700; margin-top: 22px; margin-bottom: 32px;
         }
 
-        .arrow-link { margin-top: 36px;}
+        .arrow-link { margin-top: auto;}
     }
+
+    @media (max-width: 1800px) {
+        .rozcest-link { padding: 80px 120px;}
+    }
+
+    @media (max-width: 1500px) {
+        .rozcest-link { padding: 60px 40px;
+            .icon img { max-height: 120px;}
+            .title { font-size: 36px;}
+            .text { font-size: 20px;}
+        }
+    }
+
+    @media (max-width: 992px) {
+        .rozcest-link { padding: 50px 30px;
+            &.hor .icon svg { max-width: 120px;}
+            .title { font-size: 32px;}
+            .text { font-size: 18px;}
+            .arrow-link svg { max-width: 80px;}
+        }
+    }
+
+    @media (max-width: 680px) { padding-top: 60px;
+        .rozcest-wrap { flex-direction: column;}
+        .rozcest-link { padding: 30px 16px;
+            &:first-child { border-top: 0;}
+            &.nd { border-left: 0;}
+            &.hor { flex-direction: column;}
+
+            .icon img { max-height: 100px;}
+            .arrow-link svg { max-width: 60px;}
+        }
+    }
+
 }

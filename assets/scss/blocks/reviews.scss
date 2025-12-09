@@ -1,4 +1,4 @@
- .reviews-block { padding-top: 80px; padding-bottom: 80px; overflow: hidden;
+.reviews-block { padding-top: 80px; padding-bottom: 80px; overflow: hidden;
 
     .review-carousel { margin-bottom: 60px;}
 
@@ -29,9 +29,32 @@
     }
 
     .text-wrap {
-        font-size: 20px; letter-spacing: -.03em; color: $dark-bck;
+        font-size: 20px; letter-spacing: -.03em; color: $dark-bck; display: flex;
 
         .lg-text { text-transform: uppercase; margin-right: 48px; font-weight: 700;}
-        .text {}
+    }
+
+
+    @media (max-width: 1600px) {
+        .review-item .review-wrap {
+            .name { font-size: 28px;}
+            .text { font-size: 18px}
+        }
+    }
+
+    @media (max-width: 992px) {
+        .text-wrap { font-size: 18px;}
+    }
+
+    @media (max-width: 768px) {
+        .review-item .review-wrap { padding: 40px 32px;
+            .name { font-size: 24px;}
+            .text { font-size: 16px;}
+            .text-link { font-size: 18px;}
+        }
+    }
+
+    @media (max-width: 680px) {
+        .text-wrap { flex-direction: column;}
     }
 }

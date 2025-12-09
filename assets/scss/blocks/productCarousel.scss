@@ -81,4 +81,44 @@
     }
 
     .btn-row { margin-top: 10px;}
+
+
+    @media (max-width: 1500px) {
+        .product-slide .text-content { padding: 40px;
+            .name, .price { font-size: 38px;}
+            .dph-note { font-size: 16px;}
+            .subtitle, .text { font-size: 18px;}
+            .tags .tag { margin-bottom: 12px;
+                &:not(:last-child) { margin-right: 12px;}
+                .text { font-size: 16px;}
+            }
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .product-slide .text-content {
+            .name, .price { font-size: 32px;}
+            .subtitle, .text { font-size: 16px;}
+            .tags { margin-top: 24px;
+                .tag { margin-bottom: 6px; font-size: 12px;
+                    &:not(:last-child) { margin-right: 6px;}
+                    .text { font-size: 16px;}
+                    .icon svg { max-width: 16px; height: auto;}
+                }
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        .product-slide { flex-direction: column;
+            .image { min-height: 400px;}
+        }
+    }
+
+    @media (max-width: 768px) {
+        .product-slide {
+            .text-content { padding: 40px 30px 30px;}
+            .image { min-height: 320px;}
+        }
+    }
 }

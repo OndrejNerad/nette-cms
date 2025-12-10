@@ -5,7 +5,12 @@
         .text-outline { color: #272727;}
     }
 
-    .text { color: #AFAFAF; font-size: 24px; letter-spacing: -.02em; margin-top: 104px;
+    .text { font-size: 24px; letter-spacing: -.02em; margin-top: 104px;
+        p { color: #AFAFAF}
         .label { font-size: 20px; font-weight: 700;}
+    }
+
+    @media (max-width: 768px) {
+        .big-letter { z-index: 0; opacity: .5;}
     }
 }

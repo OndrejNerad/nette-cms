@@ -17,7 +17,9 @@
             .arrow { position: absolute; bottom: 0; left: 0; transform: translateY(90%);}
         }
 
-        .person { position: absolute; bottom: 20%; left: 12%; transform: rotate(3deg);
+        .person {
+            position: absolute; bottom: 20%; left: 12%; transform: rotate(3deg); z-index: 1;
+
             svg { max-width: 160px;}
         }
 
@@ -42,15 +44,113 @@
             &.collapsed .icon { transform: rotate(0deg); transition: .5s all;}
 
             .title {
-                font-size: 24px; font-weight: 700; letter-spacing: -.02em; line-height: 1.5em;
+                font-size: 24px; font-weight: 700; letter-spacing: -.02em; line-height: 1.5em; margin-right: 12px;
             }
 
             .icon {
                 margin-left: auto; background-color: $red; display: flex; justify-content: center; align-items: center;
                 width: 30px; height: 30px; border-radius: 100%; transform: rotate(180deg); transition: .5s all;
+                min-width: 30px;
             }
         }
 
         .accordion-body { padding-top: 32px;}
+    }
+
+    @media (max-width: 1700px) {
+        .image-wrap {
+            .box { top: 0;}
+            .question-icon svg { max-width: 20vw;}
+        }
+    }
+
+    @media (max-width: 1500px) {
+        .image-wrap {
+            .box { top: -10%;}
+            .star-icon svg { max-width: 12vw;}
+        }
+    }
+
+    @media (max-width: 1300px) {
+        .image-wrap { top: 10%;
+            .box { top: -20%; left: 30%;}
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .image-wrap {
+            .box { top: -10%;}
+            .person { bottom: 10%;
+                svg { max-width: 130px;}
+            }
+        }
+    }
+
+    @media (max-width: 1050px) {
+        .image-wrap .box { top: -30%;}
+    }
+
+    @media (max-width: 992px) { padding-bottom: 120px; padding-top: 80px;
+        .image-wrap { left: 0;
+            .box { top: 0; left: 20%;}
+            .person { bottom: -10%; left: 10%;}
+            .question-icon { left: unset; right: 14%;}
+            .star-icon { bottom: 4%; right: 9%;}
+        }
+    }
+
+    @media (max-width: 860px) { padding-bottom: 160px;
+        .image-wrap { top: 25%;
+            .box { top: -10%;}
+        }
+    }
+
+    @media (max-width: 768px) {
+        .image-wrap {
+            .box { top: -10%; left: 15%; font-size: 18px;}
+            .person { bottom: -25%; left: 0;}
+            .star-icon { bottom: 14%;
+                svg { height: auto;}
+            }
+        }
+    }
+
+    @media (max-width: 640px) {
+        .image-wrap { top: 40%;
+            .box { top: -30%;}
+            .question-icon svg { height: auto;}
+        }
+    }
+
+    @media (max-width: 576px) { padding-bottom: 200px;
+        .image-wrap { top: 60%;
+            .box { top: -40%;}
+        }
+    }
+
+    @media (max-width: 500px) {
+        .image-wrap {
+            .person { bottom: -45%;
+                svg { max-width: 90px;}
+            }
+        }
+    }
+
+    @media (max-width: 450px) {
+        .image-wrap {
+            &::before { top: 30%;}
+            .person { bottom: -75%;}
+            .question-icon { bottom: -60%;}
+            .star-icon { bottom: -16%;}
+        }
+    }
+
+    @media (max-width: 400px) {
+        .image-wrap {
+            .person { bottom: -35%;
+                svg { height: auto;}
+            }
+            .box { padding: 16px;}
+        }
     }
 }

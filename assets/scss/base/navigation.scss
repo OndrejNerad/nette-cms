@@ -1,24 +1,40 @@
 nav {
     position: fixed; inset: 0; bottom: unset; z-index: 10;
 
-    .navbar-toggler { display: none;}
-    .navbar-toggler-icon {
-        &::before {
+    .navbar-toggler { display: none;
+        &.collapsed .navbar-toggler-icon {
+            &::before {
+                content: ""; display: inline-block; width: 24px; height: 24px; background-size: contain;
+                background-repeat: no-repeat; background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 17H19M5 12H19M5 7H19' stroke='%23323232' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            }
+        }
+
+        .navbar-toggler-icon::before {
             content: ""; display: inline-block; width: 24px; height: 24px; background-size: contain;
             background-repeat: no-repeat; background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 17H19M5 12H19M5 7H19' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
         }
     }
 
+    .navbar-collapse:not(.collapsed) .menu .nav-link { color: $white;}
+
+    @media (min-width: 993px) {
+        .navbar-collapse:not(.collapsed) .menu .nav-link { color: #323232;}
+    }
+
     .nav-wrap {
         display: flex; justify-content: space-between; padding: 35px; transition: .25s all;
 
-        &.sticky { background-color: #323232; transition: .25s all; padding: 16px 35px;
+        &.sticky { background-color: #323232; transition: .25s all; padding: 20px 30px;
             .logo {
                 &--dark { display: none;}
                 &--light { display: block;}
             }
             .menu {
                 .nav-link, .separ { color: $white;}
+            }
+
+            .navbar-toggler-icon::before {
+                background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 17H19M5 12H19M5 7H19' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
             }
         }
 
@@ -29,6 +45,10 @@ nav {
             }
             .menu {
                 .nav-link, .separ { color: $white;}
+            }
+
+            .navbar-toggler-icon::before {
+                background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 17H19M5 12H19M5 7H19' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
             }
         }
 

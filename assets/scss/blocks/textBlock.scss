@@ -117,6 +117,34 @@
     }
 
     .full-bck { border-radius: 8px;}
+
+
+    @media (max-width: 1600px) {
+        .text-col .citation-wrap { margin-top: 60px;
+            .citation-text { font-size: 28px; padding: 50px 40px;}
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .text-col .citation-wrap {
+            .icon { max-width: 52px;}
+            .citation-text { font-size: 24px;}
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .full-bck { margin-left: 40px;}
+    }
+
+    @media (max-width: 992px) { padding-top: 100px; padding-bottom: 60px;
+        .full-bck {
+            margin-left: 0; position: relative; min-height: 40svh; margin-top: 60px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .text-col .citation-wrap .citation-text { font-size: 20px;}
+    }
 }
 
 .text-block-th { padding-top: 120px; padding-bottom: 180px; overflow: hidden;
@@ -124,13 +152,53 @@
     .text-wrap {
         padding-top: 76px; border-top: 2px solid rgba(255,255,255,.25); color: $white; padding-right: 60px;
 
-        .text { font-size: 24px; letter-spacing: -.02em; line-height: 1.5em;}
+        .text { font-size: 24px; letter-spacing: -.02em; line-height: 1.5em;
+            * { color: $white;}
+        }
         .magnifier-box { margin-top: 90px; display: flex; align-items: center;
             .icon { flex: 0 0 150px;}
             .magnifier-text {
                 opacity: .65; font-size: 24px; line-height: 1.6em; letter-spacing: -.02em; font-style: italic;
                 padding-left: 50px;
+
+                * { color: $white;}
             }
+        }
+    }
+
+
+    @media (max-width: 1600px) { padding-top: 80px; padding-bottom: 100px;
+        .text-wrap { padding-top: 40px; padding-right: 0;
+            .magnifier-box { margin-top: 40px;
+                .magnifier-text { padding-left: 40px;}
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        .full-bck::before {
+            content: ""; position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(90deg,rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 1) 100%);
+        }
+
+        .container { z-index: 1;}
+        .big-letter { opacity: .35; right: 0; left: unset;}
+    }
+
+    @media (max-width: 576px) {
+        .text-wrap {
+            .text { font-size: 20px;}
+            .magnifier-box {
+                .icon { flex: 0 0 80px;}
+                .magnifier-text { font-size: 20px;}
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .text-wrap .magnifier-box {
+            .icon { display: none;}
+            .magnifier-text { padding-left: 0;}
         }
     }
 }

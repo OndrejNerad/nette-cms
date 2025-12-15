@@ -17,6 +17,20 @@ $(function() {
 
 
     /**
+     * CHANGE LOGO FOR NAVBAR OPENED (HAMBURGER)
+     */
+    const collapse = document.getElementById('navbar');
+
+    collapse.addEventListener('show.bs.collapse', () => {
+        nav.classList.add('light-nav');
+    });
+
+    collapse.addEventListener('hidden.bs.collapse', () => {
+        nav.classList.remove('light-nav');
+    });
+
+
+    /**
      * PRODUCTS CAROUSEL
      */
     const productsSwiper = new Swiper('.product-carousel', {

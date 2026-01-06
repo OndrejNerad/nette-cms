@@ -20,7 +20,7 @@
                 }
 
                 .title { font-size: 42px; font-weight: 700; letter-spacing: -.02em}
-                .price { font-size: 28px; letter-spacing: -.02em;}
+                .price { font-size: 28px; letter-spacing: -.02em; color: $white;}
             }
 
             &-body {
@@ -44,6 +44,42 @@
                 }
 
                 .btn-wrap { margin-top: auto;}
+            }
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .packages-wrap .package {
+            .package-head { padding: 72px 32px 20px;
+                .title { font-size: 36px;}
+                .price { font-size: 20px;}
+            }
+            .package-body { padding: 24px 32px;
+                ul li { font-size: 18px;}
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        .packages-wrap { flex-direction: column;
+            .package + .package { margin-top: 72px;}
+        }
+    }
+
+    @media (max-width: 768px) {
+        .packages-wrap {
+            .package {
+                .package-head {
+                    .title { font-size: 26px;}
+                    .price { font-size: 18px;}
+                }
+                .package-body {
+                    ul { padding-right: 0;
+                        li { font-size: 16px;}
+                    }
+
+                    .btn { font-size: 16px; padding: 10px 24px;}
+                }
             }
         }
     }

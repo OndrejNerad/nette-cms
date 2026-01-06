@@ -119,6 +119,10 @@
                 order: 0; flex: 0 0 calc(100% - 36px); left: 0; margin-bottom: 20px;
             }
         }
+
+        &.--pricing {
+            .inquiry-item.--form-inputs { flex-direction: column;}
+        }
     }
 
     @media (max-width: 576px) {

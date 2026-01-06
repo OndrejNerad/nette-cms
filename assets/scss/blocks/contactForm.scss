@@ -1,7 +1,11 @@
 .contact-form-block {
     padding-top: 165px; padding-bottom: 130px; background-color: $white;
 
+    @media (max-width: 1400px) {
+        padding-top: 120px; padding-bottom: 80px;
+    }
 
-
-
+    @media (max-width: 768px) {
+        padding-top: 80px; padding-bottom: 40px;
+    }
 }

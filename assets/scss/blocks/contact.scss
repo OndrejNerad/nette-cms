@@ -5,12 +5,29 @@
         display: flex; flex-wrap: wrap; margin-top: 30px;
 
         .contact {
-            flex: 0 0 50%; font-size: 24px; letter-spacing: -.02em; margin-bottom: 30px; padding-right: 20px;
+            flex: 0 0 50%; letter-spacing: -.02em; margin-bottom: 30px; padding-right: 20px;
 
             &.--sm { font-size: 20px; color: #777;}
+            a, p { font-size: 20px; margin-bottom: 0;}
 
             .label {
                 font-size: 20px; color: #B1B1B1; text-transform: uppercase; font-weight: 700; letter-spacing: .2em;
+            }
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .contact-wrap .contact { font-size: 18px; padding-right: 10px;}
+    }
+
+    @media (max-width: 992px) { padding-top: 120px;}
+
+    @media (max-width: 576px) {
+        h1.title { margin-bottom: 20px;}
+        .contact-wrap { margin-top: 0;
+            .contact { flex: 0 0 100%; margin-bottom: 20px;
+                .label { font-size: 16px;}
+                a, p { font-size: 18px;}
             }
         }
     }

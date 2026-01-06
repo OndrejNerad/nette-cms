@@ -16,7 +16,7 @@
         .box {
             position: absolute; padding: 20px 26px; color: #fff; text-align: center; background-color: #C41717;
             border-radius: 8px; font-size: 20px; line-height: 1.08em; letter-spacing: -0.02em; left: 20%; top: 0;
-            max-width: 280px; z-index: 1;
+            max-width: 280px; z-index: 2;
 
             .arrow { position: absolute; bottom: 0; left: 0; transform: translateY(90%);}
         }
@@ -33,4 +33,58 @@
             position: absolute; top: 50%; z-index: 1; transform: translateX(2%);
         }
     }
+
+    @media (max-width: 1400px) {
+        .text-wrap { padding-left: 40px; font-size: 18px;
+            .text--lg { font-size: 26px;}
+        }
+        .image-wrap {
+            .magnifier-icon { right: -70px;}
+            .schema { right: -10%;}
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .image-wrap .magnifier-icon { right: -50px;}
+    }
+
+    @media (max-width: 992px) { padding-top: 120px;
+        .image-wrap { margin-top: 60px; min-height: 80svh;
+            .magnifier-icon { max-width: 70vw; top: -10%;}
+            .box.red { top: 10%;}
+            .schema { right: 0; top: 20%;}
+            .car { right: 0; max-width: 70vw;}
+        }
+    }
+
+    @media (max-width: 768px) { padding-bottom: 20px;
+        .image-wrap { margin-top: 20px; min-height: 60svh;
+            .magnifier-icon { right: -40px;}
+            .person svg { max-height: 320px;}
+            .box.red { font-size: 18px;}
+            .schema { max-width: 35vw; top: 25%;}
+        }
+    }
+
+    @media (max-width: 576px) {
+        .text-wrap {
+            padding-left: 32px; padding-right: 0; font-size: 16px; margin-top: 30px;
+
+            .text--lg { font-size: 18px; margin-bottom: 20px;}
+        }
+
+        .image-wrap {
+            .person { left: 0;}
+            .magnifier-icon { right: -26px; top: -30%;}
+        }
+    }
+
+    @media (max-width: 480px) {
+        .image-wrap {
+            .person { left: -40px;}
+            .box { left: 0;}
+        }
+    }
+
+
 }

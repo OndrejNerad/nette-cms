@@ -27,4 +27,26 @@
     }
 
 
+    @media (max-width: 1400px) {
+        .team-wrap .team-item {
+            img { max-width: 220px;}
+            .contact a { font-size: 18px;}
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .team-wrap { flex-wrap: wrap;
+            .team-item { flex: 0 0 50%; margin-bottom: 60px;}
+        }
+    }
+
+    @media (max-width: 992px) { padding-top: 120px;}
+
+    @media (max-width: 576px) { padding-top: 80px;
+        .team-wrap .team-item { flex: 0 0 100%;}
+    }
+
+    @media (max-width: 420px) { padding-top: 40px;
+        h1.title { line-height: 1.2em;}
+    }
 }

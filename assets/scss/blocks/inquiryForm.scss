@@ -14,12 +14,12 @@
             text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;
             flex: 0 0 calc(100% / 3);
 
+            &.active .num { background-color: $red; color: $white; border-color: $red;}
+
             .num {
                 width: 44px; height: 44px; background-color: $white; display: flex; align-items: center;
                 letter-spacing: -.02em; justify-content: center; border-radius: 100%; color: $red; font-size: 22px;
                 font-weight: 700; border: 2px solid #E9E9E9;
-
-                &.active { background-color: $red; color: $white; border-color: $red;}
             }
 
             .label {
@@ -31,11 +31,17 @@
     .inquiry-wrap {
         display: flex; flex-direction: column;
 
+        .inquiry-step {
+            display: none; flex-wrap: wrap; gap: 20px; opacity: 0; transition: .2s all;
+
+            &.active { display: flex; opacity: 1; transition: .2s all;}
+        }
+
         .inquiry-item {
             padding: 34px 45px; background-color: #F5F5F5; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            justify-content: center; align-items: center; flex: 0 0 100%;
 
-            & + .inquiry-item { margin-top: 20px;}
+            &.--third { flex: 0 0 calc((100% / 3) - (20px * 2) / 3);}
 
             &.--form-inputs {
                 display: flex; flex-wrap: wrap; gap: 20px; flex-direction: row;
@@ -83,8 +89,69 @@
                 }
             }
 
+            .inquiry-radio {
+                display: flex; gap: 16px; margin-top: 12px; width: 100%;
+
+                fieldset {
+                    display: flex; justify-content: space-between; align-items: center; width: 100%;
+
+                    &.--btns { justify-content: center; gap: 10px; flex-wrap: wrap;}
+                }
+
+                .radio-bar {
+                    position: absolute; inset: 50% 0 0 0; height: 1px; background: $border-color;
+                    transform: translateY(-50%);
+                }
+
+                input[type='radio'] { display: none;}
+
+                .ghost-radio {
+                    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+                    color: $red; background-color: $white; border: 2px solid $border-color; border-radius: 100%;
+                    transition: .2s all; cursor: pointer;
+
+                    &.active, &:hover {
+                        width: 34px; height: 34px; color: $white; background-color: $red; border-color: $red;
+                        transition: .2s all;
+                    }
+
+                    &.--btn {
+                        padding: 9px 50px; font-size: 18px; letter-spacing: -0.02em; color: $red; line-height: 1.5em;
+                        border-radius: 8px; border: 2px solid $red; font-weight: 700; display: block; width: auto;
+                        height: auto; background-color: transparent;
+
+                        &:hover, &.active {
+                            background-color: $red; color: $white; transition: .2s all;
+                        }
+                    }
+                }
+            }
+
+
+            .inquiry-checkbox { margin-top: 12px;
+
+                fieldset {
+                    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%;
+                    gap: 10px;
+                }
+
+                input[type="checkbox"] { display: none;}
+
+                .ghost-checkbox {
+                    padding: 9px 50px; font-size: 18px; letter-spacing: -0.02em; color: $red; line-height: 1.5em;
+                    border-radius: 8px; border: 2px solid $red; font-weight: 700; display: block; cursor: pointer;
+                    transition: .2s all;
+
+                    &:hover, &.active {
+                        background-color: $red; color: $white; transition: .2s all;
+                    }
+
+                    &.active:hover { background-color: transparent; color: $red; transition: .2s all;}
+                }
+            }
+
             .inquiry-btns {
-                display: flex; justify-content: center; margin-top: 20px;
+                display: flex; justify-content: center; margin-top: 20px; flex-wrap: wrap; gap: 16px;
             }
 
             .inquiry-btn {
@@ -93,12 +160,17 @@
 
                 &:hover { background-color: $red; color: $white;}
 
-                & + .inquiry-btn { margin-left: 16px;}
+                &.--circle {
+
+                }
             }
         }
 
-        .inquiry-submit { margin-top: 50px; text-align: center;
+        .inquiry-submit {
+            margin-top: 50px; text-align: center; flex: 0 0 100%;
+
             .btn { min-width: 180px;
+                & + .btn { margin-left: 27px;}
                 &:hover { background-color: $red; color: $white;}
             }
         }

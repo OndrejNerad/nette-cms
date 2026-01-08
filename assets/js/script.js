@@ -1,6 +1,5 @@
-$(function() {
-
-    console.log('start of script');
+import './inquiry.js';
+$(function () {
 
     /**
      * STICKY HEADER
@@ -106,4 +105,5 @@ $(function() {
             }
         }
     });
+
 });

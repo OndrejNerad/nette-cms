@@ -30,11 +30,11 @@
     <section class="inquiry-form-block content-block">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                <div class="col-12 col-lg-10 offset-lg-1">
                     <div class="title title--h4 text-center">Jaké vozidlo?</div>
                     <div class="progress">
-                        <div class="progress-item">
-                            <div class="num active">1</div>
+                        <div class="progress-item active">
+                            <div class="num">1</div>
                             <div class="label">Cena</div>
                         </div>
                         <div class="progress-item">
@@ -47,29 +47,260 @@
                         </div>
                     </div>
                     <div class="inquiry-wrap">
-                        <div class="inquiry-item">
-                            <div class="label">V jaké cenové hladině vybíráte?</div>
-                            <div class="inquiry-range">
-                                <input type="text" placeholder="400 000">
-                                <div class="range-bar">
-                                    <div class="fill">
-                                        <div class="point --start"></div>
-                                        <div class="point --end"></div>
+                        <div class="inquiry-step active" id="inquiryStepSt">
+                            <div class="inquiry-item">
+                                <div class="label">V jaké cenové hladině vybíráte?</div>
+                                <div class="inquiry-range">
+                                    <input type="text" inputmode="numeric" placeholder="10 000" name="priceMin">
+                                    <div class="range-bar">
+                                        <div class="fill">
+                                            <div class="point --start"></div>
+                                            <div class="point --end"></div>
+                                        </div>
+                                    </div>
+                                    <input type="text" inputmode="numeric" placeholder="20 000 000" name="priceMax">
+                                </div>
+                            </div>
+                            <div class="inquiry-item">
+                                <div class="label">Využijete možnost odpočtu DPH?</div>
+                                <div class="label">(Jste plátce DPH?)</div>
+                                <div class="inquiry-radio">
+                                    <fieldset class="--btns">
+                                        <label>
+                                            <input type="radio" name="dph" value="0">
+                                            <span class="ghost-radio --btn">Ano</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="dph" value="1">
+                                            <span class="ghost-radio --btn">Ne</span>
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="inquiry-submit --next">
+                                <a href="#inquiryStepNd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryNd">Dále</a>
+                            </div>
+                        </div>
+                        <div class="inquiry-step" id="inquiryStepNd">
+                            <div class="inquiry-item">
+                                <div class="label">Jaká velikost vozidla a karoserie Vás zajímá?</div>
+                                <div class="inquiry-checkbox">
+                                    <fieldset>
+                                        <label>
+                                            <input type="checkbox" name="velikostVozidla" value="0">
+                                            <span class="ghost-checkbox">SUV</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="1">
+                                            <span class="ghost-checkbox">Kombi</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="2">
+                                            <span class="ghost-checkbox">Sedan</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="3">
+                                            <span class="ghost-checkbox">Liftback</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="4">
+                                            <span class="ghost-checkbox">Hatchback</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="5">
+                                            <span class="ghost-checkbox">Kupé</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="6">
+                                            <span class="ghost-checkbox">CUV</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="7">
+                                            <span class="ghost-checkbox">Pick-up</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="8">
+                                            <span class="ghost-checkbox">MPV</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="9">
+                                            <span class="ghost-checkbox">Kabriolet</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="velikostProvedeni" value="10">
+                                            <span class="ghost-checkbox">Crossover</span>
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="inquiry-item --third">
+                                <div class="label">Velikost provedení</div>
+                                <div class="inquiry-radio">
+                                    <fieldset class="--btns">
+                                        <label>
+                                            <input type="radio" name="velikostProvedeni" value="0">
+                                            <span class="ghost-radio --btn">Velké</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="velikostProvedeni" value="1">
+                                            <span class="ghost-radio --btn">Malé</span>
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="inquiry-item --third">
+                                <div class="label">Počet dveří</div>
+                                <div class="inquiry-radio">
+                                    <div class="radio-bar"></div>
+                                    <fieldset>
+                                        <label>
+                                            <input type="radio" name="pocetDveri" value="2" checked>
+                                            <span class="ghost-radio active">2</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="pocetDveri" value="3">
+                                            <span class="ghost-radio">3</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="pocetDveri" value="4">
+                                            <span class="ghost-radio">4</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="pocetDveri" value="5">
+                                            <span class="ghost-radio">5</span>
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="inquiry-item --third">
+                                <div class="label">Počet míst</div>
+                                <div class="inquiry-radio">
+                                    <div class="radio-bar"></div>
+                                    <fieldset>
+                                        <label>
+                                            <input type="radio" name="count" value="2" checked>
+                                            <span class="ghost-radio active">2</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="count" value="3">
+                                            <span class="ghost-radio">3</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="count" value="4">
+                                            <span class="ghost-radio">4</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="count" value="5">
+                                            <span class="ghost-radio">5</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="count" value="6">
+                                            <span class="ghost-radio">6</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="count" value="7">
+                                            <span class="ghost-radio">7</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="count" value="8">
+                                            <span class="ghost-radio">8</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="count" value="9">
+                                            <span class="ghost-radio">9</span>
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="inquiry-item">
+                                <div class="label">Máte preferované palivo?</div>
+                                <div class="inquiry-radio">
+                                    <fieldset class="--btns">
+                                        <label>
+                                            <input type="radio" name="palivo" value="0" checked>
+                                            <span class="ghost-radio --btn active">Benzín</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="palivo" value="1">
+                                            <span class="ghost-radio --btn">Diesel</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="palivo" value="2">
+                                            <span class="ghost-radio --btn">CNG</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="palivo" value="3">
+                                            <span class="ghost-radio --btn">LPG</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="palivo" value="4">
+                                            <span class="ghost-radio --btn">Hybrid</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="palivo" value="5">
+                                            <span class="ghost-radio --btn">Elektro</span>
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="inquiry-submit --next">
+                                <a href="#inquiryStepSt" class="btn btn--outline inquiry-step-btn" id="backToInquirySt">Zpět</a>
+                                <a href="#inquiryStepRd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryRd">Dále</a>
+                            </div>
+                        </div>
+                        <div class="inquiry-step" id="inquiryStepRd">
+                            <div class="inquiry-item">
+                                <div class="inquiry-row">
+                                    <div class="label">Kontakt</div>
+                                    <div class="form-row">
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label">Jméno</span>
+                                                <input type="text" placeholder="Tomáš Novák">
+                                            </label>
+                                        </div>
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label">Email</span>
+                                                <input type="email" placeholder="novak@tomas.cz">
+                                            </label>
+                                        </div>
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label">Telefon</span>
+                                                <input type="text" placeholder="+420 777 666 555">
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <input type="text" placeholder="50 000 000">
+                                <div class="inquiry-row">
+                                    <div class="label">Chcete-li, můžete dodat ještě pár informací</div>
+                                    <div class="form-row">
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label">Měl/a jste nějakou špatnou zkušenost</span>
+                                                <textarea placeholder="Váš text..."></textarea>
+                                            </label>
+                                        </div>
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label">Je vozidlo pořizováno jako dárek?</span>
+                                                <textarea placeholder="Váš text..."></textarea>
+                                            </label>
+                                        </div>
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label">Máte konkrétní termín, ke kterému je potřeba vůz mít?</span>
+                                                <textarea placeholder="Váš text..."></textarea>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="inquiry-item">
-                            <div class="label">Využijete možnost odpočtu DPH?</div>
-                            <div class="label">(Jste plátce DPH?)</div>
-                            <div class="inquiry-btns">
-                                <a href="#" class="inquiry-btn">Ano</a>
-                                <a href="#" class="inquiry-btn">Ne</a>
+                            <div class="inquiry-submit --next">
+                                <a href="#inquiryStepNd" class="btn btn--outline inquiry-step-btn" id="backToInquiryNd">Zpět</a>
+                                <input type="submit" class="btn btn--outline" value="Odeslat">
                             </div>
-                        </div>
-                        <div class="inquiry-submit --next">
-                            <a href="#" class="btn btn--outline">Dále</a>
                         </div>
                     </div>
                 </div>

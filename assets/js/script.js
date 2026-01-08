@@ -1,109 +1,116 @@
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
+
 import './inquiry.js';
-$(function () {
 
-    /**
-     * STICKY HEADER
-     */
-    const nav = document.querySelector('nav .nav-wrap');
+document.addEventListener('DOMContentLoaded', () => {
+    $(function () {
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 0) {
-            nav.classList.add('sticky');
-        } else {
-            nav.classList.remove('sticky');
-        }
-    });
+        /**
+         * STICKY HEADER
+         */
+        const nav = document.querySelector('nav .nav-wrap');
 
-
-    /**
-     * CHANGE LOGO FOR NAVBAR OPENED (HAMBURGER)
-     */
-    const collapse = document.getElementById('navbar');
-
-    collapse.addEventListener('show.bs.collapse', () => {
-        nav.classList.add('light-nav');
-    });
-
-    collapse.addEventListener('hidden.bs.collapse', () => {
-        nav.classList.remove('light-nav');
-    });
-
-
-    /**
-     * PRODUCTS CAROUSEL
-     */
-    const productsSwiper = new Swiper('.product-carousel', {
-        slidesPerView: 1,
-        spaceBetween: 43,
-        loop: false,
-        pagination: {
-            el: '.product-pagination'
-        },
-        breakpoints: {
-            768: {
-                slidesPerView: 1.2
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 0) {
+                nav.classList.add('sticky');
+            } else {
+                nav.classList.remove('sticky');
             }
-        }
-    });
+        });
 
 
-    /**
-     * REVIEWS CAROUSEL
-     */
-    const reviewsSwiper = new Swiper('.review-carousel', {
-        slidesPerView: 1,
-        spaceBetween: 43,
-        loop: false,
-        breakpoints: {
-            568: {
-                slidesPerView: 1.5
+        /**
+         * CHANGE LOGO FOR NAVBAR OPENED (HAMBURGER)
+         */
+        const collapse = document.getElementById('navbar');
+
+        collapse.addEventListener('show.bs.collapse', () => {
+            nav.classList.add('light-nav');
+        });
+
+        collapse.addEventListener('hidden.bs.collapse', () => {
+            nav.classList.remove('light-nav');
+        });
+
+
+        /**
+         * PRODUCTS CAROUSEL
+         */
+        const productsSwiper = new Swiper('.product-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 43,
+            loop: false,
+            pagination: {
+                el: '.product-pagination'
             },
-            992: {
-                slidesPerView: 2
-            },
-            1200: {
-                slidesPerView: 2.5
-            },
-            1400: {
-                slidesPerView: 3.2
+            breakpoints: {
+                768: {
+                    slidesPerView: 1.2
+                }
             }
-        }
-    });
+        });
 
 
-    /**
-     * WE OFFER CAROUSEL
-     */
-    const weOfferSwiper = new Swiper('.we-offer-carousel', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: false,
-        breakpoints: {
-            680: {
-                slidesPerView: 1.5
+        /**
+         * REVIEWS CAROUSEL
+         */
+        const reviewsSwiper = new Swiper('.review-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 43,
+            loop: false,
+            breakpoints: {
+                568: {
+                    slidesPerView: 1.5
+                },
+                992: {
+                    slidesPerView: 2
+                },
+                1200: {
+                    slidesPerView: 2.5
+                },
+                1400: {
+                    slidesPerView: 3.2
+                }
             }
-        }
-    });
+        });
 
 
-    /**
-     * SOCIAL CAROUSEL
-     */
-    const socialSwiper = new Swiper('.social-carousel', {
-        slidesPerView: 1.5,
-        spaceBetween: 20,
-        loop: false,
-        breakpoints: {
-            680: {
-                slidesPerView: 2
-            },
-            992: {
-                slidesPerView: 2.5
-            },
-            1100: {
-                slidesPerView: 3
+        /**
+         * WE OFFER CAROUSEL
+         */
+        const weOfferSwiper = new Swiper('.we-offer-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: false,
+            breakpoints: {
+                680: {
+                    slidesPerView: 1.5
+                }
             }
-        }
-    });
+        });
 
+
+        /**
+         * SOCIAL CAROUSEL
+         */
+        const socialSwiper = new Swiper('.social-carousel', {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+            loop: false,
+            breakpoints: {
+                680: {
+                    slidesPerView: 2
+                },
+                992: {
+                    slidesPerView: 2.5
+                },
+                1100: {
+                    slidesPerView: 3
+                }
+            }
+        });
+
+    });
 });

@@ -1,8 +1,6 @@
+import $ from 'jquery';
+
 $(function () {
-
-
-
-
 
     /**
      * INQUIRY INPUTS LOGIC
@@ -68,10 +66,6 @@ $(function () {
             document.querySelector('.progress-item:nth-child(1)').classList.add('active');
         }
     });
-
-
-
-
 
 
 });

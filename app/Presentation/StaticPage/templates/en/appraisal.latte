@@ -18,11 +18,11 @@
     <section class="inquiry-form-block --pricing content-block">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-8 offset-lg-2">
+                <div class="col-12 col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
                     <div class="title title--h4 text-center">Zjistit cenu vozu</div>
                     <div class="progress">
-                        <div class="progress-item">
-                            <div class="num active">1</div>
+                        <div class="progress-item active">
+                            <div class="num">1</div>
                             <div class="label">Info o vozidle</div>
                         </div>
                         <div class="progress-item">
@@ -34,47 +34,172 @@
                             <div class="label">Kontaktní údaje</div>
                         </div>
                     </div>
-                    <div class="inquiry-wrap --pricing">
-                        <div class="inquiry-item --form-inputs">
-                            <div class="form-item">
-                                <label>
-                                    <span class="label">Značka a model vozidla</span>
-                                    <input type="text" placeholder="Škoda">
-                                </label>
+                    <div class="inquiry-wrap --pricing form-wrap">
+                        <div class="inquiry-step active" id="inquiryPricingStepSt">
+                            <div class="inquiry-item --form-inputs">
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label">Značka a model vozidla</span>
+                                        <input type="text" placeholder="Škoda">
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label">Uvedení do provozu</span>
+                                        <input type="text" placeholder="2022">
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label">Stav tachometru</span>
+                                        <input type="text" placeholder="200 000 km">
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label">Motorizace</span>
+                                        <input type="text" placeholder="1.8 TDI">
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label">VIN číšlo vozu</span>
+                                        <input type="text" placeholder="4Y1SL65848Z411439">
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label">Představa o ceně</span>
+                                        <input type="text" placeholder="1 000 000 Kč">
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-item">
-                                <label>
-                                    <span class="label">Uvedení do provozu</span>
-                                    <input type="text" placeholder="2022">
-                                </label>
-                            </div>
-                            <div class="form-item">
-                                <label>
-                                    <span class="label">Stav tachometru</span>
-                                    <input type="text" placeholder="200 000 km">
-                                </label>
-                            </div>
-                            <div class="form-item">
-                                <label>
-                                    <span class="label">Motorizace</span>
-                                    <input type="text" placeholder="1.8 TDI">
-                                </label>
-                            </div>
-                            <div class="form-item">
-                                <label>
-                                    <span class="label">VIN číšlo vozu</span>
-                                    <input type="text" placeholder="4Y1SL65848Z411439">
-                                </label>
-                            </div>
-                            <div class="form-item">
-                                <label>
-                                    <span class="label">Představa o ceně</span>
-                                    <input type="text" placeholder="1 000 000 Kč">
-                                </label>
+                            <div class="inquiry-submit --next">
+                                <a href="#inquiryPricingStepNd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryPricingNd">Dále</a>
                             </div>
                         </div>
-                        <div class="inquiry-submit --next">
-                            <a href="#" class="btn btn--outline">Dále</a>
+                        <div class="inquiry-step" id="inquiryPricingStepNd">
+                            <div class="inquiry-item --form-inputs">
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label label--sm">Má vozidlo odpočet DPH?</span>
+                                        <select name="dph">
+                                            <option value="1">Ano</option>
+                                            <option value="0">Ne</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label label--sm">Má vozidlo vedenou historii?</span>
+                                        <select name="history">
+                                            <option value="1">Ano</option>
+                                            <option value="0">Ne</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label label--sm">Kdy byl proveden poslední servis?</span>
+                                        <select name="service">
+                                            <option value="1">Ano</option>
+                                            <option value="0">Ne</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label label--sm">Mám zájem o:</span>
+                                        <select name="interested">
+                                            <option value="1">Ano</option>
+                                            <option value="0">Ne</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label label--sm">Bylo vozidlo poskozeno?</span>
+                                        <select name="damaged">
+                                            <option value="1">Ano</option>
+                                            <option value="0">Ne</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="form-item">
+                                    <label>
+                                        <span class="label label--sm">Představa o ceně</span>
+                                        <input type="text" placeholder="1 000 000 Kč">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="inquiry-submit --next">
+                                <a href="#inquiryPricingStepSt" class="btn btn--outline inquiry-step-btn" id="backToInquiryPricingSt">Zpět</a>
+                                <a href="#inquiryPricingStepRd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryPricingRd">Dále</a>
+                            </div>
+                        </div>
+                        <div class="inquiry-step" id="inquiryPricingStepRd">
+                            <div class="inquiry-item --form-inputs">
+                                <div class="inquiry-row">
+                                    <div class="form-row">
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label label--sm">Jméno</span>
+                                                <input type="text" placeholder="Tomáš Novák">
+                                            </label>
+                                        </div>
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label label--sm">Email</span>
+                                                <input type="email" placeholder="novak@tomas.cz">
+                                            </label>
+                                        </div>
+                                        <div class="form-item third">
+                                            <label>
+                                                <span class="label label--sm">Telefon</span>
+                                                <input type="text" placeholder="+420 777 666 555">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inquiry-row">
+                                    <div class="form-row">
+                                        <div class="form-item half file-input">
+                                            <label>
+                                                <span class="label label--sm">Sken technického průkazu vozidla</span>
+                                                <div class="fake-file-input">
+                                                    <div class="icon">
+                                                        <svg width="54" height="35" viewBox="0 0 54 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M23.7123 2.87501C25.1704 5.37217 26.9692 8.45285 27.1062 8.68755C27.2581 8.94777 40.1681 8.85061 49.1652 8.73869M23.7123 2.87501H47.1652C48.2698 2.87501 49.1652 3.77044 49.1652 4.87501V8.73869M23.7123 2.87501C23.0343 1.71387 21.7908 1 20.4462 1H5C2.79086 1 1 2.79086 1 5V30.0002C1 32.2093 2.79086 34.0002 5 34.0002H48.9578C51.1669 34.0002 52.9578 32.2094 52.9578 30.0002V12.4804C52.9578 10.3947 51.2508 8.71275 49.1652 8.73869" stroke="#C41717" stroke-width="2"/>
+                                                            <path d="M25.9785 28C25.9785 28.5523 26.4262 29 26.9785 29C27.5308 29 27.9785 28.5523 27.9785 28L26.9785 28L25.9785 28ZM27.6856 13.2929C27.2951 12.9024 26.6619 12.9024 26.2714 13.2929L19.9074 19.6569C19.5169 20.0474 19.5169 20.6805 19.9074 21.0711C20.298 21.4616 20.9311 21.4616 21.3217 21.0711L26.9785 15.4142L32.6354 21.0711C33.0259 21.4616 33.6591 21.4616 34.0496 21.0711C34.4401 20.6805 34.4401 20.0474 34.0496 19.6569L27.6856 13.2929ZM26.9785 28L27.9785 28L27.9785 14L26.9785 14L25.9785 14L25.9785 28L26.9785 28Z" fill="#C41717"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="text">Nahrát soubory</div>
+                                                </div>
+                                                <input type="file">
+                                            </label>
+                                        </div>
+                                        <div class="form-item half file-input">
+                                            <label>
+                                                <span class="label label--sm">Fotografie vozu (exteriér, interiér, případná poškození)</span>
+                                                <div class="fake-file-input">
+                                                    <div class="icon">
+                                                        <svg width="54" height="35" viewBox="0 0 54 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M23.7123 2.87501C25.1704 5.37217 26.9692 8.45285 27.1062 8.68755C27.2581 8.94777 40.1681 8.85061 49.1652 8.73869M23.7123 2.87501H47.1652C48.2698 2.87501 49.1652 3.77044 49.1652 4.87501V8.73869M23.7123 2.87501C23.0343 1.71387 21.7908 1 20.4462 1H5C2.79086 1 1 2.79086 1 5V30.0002C1 32.2093 2.79086 34.0002 5 34.0002H48.9578C51.1669 34.0002 52.9578 32.2094 52.9578 30.0002V12.4804C52.9578 10.3947 51.2508 8.71275 49.1652 8.73869" stroke="#C41717" stroke-width="2"/>
+                                                            <path d="M25.9785 28C25.9785 28.5523 26.4262 29 26.9785 29C27.5308 29 27.9785 28.5523 27.9785 28L26.9785 28L25.9785 28ZM27.6856 13.2929C27.2951 12.9024 26.6619 12.9024 26.2714 13.2929L19.9074 19.6569C19.5169 20.0474 19.5169 20.6805 19.9074 21.0711C20.298 21.4616 20.9311 21.4616 21.3217 21.0711L26.9785 15.4142L32.6354 21.0711C33.0259 21.4616 33.6591 21.4616 34.0496 21.0711C34.4401 20.6805 34.4401 20.0474 34.0496 19.6569L27.6856 13.2929ZM26.9785 28L27.9785 28L27.9785 14L26.9785 14L25.9785 14L25.9785 28L26.9785 28Z" fill="#C41717"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="text">Nahrát soubory</div>
+                                                </div>
+                                                <input type="file">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inquiry-submit --next">
+                                <a href="#inquiryPricingStepNd" class="btn btn--outline inquiry-step-btn" id="backToInquiryPricingNd">Zpět</a>
+                                <input type="submit" class="btn btn--outline" value="Odeslat">
+                            </div>
                         </div>
                     </div>
                 </div>

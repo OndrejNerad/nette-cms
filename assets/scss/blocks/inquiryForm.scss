@@ -44,18 +44,48 @@
             &.--third { flex: 0 0 calc((100% / 3) - (20px * 2) / 3);}
 
             &.--form-inputs {
-                display: flex; flex-wrap: wrap; gap: 20px; flex-direction: row;
+                display: flex; flex-wrap: wrap; gap: 20px; flex-direction: row; align-items: stretch;
 
-                .form-item { flex: 0 0 calc((100% / 3) - (20px / 3) * 2);
-                    label {
+                .form-item {
+                    flex: 0 0 calc((100% / 3) - (20px / 3) * 2);
+
+                    &.half { flex: 0 0 calc(50% - 10px);}
+                    &.file-input {
+                        input { display: none;}
+                    }
+
+                    label { height: 100%;
                         .label { font-size: 18px;}
-                        input { background-color: #E4E4E4; font-size: 18px;}
+                        input {
+                            background-color: #E4E4E4; font-size: 18px; margin-top: auto;
+                        }
+
+                        select { margin-top: auto;}
+
+                        .fake-file-input {
+                            background-color: $light-bck; display: flex; flex-direction: column;
+                            justify-content: center; align-items: center; padding: 53px; border-radius: 8px;
+                            margin-top: auto;
+
+                            .text { margin-top: 4px;}
+                        }
                     }
                 }
             }
 
+            .form-item label {
+                input, textarea { background-color: $light-bck;}
+            }
+
+            .inquiry-row { width: 100%;}
+
             .label {
                 font-size: 24px; letter-spacing: -.02em; line-height: 1.5em;
+
+                &--sm { font-size: 18px;}
+                &--title { text-align: center; margin-bottom: 30px;}
+                &--half { width: 75%;}
+                &--mt { margin-top: 55px;}
             }
 
             .inquiry-range { display: flex; align-items: center; margin-top: 24px;
@@ -126,7 +156,6 @@
                     }
                 }
             }
-
 
             .inquiry-checkbox { margin-top: 12px;
 

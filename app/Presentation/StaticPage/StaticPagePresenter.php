@@ -6,11 +6,12 @@ namespace App\Presentation\StaticPage;
 
 use Nette;
 use Nette\Application\UI\Presenter;
-use Nette\Forms\Form;
+use App\Components\Forms\ContactFormControl;
+use App\Components\Forms\ContactFormControlFactory;
 
 final class StaticPagePresenter extends Presenter
 {
-    public function __construct(private readonly \App\Components\Forms\ContactFormFactory $contactFormFactory)
+    public function __construct(private readonly ContactFormControlFactory $contactFormControlFactory)
     {
         parent::__construct();
     }
@@ -18,9 +19,7 @@ final class StaticPagePresenter extends Presenter
     protected function createTemplate(?string $class = null): Nette\Application\UI\Template
     {
         $template = parent::createTemplate($class);
-
         $this->setLayout(__DIR__ . '/../@layout.latte');
-
         return $template;
     }
 
@@ -36,10 +35,6 @@ final class StaticPagePresenter extends Presenter
 
     public function actionDefault(?string $url = null, string $lang = 'cs'): void
     {
-        if (!in_array($lang, ['cs', 'en'], true)) {
-            $this->redirect('StaticPage:default', ['lang' => 'cs', 'url' => $url ?? 'default']);
-        }
-
         $this->template->lang = $lang;
         $this->template->url  = $url ?? 'default';
     }
@@ -54,15 +49,8 @@ final class StaticPagePresenter extends Presenter
         ];
     }
 
-    protected function createComponentContactForm(): Form
+    protected function createComponentContactForm(): ContactFormControl
     {
-        $form = $this->contactFormFactory->create(function () {
-            $this->flashMessage('Děkujeme! Zpráva byla odeslána.', 'success');
-            $this->redirect('this');
-        });
-
-        $form->setAction($this->getHttpRequest()->getUrl()->getPath());
-
-        return $form;
+        return $this->contactFormControlFactory->create();
     }
 }

@@ -1,7 +1,7 @@
 # see https://doc.nette.org/en/configuring
 
 parameters:
-    adminEmail: test@localhost # for prod info@automaton.mpotfaj.cz (proste info na domene)
+    adminEmail: neradondrej@gmail.com # for prod info@automaton.mpotfaj.cz (proste info na domene)
 
 application:
     catchExceptions: true

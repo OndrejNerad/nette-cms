@@ -1,0 +1,49 @@
+{foreach $flashes as $flash}
+    <div class="flash {$flash->type}">{$flash->message}</div>
+{/foreach}
+
+{form contactForm}
+    <div class="form-row">
+        <div class="form-item third">
+            <label>
+                <span class="label">{label name /}</span>
+                {input name, placeholder => 'Tomáš Novák'}
+            </label>
+            {inputError name}
+        </div>
+        <div class="form-item third">
+            <label>
+                <span class="label">{label email /}</span>
+                {input email, placeholder => 'novak@tomas.cz'}
+            </label>
+            {inputError email}
+        </div>
+        <div class="form-item third">
+            <label>
+                <span class="label">{label phone /}</span>
+                {input phone, placeholder => '+420 777 666 555'}
+            </label>
+            {inputError phone}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-item textarea">
+            <label>
+                <span class="label">{label message /}</span>
+                {input message, placeholder => 'Váš text...'}
+            </label>
+            {inputError message}
+        </div>
+    </div>
+
+    {* honeypot - bot protection *}
+    <div style="display:none">
+        {input address}
+    </div>
+
+    <div class="form-row submit">
+        <div class="form-item">
+            {input send}
+        </div>
+    </div>
+{/form}

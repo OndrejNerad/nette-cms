@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Core;
 
 use Nette\Application\Routers\RouteList;
-use Nette\Application\Routers\Route;
 
 final class RouterFactory
 {
@@ -21,11 +20,15 @@ final class RouterFactory
         $router->addRoute('<lang en|cs>', [
             'presenter' => 'StaticPage',
             'action'    => 'default',
-            'url'       => 'default',
+            'url'       => null,
         ]);
 
-        // redirect bare / to /cs
-        $router->addRoute('', 'StaticPage:default', RouteList::ONE_WAY);
+        $router->addRoute('', [
+            'presenter' => 'StaticPage',
+            'action'    => 'default',
+            'lang'      => 'cs',
+            'url'       => null,
+        ]);
 
         return $router;
     }

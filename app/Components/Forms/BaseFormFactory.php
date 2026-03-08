@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Components\Forms;
 
-use Nette\Forms\Form;
+use Nette\Application\UI\Form;
 use Nette\Mail\Message;
 
 abstract class BaseFormFactory
@@ -16,19 +16,14 @@ abstract class BaseFormFactory
 
     protected function addCommonFields(Form $form): void
     {
-        // Honeypot
         $form->addText('address')
             ->setHtmlAttribute('style', 'display:none')
             ->setOmitted();
-
-        // nahradit manualnim checkem viz nais
-//        // reCAPTCHA v3
-//        $form->addReCaptcha('recaptcha')
-//            ->setThreshold(0.5);
     }
 
     protected function sendMail(array $data, string $subject, string $template = null): void
     {
+        // TODO: fix it for prod
         $mail = new Message;
         $mail->setFrom($data['email'], $data['name'] ?? null)
             ->addTo($this->adminEmail)
@@ -43,7 +38,6 @@ abstract class BaseFormFactory
 
     private function renderTemplate(string $template, array $data): string
     {
-        // optional: use Latte for beautiful emails
         return "TODO: Latte template";
     }
 }

@@ -1,6 +1,4 @@
 services:
-    - App\Core\RouterFactory::createRouter
-
     mail.mailer:
         class: Nette\Mail\SmtpMailer
         arguments:
@@ -10,7 +8,9 @@ services:
             password: ''
             encryption: null
 
+    - App\Core\RouterFactory::createRouter
     - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%)
+    - implement: App\Components\Forms\ContactFormControlFactory
 
 search:
     - in: %appDir%

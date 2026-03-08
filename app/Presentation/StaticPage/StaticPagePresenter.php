@@ -36,13 +36,17 @@ final class StaticPagePresenter extends Presenter
 
     public function actionDefault(?string $url = null, string $lang = 'cs'): void
     {
+        if (!in_array($lang, ['cs', 'en'], true)) {
+            $this->redirect('StaticPage:default', ['lang' => 'cs', 'url' => $url ?? 'default']);
+        }
+
         $this->template->lang = $lang;
         $this->template->url  = $url ?? 'default';
     }
 
     public function formatTemplateFiles(): array
     {
-        $lang = $this->getParameter('lang');
+        $lang = $this->getParameter('lang') ?? 'cs';
         $url  = $this->getParameter('url') ?? 'default';
 
         return [
@@ -52,9 +56,13 @@ final class StaticPagePresenter extends Presenter
 
     protected function createComponentContactForm(): Form
     {
-        return $this->contactFormFactory->create(function () {
+        $form = $this->contactFormFactory->create(function () {
             $this->flashMessage('Děkujeme! Zpráva byla odeslána.', 'success');
             $this->redirect('this');
         });
+
+        $form->setAction($this->getHttpRequest()->getUrl()->getPath());
+
+        return $form;
     }
 }

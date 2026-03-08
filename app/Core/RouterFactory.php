@@ -13,31 +13,19 @@ final class RouterFactory
     {
         $router = new RouteList;
 
-        $router->addRoute('en/<url .+>', [
+        $router->addRoute('<lang en|cs>/<url .+>', [
             'presenter' => 'StaticPage',
-            'action'     => 'default',
-            'lang'       => 'en',
+            'action'    => 'default',
         ]);
 
-        $router->addRoute('en', [
+        $router->addRoute('<lang en|cs>', [
             'presenter' => 'StaticPage',
-            'action'     => 'default',
-            'lang'       => 'en',
-            'url'       => null,
+            'action'    => 'default',
+            'url'       => 'default',
         ]);
 
-        $router->addRoute('<url .*>', [
-            'presenter' => 'StaticPage',
-            'action'     => 'default',
-            'lang'       => 'cs',
-        ]);
-
-        $router->addRoute('', [
-            'presenter' => 'StaticPage',
-            'action'     => 'default',
-            'lang'       => 'en',
-            'url'       => null,
-        ]);
+        // redirect bare / to /cs
+        $router->addRoute('', 'StaticPage:default', RouteList::ONE_WAY);
 
         return $router;
     }

@@ -39,7 +39,9 @@
             .text-box {
                 padding-right: 10%; flex: 0 0 60%; padding-bottom: 60px;
 
-                .text { font-size: 24px; letter-spacing: -.02em;}
+                .text {
+                    font-size: 24px; letter-spacing: -.02em; margin-top: 32px;
+                }
             }
 
             .btn-wrap { padding-bottom: 5%;}

@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-
+    <meta charset="UTF-8">
+    <meta name="description" content="Nekupujte auta dráž než musíte">
+    <meta name="keywords" content="Auta, Prodej, Dovoz">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         Automaton | {if $lang == 'en'}Stop overpaying for cars{else}Nekupujte auta dráž než musíte{/if}
     </title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +25,7 @@
 <body>
 
 <nav>
-    <div class="nav-wrap{if $lightNav} light-nav{/if}">
+    <div class="nav-wrap{if $lightNav} light-nav{/if}{if $homepage} homepage{/if}">
         <a href="/{$lang}" class="logo">
             <img src="/assets/img/logo.webp" alt="" class="logo--light">
             <img src="/assets/img/logo-dark.webp" alt="" class="logo--dark">
@@ -35,7 +41,10 @@
                     <a href="/en/car-listings" class="nav-link">Car listings</a>
                     <a href="/en/car-inquiry" class="nav-link">Car inquiry</a>
                     <a href="/en/appraisal" class="nav-link">Appraisal</a>
-                    <a href="/en/autoinspect" class="nav-link">Autoinspect</a>
+                    <a href="/en/autoinspect" class="nav-link">AutoInspect</a>
+                    <a href="/en/veterani" class="nav-link">Veteráni</a>
+                    <a href="/en/karavany" class="nav-link">Karavany</a>
+                    <a href="/en/motorky" class="nav-link">Motorky</a>
                     <span class="separ">|</span>
                     <a href="/en/about-us" class="nav-link">About us</a>
                     <a href="/en/faq" class="nav-link">FAQ</a>
@@ -47,13 +56,15 @@
                         </a>
                     </div>
                 {else}
-                    <a href="/cs/nabidka-vozu" class="nav-link">Nabídka vozů</a>
-                    <a href="/cs/poptat-vuz" class="nav-link">Poptat vůz</a>
-                    <a href="/cs/oceneni" class="nav-link">Ocenění</a>
-                    <a href="/cs/autoinspect" class="nav-link">Autoinspect</a>
+                    <a href="/cs/nabidka-vozidel" class="nav-link">Nabídka vozidel</a>
+                    <a href="/cs/poptat-dovoz" class="nav-link">Poptat dovoz</a>
+                    <a href="/cs/vykup" class="nav-link">Výkup</a>
+                    <a href="/cs/autoinspect" class="nav-link">AutoInspect</a>
+                    <a href="/cs/veterani" class="nav-link">Veteráni</a>
+                    <a href="/cs/karavany" class="nav-link">Karavany</a>
                     <span class="separ">|</span>
                     <a href="/cs/o-nas" class="nav-link">O nás</a>
-                    <a href="/cs/faq" class="nav-link">FAQ</a>
+                    <a href="/cs/faq" class="nav-link">Často kladené dotazy</a>
                     <a href="/cs/kontakt" class="nav-link">Kontakt</a>
 
                     <div class="lang-switcher">
@@ -83,12 +94,20 @@
                 <div class="col-12 col-lg-9">
                     <div class="top-row">
                         <div class="footer-col">
-                            <div class="label">Cars</div>
+                            <div class="label">Vozy</div>
                             <div class="menu-items">
                                 <a href="/en/car-listings" class="menu-item">Car listings</a>
                                 <a href="/en/car-inquiry" class="menu-item">Car inquiry</a>
-                                <a href="/en/appraisal" class="menu-item">Appraisal</a>
-                                <a href="/en/autoinspect" class="menu-item">AutoInspect</a>
+                                <a href="/appraisal" class="menu-item">Appraisal</a>
+                                <a href="/autoinspect" class="menu-item">AutoInspect</a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="label --empty"></div>
+                            <div class="menu-items">
+                                <a href="/en/veterani" class="menu-item">Veteráni</a>
+                                <a href="/en/karavany" class="menu-item">Karavany</a>
+                                <a href="/en/motorky" class="menu-item">Motorky</a>
                             </div>
                         </div>
                         <div class="footer-col">
@@ -105,16 +124,40 @@
                             <a href="tel:+420775092097" class="contact-item">+420 775 092 097</a>
 
                             <div class="label marg-top">Mail</div>
-                            <a href="mailto:poptavky@automaton.cz" class="contact-item">poptavky@automaton.cz</a>
+                            <a href="mailto:info@automaton.cz" class="contact-item">info@automaton.cz</a>
                         </div>
+                    </div>
+                    <div class="top-row --mt">
+                        <div class="footer-col --full">
+                            <div class="label">Automaton s.r.o.</div>
+                        </div>
+                    </div>
+                    <div class="top-row">
                         <div class="footer-col">
-                            <div class="label --white">Automaton s.r.o.</div>
                             <div class="menu-items">
+                                <div class="label --white">Sídlo</div>
                                 <a href="https://maps.app.goo.gl/LeGxNzmEZRCQLHkQ6" target="_blank" class="menu-item">
                                     Holečkova 1205/93,<br>
-                                    150 00 Prague 5,
+                                    Košíře, 150 00 Prague,<br>
                                     Czech Republic
                                 </a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="menu-items">
+                                <div class="label --white">Provozovna</div>
+                                <a href="https://maps.app.goo.gl/LeGxNzmEZRCQLHkQ6" target="_blank" class="menu-item">
+                                    Holečkova 657/29,<br>
+                                    Košíře, 150 00 Prague,<br>
+                                    Czech Republic
+                                </a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="menu-items">
+                                <div class="label --white">Otevírací doba</div>
+                                <p>Po-Pá 10:00 - 18:00</p>
+                                <p>Víkendy & svátky: dle domluvy</p>
                             </div>
                         </div>
                     </div>
@@ -155,7 +198,7 @@
                 </div>
             {else}
                 <div class="col-12 col-lg-3">
-                    <a href="/" class="logo">
+                    <a href="/cs" class="logo">
                         <img src="/assets/img/logo.webp" alt="Automaton">
                     </a>
                 </div>
@@ -164,10 +207,18 @@
                         <div class="footer-col">
                             <div class="label">Vozy</div>
                             <div class="menu-items">
-                                <a href="/nabidka-vozu" class="menu-item">Nabídka vozů</a>
-                                <a href="/poptat-vuz" class="menu-item">Poptat vůz</a>
-                                <a href="/oceneni" class="menu-item">Ocenění</a>
+                                <a href="/nabidka-vozidel" class="menu-item">Nabídka vozidel</a>
+                                <a href="/poptat-dovoz" class="menu-item">Poptat dovoz</a>
+                                <a href="/vykup" class="menu-item">Výkup</a>
                                 <a href="/autoinspect" class="menu-item">AutoInspect</a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="label --empty"></div>
+                            <div class="menu-items">
+                                <a href="/veterani" class="menu-item">Veteráni</a>
+                                <a href="/karavany" class="menu-item">Karavany</a>
+                                <a href="/motorky" class="menu-item">Motorky</a>
                             </div>
                         </div>
                         <div class="footer-col">
@@ -184,16 +235,40 @@
                             <a href="tel:+420775092097" class="contact-item">+420 775 092 097</a>
 
                             <div class="label marg-top">Mail</div>
-                            <a href="mailto:poptavky@automaton.cz" class="contact-item">poptavky@automaton.cz</a>
+                            <a href="mailto:info@automaton.cz" class="contact-item">info@automaton.cz</a>
                         </div>
+                    </div>
+                    <div class="top-row --mt">
+                        <div class="footer-col --full">
+                            <div class="label">Automaton s.r.o.</div>
+                        </div>
+                    </div>
+                    <div class="top-row">
                         <div class="footer-col">
-                            <div class="label --white">Automaton s.r.o.</div>
                             <div class="menu-items">
+                                <div class="label --white">Sídlo</div>
                                 <a href="https://maps.app.goo.gl/LeGxNzmEZRCQLHkQ6" target="_blank" class="menu-item">
                                     Holečkova 1205/93,<br>
-                                    150 00 Praha 5,
-                                    Česká republika
+                                    Košíře, 150 00 Prague,<br>
+                                    Czech Republic
                                 </a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="menu-items">
+                                <div class="label --white">Provozovna</div>
+                                <a href="https://maps.app.goo.gl/LeGxNzmEZRCQLHkQ6" target="_blank" class="menu-item">
+                                    Holečkova 657/29,<br>
+                                    Košíře, 150 00 Prague,<br>
+                                    Czech Republic
+                                </a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="menu-items">
+                                <div class="label --white">Otevírací doba</div>
+                                <p>Po-Pá 10:00 - 18:00</p>
+                                <p>Víkendy & svátky: dle domluvy</p>
                             </div>
                         </div>
                     </div>

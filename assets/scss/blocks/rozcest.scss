@@ -3,9 +3,12 @@
 
     .rozcest-link {
         padding: 120px 200px; text-decoration: none; display: flex; flex-direction: column; justify-content: center;
-        align-items: center; text-align: center; height: 100%; border-top: 2px solid $gray; flex: 0 0 50%; height: auto;
+        align-items: center; text-align: center; border-top: 2px solid $gray; flex: 0 0 50%; height: auto;
+        transition: .25s all;
 
         &:hover {
+            background-color: rgba(202, 202, 202, .25); transition: .25s all;
+
             .title { color: $red;}
         }
 

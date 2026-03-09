@@ -31,6 +31,12 @@ final class StaticPagePresenter extends Presenter
         $lightNav = ['default', 'o-nas', 'about-us'];
 
         $this->template->lightNav = in_array($url, $lightNav, true);
+
+        $this->template->homepage = false;
+        if ($url === 'default') {
+            $this->template->homepage = true;
+        }
+
     }
 
     public function actionDefault(?string $url = null, string $lang = 'cs'): void

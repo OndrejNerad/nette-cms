@@ -211,8 +211,9 @@
 
             .price-wrap {
                 background-color: #F6F6F6; display: flex; align-items: center; padding-top: 20px; padding-bottom: 18px;
+                flex-direction: row; flex-wrap: wrap;
 
-                .price-col {
+                .price-col { flex: 0 0 50%;
                     .price { font-size: 44px; color: $red; line-height: 1.04em;}
                     .note {
                         font-size: 18px; letter-spacing: -.03em; color: #6E6E6E; display: flex; align-items: center;
@@ -221,7 +222,9 @@
                     }
                 }
 
-                .btn-col { flex: 0 0 50%; margin-left: auto;
+                .btn-col {
+                    flex: 0 0 50%; margin-left: auto; margin-top: 24px;
+
                     .btn { width: 100%;}
                 }
             }
@@ -432,13 +435,14 @@
 
             .full-bck::before { right: -50%;}
             .text-col { flex: 0 0 auto; text-align: center;}
-            .btn-col { margin-left: 0; margin-top: 40px;}
+            .btn-col { margin-left: 0; margin-top: 0;}
         }
 
         &-detail {
             .product-info {
                 .price-wrap { flex-direction: column; align-items: flex-start;
-                    .btn-col { margin-left: 0; margin-top: 20px;}
+                    .price-col { margin-bottom: 20px;}
+                    .btn-col { margin-left: 0; margin-top: 0;}
                 }
                 .info-wrap { padding-right: 12px;}
             }

@@ -1,7 +1,9 @@
 footer {
     background-color: #191919; padding-top: 150px; padding-bottom: 100px;
 
-    .top-row { display: flex;}
+    .top-row { display: flex;
+         &.--mt { margin-top: 60px;}
+    }
 
     .bottom-row {
         display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 140px;
@@ -28,11 +30,13 @@ footer {
     .marg-top { margin-top: 24px;}
 
     .footer-col { flex: 0 0 23%; margin-right: 2%;
+        &.--full { flex: 0 0 100%;}
 
         .label {
             text-transform: uppercase; font-size: 20px; font-weight: 700; letter-spacing: .2em; color: #414141;
 
             &.--white { text-transform: unset; color: #868686; letter-spacing: 0;}
+            &.--empty { height: 30px;}
         }
 
         .contact-item, .menu-item {
@@ -43,6 +47,8 @@ footer {
 
         .menu-items {
             margin-top: 10px; display: flex; flex-direction: column;
+
+            p { color: #868686;}
         }
     }
 

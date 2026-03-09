@@ -27,11 +27,11 @@ $(function () {
     const collapse = document.getElementById('navbar');
 
     collapse.addEventListener('show.bs.collapse', () => {
-        nav.classList.add('light-nav');
+        nav.classList.add('opened-nav');
     });
 
     collapse.addEventListener('hidden.bs.collapse', () => {
-        nav.classList.remove('light-nav');
+        nav.classList.remove('opened-nav');
     });
 
 

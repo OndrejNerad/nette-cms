@@ -24,11 +24,27 @@ nav {
     .nav-wrap {
         display: flex; justify-content: space-between; padding: 35px; transition: .25s all;
 
+        &.homepage { background-color: rgba(0,0,0,.5);}
         &.sticky { background-color: #323232; transition: .25s all; padding: 20px 30px;
             .logo {
                 &--dark { display: none;}
                 &--light { display: block;}
             }
+            .menu {
+                .nav-link, .separ { color: $white;}
+            }
+
+            .navbar-toggler-icon::before {
+                background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 17H19M5 12H19M5 7H19' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            }
+        }
+
+        &.opened-nav { padding-bottom: 0; background-color: transparent;
+            .logo {
+                &--dark { display: none;}
+                &--light { display: block;}
+            }
+
             .menu {
                 .nav-link, .separ { color: $white;}
             }
@@ -76,21 +92,17 @@ nav {
         }
     }
 
-    @media (max-width: 1200px) {
-        .nav-wrap { padding: 20px 30px;
-            .menu .nav-link:not(:first-child),
-            .menu .separ,
-            .lang-switcher { margin-left: 20px;}
-
-            .logo img { max-width: 160px;}
+    @media (max-width: 1450px) {
+        .nav-wrap .menu {
+            .separ, .nav-link:not(:first-child) { margin-left: 24px;}
         }
     }
 
-    @media (min-width: 993px) {
+    @media (min-width: 1401px) {
         #navbar { display: block;}
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1400px) {
         .navbar-toggler { display: block;}
         .nav-wrap {
             #navbar {
@@ -103,5 +115,19 @@ nav {
                 .lang-switcher { margin-left: 0; margin-top: 20px;}
             }
         }
+    }
+
+    @media (max-width: 1200px) {
+        .nav-wrap { padding: 20px 30px;
+            .menu .nav-link:not(:first-child),
+            .menu .separ,
+            .lang-switcher { margin-left: 20px;}
+
+            .logo img { max-width: 160px;}
+        }
+    }
+
+    @media (max-height: 550px) {
+        .nav-wrap #navbar { overflow: scroll; height: 100svh;}
     }
 }

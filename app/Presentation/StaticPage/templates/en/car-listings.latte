@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="title--h3">Nabídka vozů</h1>
+                    <h1 class="title--h3">Nabídka vozidel</h1>
                 </div>
                 <div class="col-12">
                     <div class="product-order">
@@ -24,9 +24,9 @@
                                     <span class="label">Kategorie</span>
                                     <select name="category" id="category">
                                         <option value="0">Nerozhoduje</option>
-                                        <option value="category-1">Kategorie 1</option>
-                                        <option value="category-2">Kategorie 2</option>
-                                        <option value="category-3">Kategorie 3</option>
+                                        <option value="category-1">Skladem</option>
+                                        <option value="category-2">Na dovoz</option>
+                                        <option value="category-3">Do výroby</option>
                                     </select>
                                 </label>
                             </div>
@@ -35,9 +35,11 @@
                                     <span class="label">Druh</span>
                                     <select name="type" id="type">
                                         <option value="0">Nerozhoduje</option>
-                                        <option value="type-1">Druh 1</option>
-                                        <option value="type-2">Druh 2</option>
-                                        <option value="type-3">Druh 3</option>
+                                        <option value="type-1">Osobní</option>
+                                        <option value="type-2">Užitkový</option>
+                                        <option value="type-3">Karvan</option>
+                                        <option value="type-4">Motorka</option>
+                                        <option value="type-5">Jiné</option>
                                     </select>
                                 </label>
                             </div>
@@ -54,8 +56,19 @@
                             </div>
                             <div class="filter-item">
                                 <label>
-                                    <span class="label">Hledaný text</span>
-                                    <input type="text" placeholder="Specifická výbava ...">
+                                    <span class="label">Karoserie (pro osobní)</span>
+                                    <select name="bodywork" id="bodywork">
+                                        <option value="0">Nerozhoduje</option>
+                                        <option value="bodywork-1">SUV</option>
+                                        <option value="bodywork-2">Kombi</option>
+                                        <option value="bodywork-3">Sedan</option>
+                                        <option value="bodywork-4">Liftback</option>
+                                        <option value="bodywork-5">Hatchback</option>
+                                        <option value="bodywork-6">Kabriolet</option>
+                                        <option value="bodywork-7">Kupé</option>
+                                        <option value="bodywork-8">Pick-up</option>
+                                        <option value="bodywork-9">MPV</option>
+                                    </select>
                                 </label>
                             </div>
                             <div class="filter-item">
@@ -69,6 +82,16 @@
                                     </select>
                                 </label>
                             </div>
+                            <div class="filter-item">
+                                <h5>PREDELAT NA PREKLIK</h5>
+                                <label>
+                                    <span class="label">Převodovka</span>
+                                    <select name="fuel" id="transmission">
+                                        <option value="transmission-1">Automatická</option>
+                                        <option value="transmission-2">Manuální</option>
+                                    </select>
+                                </label>
+                            </div>
                             <div class="filter-item range">
                                 <label for="price-from">Cena (Kč)</label>
                                 <div class="range-wrap">
@@ -77,26 +100,43 @@
                                 </div>
                             </div>
                             <div class="filter-item range">
-                                <label for="year-from">Vyrobeno</label>
+                                <label for="year-from">1. registrace</label>
                                 <div class="range-wrap">
                                     <input type="text" placeholder="Od" name="year-from">
                                     <input type="text" placeholder="Do" name="year-to">
                                 </div>
                             </div>
                             <div class="filter-item range">
-                                <label for="distance-from">Tachometr (km)</label>
+                                <label for="distance-from">Nájezd (km)</label>
                                 <div class="range-wrap">
                                     <input type="text" placeholder="Od" name="distance-from">
                                     <input type="text" placeholder="Do" name="distance-to">
                                 </div>
                             </div>
+                            <div class="filter-item range">
+                                <label for="displacement-from">Objem motoru (ccm)</label>
+                                <div class="range-wrap">
+                                    <input type="text" placeholder="Od" name="displacement-from">
+                                    <input type="text" placeholder="Do" name="displacement-to">
+                                </div>
+                            </div>
+                            <div class="filter-item range">
+                                <label for="power-from">Výkon motoru (kW)</label>
+                                <div class="range-wrap">
+                                    <input type="text" placeholder="Od" name="power-from">
+                                    <input type="text" placeholder="Do" name="power-to">
+                                </div>
+                            </div>
                             <div class="filter-item half checkbox">
                                 <input type="checkbox" name="param-1">
-                                <label for="param-1">Tachometr (km)</label>
+                                <label for="param-1">Odpočet DPH</label>
                             </div>
                             <div class="filter-item half checkbox">
                                 <input type="checkbox" name="param-2">
                                 <label for="param-2">Pohon 4x4</label>
+                            </div>
+                            <div class="filter-item">
+                                <div class="label">Podrobná výbava</div>
                             </div>
                             <div class="filter-submit">
                                 <input type="submit" value="Vyhledat">
@@ -691,49 +731,51 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="product-cta">
-                            <div class="full-bck" style="background-image: url('/assets/img/cta.webp')"></div>
-                            <div class="text-col">
-                                <h3 class="title">Potřebujete poradit s výběrem?</h3>
-                                <div class="text">
-                                    Nejste si jistí, který vůz je pro vás ten pravý? Napište nám a rádi vám poradíme s výběrem. Společně vybereme auto, které bude sedět vašim potřebám i rozpočtu.
+                        <div class="bottom-row">
+                            <div class="product-cta">
+                                <div class="full-bck" style="background-image: url('/assets/img/cta.webp')"></div>
+                                <div class="text-col">
+                                    <h3 class="title">Potřebujete poradit s výběrem?</h3>
+                                    <div class="text">
+                                        Nejste si jistí, který vůz je pro vás ten pravý? Napište nám a rádi vám poradíme s výběrem. Společně vybereme auto, které bude sedět vašim potřebám i rozpočtu.
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="btn-col">
-                                <a href="/kontakt" class="btn btn--circle btn--circle--red btn--circle--sm">
-                                    <span class="text">Kontakt</span>
-                                    <span class="icon">
+                                <div class="btn-col">
+                                    <a href="/en/contact" class="btn btn--circle btn--circle--red btn--circle--sm">
+                                        <span class="text">Contact</span>
+                                        <span class="icon">
                                         <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M25.7071 8.07038C26.0976 7.67986 26.0976 7.0467 25.7071 6.65617L19.3431 0.292211C18.9526 -0.0983137 18.3195 -0.0983136 17.9289 0.292211C17.5384 0.682735 17.5384 1.3159 17.9289 1.70642L23.5858 7.36328L17.9289 13.0201C17.5384 13.4107 17.5384 14.0438 17.9289 14.4343C18.3195 14.8249 18.9526 14.8249 19.3431 14.4343L25.7071 8.07038ZM0 7.36328L1.43373e-07 8.36328L25 8.36328L25 7.36328L25 6.36328L-1.43373e-07 6.36328L0 7.36328Z" fill="white"/>
                                         </svg>
                                     </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pagination-row">
-                            <div class="pagination">
-                                <div class="prev">
-                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.16406 1L1.41406 6.75L7.16406 12.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                </div>
-                                <div class="dots">
-                                    <span class="dot active">1</span>
-                                    <span class="dot">2</span>
-                                    <span class="dot">3</span>
-                                    <span class="dot">4</span>
-                                    <span class="dot">5</span>
-                                    <span class="interim">...</span>
-                                    <span class="dot">12</span>
-                                </div>
-                                <div class="next">
-                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.16406 1L1.41406 6.75L7.16406 12.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="btn-wrap">
-                                <a href="#" class="btn btn--outline">Načíst další</a>
+                            <div class="pagination-row">
+                                <div class="pagination">
+                                    <div class="prev">
+                                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.16406 1L1.41406 6.75L7.16406 12.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="dots">
+                                        <span class="dot active">1</span>
+                                        <span class="dot">2</span>
+                                        <span class="dot">3</span>
+                                        <span class="dot">4</span>
+                                        <span class="dot">5</span>
+                                        <span class="interim">...</span>
+                                        <span class="dot">12</span>
+                                    </div>
+                                    <div class="next">
+                                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.16406 1L1.41406 6.75L7.16406 12.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="btn-wrap">
+                                    <a href="#" class="btn btn--outline">Načíst další</a>
+                                </div>
                             </div>
                         </div>
                     </div>

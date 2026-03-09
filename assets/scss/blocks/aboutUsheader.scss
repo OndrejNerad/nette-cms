@@ -2,7 +2,9 @@
     min-height: 80svh; padding-top: 120px; padding-bottom: 80px; display: flex; align-items: center; overflow: hidden;
 
     h2.title { line-height: 1.04em;
-        .text-outline { color: #272727;}
+        .text-outline {
+            color: #afafaf; //color: #272727;
+        }
     }
 
     .text { font-size: 24px; letter-spacing: -.02em; margin-top: 104px;

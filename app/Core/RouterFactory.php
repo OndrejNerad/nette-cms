@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Core;
 
@@ -12,6 +10,13 @@ final class RouterFactory
     {
         $router = new RouteList;
 
+        // Car routes — must be before the catch-all
+        $router->addRoute('cs/nabidka-vozidel/<detailUrl>', ['presenter' => 'Car', 'action' => 'detail', 'lang' => 'cs']);
+        $router->addRoute('cs/nabidka-vozidel', ['presenter' => 'Car', 'action' => 'list', 'lang' => 'cs']);
+        $router->addRoute('en/car-listings/<detailUrl>', ['presenter' => 'Car', 'action' => 'detail', 'lang' => 'en']);
+        $router->addRoute('en/car-listings', ['presenter' => 'Car', 'action' => 'list', 'lang' => 'en']);
+
+        // Catch-all static pages
         $router->addRoute('<lang en|cs>/<url .+>', [
             'presenter' => 'StaticPage',
             'action'    => 'default',

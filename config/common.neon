@@ -1,42 +1,46 @@
-# see https://doc.nette.org/en/configuring
-
 parameters:
-    adminEmail: neradondrej@gmail.com # for prod info@automaton.mpotfaj.cz (proste info na domene)
+    adminEmail: neradondrej@gmail.com
 
 application:
-    catchExceptions: true
+    catchExceptions: false
     errorPresenter:
         4xx: Error:Error4xx
         5xx: Error:Error5xx
     mapping: App\Presentation\*\**Presenter
 
 database:
-	dsn: 'sqlite::memory:'
-	user:
-	password:
+    dsn: 'mysql:host=%database.host%;dbname=%database.name%;charset=utf8mb4'
+    user: %database.user%
+    password: %database.password%
 
+extensions:
+    nextras.dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
+    nextras.orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+
+nextras.dbal:
+    driver: mysqli
+    host: %database.host%
+    port: %database.port%
+    database: %database.name%
+    username: %database.user%
+    password: %database.password%
+    charset: utf8mb4
+
+nextras.orm:
+    model: App\Model\Orm
 
 latte:
-	strictTypes: yes
-	strictParsing: yes
-	extensions:
-		- App\Presentation\Accessory\LatteExtension
-
+    strictTypes: yes
+    strictParsing: yes
+    extensions:
+        - App\Presentation\Accessory\LatteExtension
 
 assets:
-	mapping:
-		default:
-			path: assets
-			# type: vite  # Uncomment to activate Vite for asset building
-
+    mapping:
+        default:
+            path: assets
 
 di:
-	export:
-		parameters: no
-		tags: no
-
-# STARY SYNTAX -> picovina
-#nette:
-#    mailer:
-#        host: mailhog
-#        port: 1025
+    export:
+        parameters: no
+        tags: no

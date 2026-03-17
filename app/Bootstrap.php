@@ -29,6 +29,12 @@ class Bootstrap
 		return $this->configurator->createContainer();
 	}
 
+    public function bootCliApplication(): Nette\DI\Container
+    {
+        $this->initializeEnvironment();
+        $this->setupContainer();
+        return $this->configurator->createContainer();
+    }
 
 	public function initializeEnvironment(): void
 	{
@@ -47,5 +53,6 @@ class Bootstrap
 		$configDir = $this->rootDir . '/config';
 		$this->configurator->addConfig($configDir . '/common.neon');
 		$this->configurator->addConfig($configDir . '/services.neon');
+		$this->configurator->addConfig($configDir . '/local.neon');
 	}
 }

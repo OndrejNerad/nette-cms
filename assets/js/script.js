@@ -2,16 +2,18 @@ import $ from 'jquery';
 import 'bootstrap';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import 'fslightbox';
 
 import './inquiry.js';
 
 $(function () {
 
+    refreshFsLightbox();
+
     /**
      * STICKY HEADER
      */
     const nav = document.querySelector('nav .nav-wrap');
-
     window.addEventListener('scroll', () => {
         if (window.scrollY > 0) {
             nav.classList.add('sticky');
@@ -111,5 +113,17 @@ $(function () {
             }
         }
     });
+
+
+    /**
+     * CAR LIST FAKE FILTER
+     */
+    if ($('.product-order #order').length) {
+        let select = $('.product-order #order option');
+        select.on('click', (e) => {
+            $('.hidden-select .select-link#filter-' + e.currentTarget.value)[0].click();
+        });
+    }
+
 
 });

@@ -1,7 +1,8 @@
 services:
     php:
-        image: php:8.1-fpm
+        build: .
         container_name: cms-php
+        user: "1000:1000"
         volumes:
             - .:/var/www/html
         working_dir: /var/www/html

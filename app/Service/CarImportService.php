@@ -1,0 +1,195 @@
+<?php declare(strict_types=1);
+
+namespace App\Service;
+
+use App\Model\Car\Car;
+use App\Model\CarEquipment\CarEquipmentRepository;
+use App\Model\Equipment\EquipmentItemsRepository;
+use App\Model\Orm;
+
+class CarImportService
+{
+    private const API_URL   = 'https://automaton-be.stage.thinkeasy.cz/api/v1/listings/';
+    private const API_TOKEN = 'YdiDcv6jbjKDAanL1aZi22vvANnPmTVL-s4_D621zy-1ZnNkzgXeC_-gdImyJsgM5kg';
+    private const IMAGE_DIR = __DIR__ . '/../../www/images/cars/';
+    private const IMAGE_URL = '/images/cars/';
+
+    public function __construct(
+        private readonly Orm                      $orm,
+        private readonly CarEquipmentRepository   $carEquipmentRepository,
+        private readonly EquipmentItemsRepository $equipmentItemsRepository,
+    ) {
+        if (!is_dir(self::IMAGE_DIR)) {
+            mkdir(self::IMAGE_DIR, 0755, true);
+        }
+    }
+
+    public function import(): void
+    {
+        $url      = self::API_URL;
+        $imported = 0;
+
+        do {
+            $response = $this->fetchPage($url);
+
+            foreach ($response['results'] as $item) {
+                $this->upsert($item);
+                $imported++;
+            }
+
+            $this->orm->flush();
+            $url = $response['next'];
+        } while ($url !== null);
+
+        echo "Import done. Total: $imported listings.\n";
+    }
+
+    private function upsert(array $item): void
+    {
+        $values    = $item['listing_values'] ?? [];
+        $equipment = $item['equipment']      ?? [];
+        $images    = $item['images']         ?? [];
+
+        $car = $this->orm->cars->findByExternalId((string) $item['id']) ?? new Car();
+
+        $car->externalId          = (string) $item['id'];
+        $car->description         = $values['description']           ?? null;
+        $car->metDojezdu          = $values['met_dojezdu']           ?? null;
+        $car->metSpotreby         = $values['met_spotreby']          ?? null;
+        $car->kapAkumulatoru      = $values['kap_akumulatoru']       ?? null;
+        $car->dojezd              = $values['dojezd']                ?? null;
+        $car->plugIn              = $values['plug_in']               ?? null;
+        $car->hmotnost            = $values['hmotnost']              ?? null;
+        $car->dvere               = $values['dvere']                 ?? null;
+        $car->mista               = $values['mista']                 ?? null;
+        $car->spotreba            = $values['spotreba']              ?? null;
+        $car->maxRychlost         = $values['max_rychlost']          ?? null;
+        $car->emise               = $values['emise']                 ?? null;
+        $car->zrychleni           = $values['zrychleni']             ?? null;
+        $car->tMoment             = $values['t_moment']              ?? null;
+        $car->vykonMotoruJednotka = $values['vykon_motoru_jednotka'] ?? null;
+        $car->vykonMotoru         = $values['vykon_motoru']          ?? null;
+        $car->obsahMotoru         = $values['obsah_motoru']          ?? null;
+        $car->odpocet             = $values['odpocet']               ?? null;
+        $car->cena                = $values['cena']                  ?? null;
+        $car->rokVyroby           = isset($values['rok_vyroby'])     ? (int) $values['rok_vyroby']  : null;
+        $car->tachometrJednotka   = $values['tachometr_jednotka']    ?? null;
+        $car->tachometr           = isset($values['tachometr'])      ? (int) $values['tachometr']   : null;
+        $car->palivo              = $values['palivo']                ?? null;
+        $car->barva               = $values['barva']                 ?? null;
+        $car->karoserie           = $values['karoserie']             ?? null;
+        $car->provedeni           = $values['provedeni']             ?? null;
+        $car->model               = $values['model']                 ?? null;
+        $car->znacka              = $values['znacka']                ?? null;
+        $car->stitek              = $values['stitek']                ?? null;
+        $car->popisNabidky        = $values['popis_nabidky']         ?? null;
+        $car->rawValues           = json_encode($values, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        $car->images              = json_encode(
+            $this->downloadImages($images, (string) $item['id']),
+            JSON_THROW_ON_ERROR,
+        );
+        $car->updatedAt           = new \DateTimeImmutable();
+
+        $car->detailUrl = $this->generateDetailUrl(
+            $values['znacka'] ?? '',
+            $values['model'] ?? '',
+            (string) $item['id'],
+        );
+
+        if (!$car->isPersisted()) {
+            $car->createdAt = new \DateTimeImmutable();
+        }
+
+        // Persist car first so it has an ID for the pivot
+        $this->orm->cars->persistAndFlush($car);
+
+        // Upsert equipment catalog + sync pivot
+        $this->syncEquipment($car->id, $equipment);
+    }
+
+    private function syncEquipment(int $carId, array $equipment): void
+    {
+        $activeKeys = [];
+
+        foreach ($equipment as $key => $data) {
+            $key   = (string) $key;
+            $title = $data['title'] ?? $key;
+            $value = (bool) ($data['value'] ?? false);
+
+            // Upsert catalog — add new items, ignore existing ones
+            $this->equipmentItemsRepository->upsert($key, $title);
+
+            if ($value) {
+                $activeKeys[] = $key;
+            }
+        }
+
+        // Write pivot rows (only true items)
+        $this->carEquipmentRepository->syncForCar($carId, $activeKeys);
+    }
+
+    /**
+     * @param string[] $urls
+     * @return string[]
+     */
+    private function downloadImages(array $urls, string $carId): array
+    {
+        $localPaths = [];
+
+        foreach ($urls as $index => $url) {
+            $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
+            $filename = $carId . '_' . $index . '.' . $ext;
+            $dest     = self::IMAGE_DIR . $filename;
+
+            if (!file_exists($dest)) {
+                $data = @file_get_contents($url);
+                if ($data !== false) {
+                    file_put_contents($dest, $data);
+                } else {
+                    echo "  Warning: failed to download image $url\n";
+                    continue;
+                }
+            }
+
+            $localPaths[] = self::IMAGE_URL . $filename;
+        }
+
+        return $localPaths;
+    }
+
+    /**
+     * @return array{count: int, next: string|null, results: array}
+     */
+    private function fetchPage(string $url): array
+    {
+        $context = stream_context_create([
+            'http' => [
+                'method'  => 'GET',
+                'header'  => implode("\r\n", [
+                    'Authorization: ' . self::API_TOKEN,
+                    'Accept: application/json',
+                ]),
+                'timeout' => 30,
+            ],
+        ]);
+
+        $body = file_get_contents($url, false, $context);
+
+        if ($body === false) {
+            throw new \RuntimeException("Failed to fetch: $url");
+        }
+
+        return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    private function generateDetailUrl(string $znacka, string $model, string $externalId): string
+    {
+        $slugify = fn(string $s): string => strtolower(trim(preg_replace(
+            ['/[^a-z0-9]+/i', '/-+/'],
+            ['-', '-'],
+            iconv('UTF-8', 'ASCII//TRANSLIT', $s)
+        ), '-'));
+
+        return $slugify($znacka) . '-' . $slugify($model) . '-' . $externalId;
+    }
+}

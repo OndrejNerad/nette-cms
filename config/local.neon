@@ -1,0 +1,7 @@
+parameters:
+    database:
+        host: db
+        port: 3306
+        name: cms
+        user: cms
+        password: cms

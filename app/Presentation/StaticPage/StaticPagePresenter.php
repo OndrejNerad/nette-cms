@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presentation\StaticPage;
 
+use App\Model\Orm;
 use Nette;
 use Nette\Application\UI\Presenter;
 use App\Components\Forms\ContactFormControl;
@@ -11,8 +12,10 @@ use App\Components\Forms\ContactFormControlFactory;
 
 final class StaticPagePresenter extends Presenter
 {
-    public function __construct(private readonly ContactFormControlFactory $contactFormControlFactory)
-    {
+    public function __construct(
+        private readonly ContactFormControlFactory $contactFormControlFactory,
+        private readonly Orm $orm,
+    ) {
         parent::__construct();
     }
 
@@ -37,6 +40,7 @@ final class StaticPagePresenter extends Presenter
             $this->template->homepage = true;
         }
 
+        $this->template->cars = $this->orm->cars->findAll()->limitBy(4);
     }
 
     public function actionDefault(?string $url = null, string $lang = 'cs'): void

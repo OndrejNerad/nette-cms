@@ -4,6 +4,7 @@
         .product-order {
             display: flex; justify-content: flex-end; padding-bottom: 20px; font-size: 18px;
 
+            .hidden-select { display: none;}
             select { font-weight: 700; margin-left: 12px;}
         }
 
@@ -72,10 +73,10 @@
 
                 .product-image {
                     background-size: cover; background-position: center; background-repeat: no-repeat;
-                    flex: 0 0 calc(100% / 3);
+                    flex: 0 0 calc(100% / 3); min-height: 240px;
                 }
 
-                .product-content { padding: 30px 40px;
+                .product-content { padding: 30px 40px; width: 100%;
                     .product-head {
                         display: flex; justify-content: space-between; margin-bottom: 24px;
 
@@ -112,7 +113,11 @@
                                         width: 15px; height: 15px; display: block; background: blue;
                                         border-radius: 100%;
 
-                                        &.--blue { background-color: #3564D9;}
+                                        &.--modra { background-color: #3564D9;}
+                                        &.--bila { background-color: #fff;}
+                                        &.--cerna { background-color: #000;}
+                                        &.--stribrna { background-color: #C0C0C0;}
+                                        &.--seda { background-color: #969696;}
                                     }
                                 }
                             }
@@ -168,6 +173,8 @@
                 }
             }
 
+            .gallery-images { display: none;}
+
             .separ {
                 margin-top: 54px; margin-bottom: 38px; border: 2px solid #D3D3D3;
             }
@@ -187,7 +194,8 @@
                 &.full { width: 100%;}
 
                 .label {
-                    font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1em; margin-bottom: 12px;
+                    font-size: 18px; letter-spacing: -.02em; line-height: 1em;
+                    //font-weight: 700; margin-bottom: 12px;
                 }
 
                 .text {
@@ -252,7 +260,11 @@
                             .color {
                                 width: 22px; height: 22px; display: block; border-radius: 100%; margin-right: 6px;
 
-                                &.blue { background-color: #3564D9;}
+                                &.--modra { background-color: #3564D9;}
+                                &.--bila { background-color: #fff;}
+                                &.--cerna { background-color: #000;}
+                                &.--stribrna { background-color: #C0C0C0;}
+                                &.--seda { background-color: #969696;}
                             }
                         }
                     }

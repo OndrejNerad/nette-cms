@@ -11,7 +11,10 @@ services:
     - App\Core\RouterFactory::createRouter
     - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%)
     - App\Command\ImportCarsCommand
+    - App\Command\ImportSocialItemsCommand
+    - App\Command\ImportGoogleReviewsCommand
     - App\Model\CarEquipment\CarEquipmentRepository
+
     - implement: App\Components\Forms\ContactFormControlFactory
 
 search:

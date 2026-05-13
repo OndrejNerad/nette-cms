@@ -126,4 +126,14 @@ $(function () {
     }
 
 
+    /**
+     * PACKAGES BLOCK - setting form val
+     */
+    $('.packages-wrap .package .btn').on('click', (e) => {
+        const target = e.currentTarget.dataset.target;
+        if (target) {
+            $('#package').val(target);
+        }
+    });
+
 });

@@ -16,7 +16,7 @@ $(function () {
                 item.value = '';
             }
 
-            let inputVal = getRawNumber(input.value);
+            let inputVal = getRawNumber(item.value);
 
             if (inputVal > 20000000) {
                 item.value = '20 000 000';
@@ -24,6 +24,21 @@ $(function () {
                 item.value = '10 000';
             }
         });
+    });
+
+    $('.inquiry-range .range-bar').each((index, item) => {
+       console.log('range-bar setup', item);
+
+       let startPoint = $(item).find('.point.--start');
+       let endPoint = $(item).find('.point.--end');
+       let points = $(item).find('.point');
+
+       points.on('click', (e) => {
+          console.log('point clicked:', e.currentTarget);
+
+
+       });
+
     });
 
 

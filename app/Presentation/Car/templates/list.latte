@@ -169,7 +169,9 @@
                                             <div class="subtitle" n:if="$car->provedeni">{$car->provedeni}</div>
                                         </div>
                                         <div class="price-col">
-                                            <div class="price" n:if="$car->cena">{$car->cena} Kč</div>
+                                            <div class="price" n:if="$car->cena">
+                                                {if $car->odpocet == 'A'}{$car->cena * .79}{else}{$car->cena}{/if} Kč
+                                            </div>
                                             <div class="note" n:if="$car->odpocet == 'A'">možnost odpočtu DPH</div>
                                         </div>
                                     </div>

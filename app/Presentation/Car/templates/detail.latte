@@ -139,7 +139,9 @@
                         </div>
                         <div class="price-wrap product-info-col">
                             <div class="price-col">
-                                <div class="price" n:if="$car->cena">{$car->cena} Kč</div>
+                                <div class="price" n:if="$car->cena">
+                                    {if $car->odpocet == 'A'}{$car->cena * .79}{else}{$car->cena}{/if} Kč
+                                </div>
                                 <div class="note" n:if="$car->odpocet == 'A'">
                                     <div class="icon">
                                         <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -255,7 +257,7 @@
                             <div class="red-col" n:if="$car->cena">
                                 <div class="label--lg">Prodejní cena</div>
                                 <div class="price" n:if="$car->odpocet == 'N'">{$car->cena} Kč <span class="text-sm">včetně DPH 21%</span></div>
-                                <div class="price" n:if="$car->odpocet == 'A'">{$car->cena} Kč <span class="text-sm">bez DPH</span></div>
+                                <div class="price" n:if="$car->odpocet == 'A'">{$car->cena * 1.21} Kč <span class="text-sm">bez DPH</span></div>
                             </div>
                             <div class="red-col">
                                 <div class="label--lg">Možnost financování</div>
@@ -378,9 +380,9 @@
                             </div>
                         </div>
                         <div class="btn-wrap product-info-col">
-                            <div class="btn-col">
-                                <a href="#" class="btn btn--outline">Prověřit stav technikem</a>
-                            </div>
+{*                            <div class="btn-col">*}
+{*                                <a href="#" class="btn btn--outline">Prověřit stav technikem</a>*}
+{*                            </div>*}
                             <div class="btn-col">
                                 <a href="#" class="btn btn--outline">Zobrazit historii vozidla</a>
                             </div>

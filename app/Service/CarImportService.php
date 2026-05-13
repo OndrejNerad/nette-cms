@@ -9,7 +9,8 @@ use App\Model\Orm;
 
 class CarImportService
 {
-    private const API_URL   = 'https://automaton-be.stage.thinkeasy.cz/api/v1/listings/';
+//    private const API_URL   = 'https://automaton-be.stage.thinkeasy.cz/api/v1/listings/';
+    private const API_URL   = 'https://app.automaton.cz/backend/api/v1/listings/';
     private const API_TOKEN = 'YdiDcv6jbjKDAanL1aZi22vvANnPmTVL-s4_D621zy-1ZnNkzgXeC_-gdImyJsgM5kg';
     private const IMAGE_DIR = __DIR__ . '/../../www/images/cars/';
     private const IMAGE_URL = '/images/cars/';

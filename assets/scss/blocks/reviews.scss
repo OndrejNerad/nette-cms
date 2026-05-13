@@ -7,6 +7,8 @@
             background-color: #272727; border-radius: 8px; padding: 50px 45px; display: flex; flex-direction: column;
             height: 100%;
 
+            .image img { max-width: 52px;}
+
             .name { color: $white; font-size: 32px; font-weight: 700; margin-top: 15px;}
 
             .stars { display: flex;

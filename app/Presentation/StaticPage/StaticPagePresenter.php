@@ -41,6 +41,7 @@ final class StaticPagePresenter extends Presenter
         }
 
         $this->template->cars = $this->orm->cars->findAll()->limitBy(4);
+        $this->template->gReviews = $this->orm->googleReviews->findAll()->limitBy(8);
     }
 
     public function actionDefault(?string $url = null, string $lang = 'cs'): void

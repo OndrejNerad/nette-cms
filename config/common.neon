@@ -1,5 +1,8 @@
 parameters:
-    adminEmail: neradondrej@gmail.com
+    adminEmail: 'dev.foo.bar.web@gmail.com'
+    recaptcha:
+        siteKey: '6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll'
+        secretKey: '6LcjeOgsAAAAAD8kNp4cZ1_kgsCa8TewHfwro0lO'
 
 application:
     catchExceptions: false

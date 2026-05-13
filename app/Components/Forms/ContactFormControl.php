@@ -15,15 +15,23 @@ final class ContactFormControl extends Control
 
     public function render(): void
     {
+        $this->template->recaptchaSiteKey = $this->factory->getSiteKey();
         $this->template->render(__DIR__ . '/templates/contactForm.latte');
     }
 
     protected function createComponentContactForm(): Form
     {
         return $this->factory->create(
-            function () {
+            function (): void {
                 $this->presenter->flashMessage('Děkujeme! Zpráva byla odeslána.', 'success');
-                $this->presenter->redirect('this');
+
+                if ($this->presenter->isAjax()) {
+                    $this->redrawControl('contactFormSnippet');
+                } else {
+                    $this->presenter->redirectUrl(
+                        $this->presenter->getHttpRequest()->getUrl()->getAbsoluteUrl()
+                    );
+                }
             },
             $this->presenter->getHttpRequest()->getUrl()->getPath()
         );

@@ -2,6 +2,13 @@
     .form-row { display: flex; flex-wrap: wrap; gap: 20px;
         &.submit { text-align: right;}
     }
+
+    .flash {
+        border-radius: 10px; padding: 12px 20px; margin: 12px 0; font-weight: 600;
+
+        &.error { background-color: $red; color: $white;}
+        &.success { background-color: $green;}
+    }
 }
 
 .form-item { flex: 0 0 100%; margin-bottom: 26px;

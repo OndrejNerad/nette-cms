@@ -38,6 +38,14 @@ abstract class BaseFormFactory
 
     private function renderTemplate(string $template, array $data): string
     {
-        return "TODO: Latte template";
+        return '
+        <h2>Nová zpráva z kontaktního formuláře</h2>
+        <table>
+            <tr><th>Jméno</th><td>' . htmlspecialchars($data['name']) . '</td></tr>
+            <tr><th>E-mail</th><td>' . htmlspecialchars($data['email']) . '</td></tr>
+            <tr><th>Telefon</th><td>' . htmlspecialchars($data['phone']) . '</td></tr>
+            <tr><th>Zpráva</th><td>' . nl2br(htmlspecialchars($data['message'])) . '</td></tr>
+        </table>
+    ';
     }
 }

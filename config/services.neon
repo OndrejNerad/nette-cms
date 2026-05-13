@@ -9,7 +9,8 @@ services:
             encryption: null
 
     - App\Core\RouterFactory::createRouter
-    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%)
+#    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%)
+    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%)
     - App\Command\ImportCarsCommand
     - App\Command\ImportSocialItemsCommand
     - App\Command\ImportGoogleReviewsCommand

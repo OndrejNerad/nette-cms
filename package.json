@@ -2,6 +2,7 @@
     "type": "module",
     "dependencies": {
         "fslightbox": "^3.7.5",
+        "naja": "^3.3.3",
         "nette-forms": "^3.3",
         "nodemon": "^3.1.11",
         "swiper": "^12.0.3"

@@ -60,9 +60,11 @@ services:
     mailhog:
         image: mailhog/mailhog
         ports:
-            - "8025:8025"   # Web UI: http://localhost:8025
-            - "1025:1025"   # SMTP server
+            - "8025:8025"
+            - "1025:1025"
         restart: unless-stopped
+        networks:
+            - app-network
 
 networks:
     app-network:

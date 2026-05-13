@@ -3,12 +3,26 @@ import 'bootstrap';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import 'fslightbox';
+import naja from 'naja';
 
 import './inquiry.js';
 
 $(function () {
-
+    naja.initialize();
     refreshFsLightbox();
+
+    /**
+     * FORM
+     */
+    // naja.snippetHandler.addEventListener('afterUpdate', () => {
+    //     if (typeof grecaptcha !== 'undefined') {
+    //         grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'contact'}).then(function(token) {
+    //             const el = document.getElementById('recaptcha_token');
+    //             if (el) el.value = token;
+    //         });
+    //     }
+    // });
+
 
     /**
      * STICKY HEADER
@@ -136,4 +150,13 @@ $(function () {
         }
     });
 
+});
+
+naja.snippetHandler.addEventListener('afterUpdate', function() {
+    if (typeof grecaptcha !== 'undefined') {
+        grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'contact'}).then(function(token) {
+            const el = document.getElementById('recaptcha_token');
+            if (el) el.value = token;
+        });
+    }
 });

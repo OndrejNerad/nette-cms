@@ -1,49 +1,69 @@
-{foreach $flashes as $flash}
-    <div class="flash {$flash->type}">{$flash->message}</div>
-{/foreach}
+{snippet contactFormSnippet}
+    {foreach $presenter->getFlashSession() as $flash}
+        {foreach $flash as $message}
+            <div class="flash {$message->type}">{$message->message}</div>
+        {/foreach}
+    {/foreach}
 
-{form contactForm}
-    <div class="form-row">
-        <div class="form-item third">
-            <label>
-                <span class="label">{label name /}</span>
-                {input name, placeholder => 'Tomáš Novák'}
-            </label>
-            {inputError name}
-        </div>
-        <div class="form-item third">
-            <label>
-                <span class="label">{label email /}</span>
-                {input email, placeholder => 'novak@tomas.cz'}
-            </label>
-            {inputError email}
-        </div>
-        <div class="form-item third">
-            <label>
-                <span class="label">{label phone /}</span>
-                {input phone, placeholder => '+420 777 666 555'}
-            </label>
-            {inputError phone}
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-item textarea">
-            <label>
-                <span class="label">{label message /}</span>
-                {input message, placeholder => 'Váš text...'}
-            </label>
-            {inputError message}
-        </div>
-    </div>
+    {form contactForm, class => 'ajax'}
+        {foreach $form->getErrors() as $error}
+            <div class="flash error">{$error}</div>
+        {/foreach}
 
-    {* honeypot - bot protection *}
-    <div style="display:none">
-        {input address}
-    </div>
-
-    <div class="form-row submit">
-        <div class="form-item">
-            {input send}
+        <div class="form-row">
+            <div class="form-item third">
+                <label>
+                    <span class="label">{label name /}</span>
+                    {input name, placeholder => 'Tomáš Novák'}
+                </label>
+                {inputError name}
+            </div>
+            <div class="form-item third">
+                <label>
+                    <span class="label">{label email /}</span>
+                    {input email, placeholder => 'novak@tomas.cz'}
+                </label>
+                {inputError email}
+            </div>
+            <div class="form-item third">
+                <label>
+                    <span class="label">{label phone /}</span>
+                    {input phone, placeholder => '+420 777 666 555'}
+                </label>
+                {inputError phone}
+            </div>
         </div>
-    </div>
-{/form}
+
+        <div class="form-row">
+            <div class="form-item textarea">
+                <label>
+                    <span class="label">{label message /}</span>
+                    {input message, placeholder => 'Váš text...'}
+                </label>
+                {inputError message}
+            </div>
+        </div>
+
+        {* honeypot - invisible to humans, bots fill it *}
+        <div style="display:none" aria-hidden="true">
+            {input address}
+        </div>
+
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+
+        <div class="form-row submit">
+            <div class="form-item">
+                {input send}
+            </div>
+        </div>
+    {/form}
+
+{/snippet}
+
+<script n:syntax="off">
+    function onRecaptchaLoad() {
+        grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'contact'}).then(function(token) {
+            document.getElementById('recaptcha_token').value = token;
+        });
+    }
+</script>

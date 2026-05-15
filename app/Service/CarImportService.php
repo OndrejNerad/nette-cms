@@ -6,12 +6,15 @@ use App\Model\Car\Car;
 use App\Model\CarEquipment\CarEquipmentRepository;
 use App\Model\Equipment\EquipmentItemsRepository;
 use App\Model\Orm;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\NullOutput;
 
 class CarImportService
 {
 //    private const API_URL   = 'https://automaton-be.stage.thinkeasy.cz/api/v1/listings/';
-    private const API_URL   = 'https://app.automaton.cz/backend/api/v1/listings/';
-    private const API_TOKEN = 'YdiDcv6jbjKDAanL1aZi22vvANnPmTVL-s4_D621zy-1ZnNkzgXeC_-gdImyJsgM5kg';
+    private const API_URL   = 'https://app.automaton.cz/api/v1/listings/';
+//    private const API_TOKEN = 'YdiDcv6jbjKDAanL1aZi22vvANnPmTVL-s4_D621zy-1ZnNkzgXeC_-gdImyJsgM5kg';
+    private const API_TOKEN =  "hfm!tobl0a7csgk73==5os5l%urmh@%g(()-%)1%7vbjv@l4oa";
     private const IMAGE_DIR = __DIR__ . '/../../www/images/cars/';
     private const IMAGE_URL = '/images/cars/';
 
@@ -25,24 +28,44 @@ class CarImportService
         }
     }
 
-    public function import(): void
+    public function import(?OutputInterface $output = null): void
     {
+        $output ??= new NullOutput();
+
+        set_time_limit(0);
+        ini_set('memory_limit', '512M');
+
         $url      = self::API_URL;
         $imported = 0;
+        $skipped  = 0;
 
         do {
             $response = $this->fetchPage($url);
 
             foreach ($response['results'] as $item) {
+                $car = $this->orm->cars->findByExternalId((string) $item['id']);
+
+                if ($car !== null) {
+                    $newHash = md5(json_encode($item['listing_values'] ?? []));
+                    if ($car->rawHash === $newHash) {
+                        $skipped++;
+                        continue; // nothing changed, skip
+                    }
+                }
+
                 $this->upsert($item);
                 $imported++;
             }
 
             $this->orm->flush();
+            $this->orm->clear();
+
             $url = $response['next'];
+            $output->writeln("Imported: $imported, Skipped: $skipped");
+
         } while ($url !== null);
 
-        echo "Import done. Total: $imported listings.\n";
+        $output->writeln("Import done. Total imported: $imported, skipped: $skipped.");
     }
 
     private function upsert(array $item): void
@@ -85,10 +108,12 @@ class CarImportService
         $car->stitek              = $values['stitek']                ?? null;
         $car->popisNabidky        = $values['popis_nabidky']         ?? null;
         $car->rawValues           = json_encode($values, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        $car->rawHash             = md5(json_encode($values)); // ← add this
         $car->images              = json_encode(
             $this->downloadImages($images, (string) $item['id']),
             JSON_THROW_ON_ERROR,
         );
+
         $car->updatedAt           = new \DateTimeImmutable();
 
         $car->detailUrl = $this->generateDetailUrl(
@@ -101,10 +126,8 @@ class CarImportService
             $car->createdAt = new \DateTimeImmutable();
         }
 
-        // Persist car first so it has an ID for the pivot
+        // persist + flush so car gets an ID before syncEquipment
         $this->orm->cars->persistAndFlush($car);
-
-        // Upsert equipment catalog + sync pivot
         $this->syncEquipment($car->id, $equipment);
     }
 
@@ -117,7 +140,6 @@ class CarImportService
             $title = $data['title'] ?? $key;
             $value = (bool) ($data['value'] ?? false);
 
-            // Upsert catalog — add new items, ignore existing ones
             $this->equipmentItemsRepository->upsert($key, $title);
 
             if ($value) {
@@ -125,7 +147,6 @@ class CarImportService
             }
         }
 
-        // Write pivot rows (only true items)
         $this->carEquipmentRepository->syncForCar($carId, $activeKeys);
     }
 

@@ -21,7 +21,8 @@
 		"latte/latte": "^3.0",
 		"tracy/tracy": "^2.10",
 		"nextras/orm": "^5.0",
-		"nextras/dbal": "^5.0"
+		"nextras/dbal": "^5.0",
+		"contributte/console": "^0.10.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.5",

@@ -10,6 +10,7 @@ use App\Model\Equipment\EquipmentItem;
  * @property int                $id             {primary}
  * @property string             $externalId
  * @property string|null        $detailUrl
+ * @property string|null        $rawHash
  *
  * @property string|null        $description
  * @property string|null        $metDojezdu

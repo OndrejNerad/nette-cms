@@ -3,6 +3,8 @@ services:
         build: .
         container_name: cms-php
         user: "1000:1000"
+        environment:
+            COMPOSER_HOME: /var/www/html/.composer
         volumes:
             - .:/var/www/html
         working_dir: /var/www/html

@@ -4,3 +4,5 @@
 .dockerignore
 .idea/
 /node_modules
+.composer/
+/www/images/

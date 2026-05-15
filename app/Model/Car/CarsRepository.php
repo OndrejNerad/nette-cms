@@ -18,4 +18,10 @@ class CarsRepository extends Repository
     {
         return $this->getBy(['detailUrl' => $detailUrl]);
     }
+
+    public function findByExternalId(string $externalId): ?Car
+    {
+        return $this->getBy(['externalId' => $externalId]);
+    }
+
 }

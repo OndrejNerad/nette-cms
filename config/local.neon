@@ -23,18 +23,18 @@ parameters:
     # TEST (pomelogrep.eu)
     # -------------------------------------------------------
     #database:
-    #    host: localhost
+    #    host: md418.wedos.net
     #    port: 3306
-    #    name: your_test_db
-    #    user: your_test_user
-    #    password: your_test_password
+    #    name: d375189_123
+    #    user: a375189_123
+    #    password: Ratata1324#
     #mail:
-    #    host: smtp.your-hosting.cz
+    #    host: wes1-smtp.wedos.net
     #    port: 587
-    #    username: your@email.cz
-    #    password: your_smtp_password
+    #    username: web@pomelogrep.eu
+    #    password: Ratata1324#
     #    encryption: tls
-    #adminEmail: 'poptavky@automaton.cz'
+    #adminEmail: 'dev.foo.bar.web@gmail.com'
     #recaptcha:
     #    verify: true
 

@@ -15,17 +15,12 @@ class CarImportService
     private const API_URL   = 'https://app.automaton.cz/api/v1/listings/';
 //    private const API_TOKEN = 'YdiDcv6jbjKDAanL1aZi22vvANnPmTVL-s4_D621zy-1ZnNkzgXeC_-gdImyJsgM5kg';
     private const API_TOKEN =  "hfm!tobl0a7csgk73==5os5l%urmh@%g(()-%)1%7vbjv@l4oa";
-    private const IMAGE_DIR = __DIR__ . '/../../www/images/cars/';
-    private const IMAGE_URL = '/images/cars/';
 
     public function __construct(
         private readonly Orm                      $orm,
         private readonly CarEquipmentRepository   $carEquipmentRepository,
         private readonly EquipmentItemsRepository $equipmentItemsRepository,
     ) {
-        if (!is_dir(self::IMAGE_DIR)) {
-            mkdir(self::IMAGE_DIR, 0755, true);
-        }
     }
 
     public function import(?OutputInterface $output = null): void
@@ -48,8 +43,12 @@ class CarImportService
                 if ($car !== null) {
                     $newHash = md5(json_encode($item['listing_values'] ?? []));
                     if ($car->rawHash === $newHash) {
+                        if (empty($car->images) || $car->images === '[]') {
+                            $car->images = json_encode($item['images'] ?? [], JSON_THROW_ON_ERROR);
+                            $output->writeln("  Updated images for car #{$item['id']}");
+                        }
                         $skipped++;
-                        continue; // nothing changed, skip
+                        continue;
                     }
                 }
 
@@ -109,10 +108,7 @@ class CarImportService
         $car->popisNabidky        = $values['popis_nabidky']         ?? null;
         $car->rawValues           = json_encode($values, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $car->rawHash             = md5(json_encode($values)); // ← add this
-        $car->images              = json_encode(
-            $this->downloadImages($images, (string) $item['id']),
-            JSON_THROW_ON_ERROR,
-        );
+        $car->images              = json_encode($images, JSON_THROW_ON_ERROR);
 
         $car->updatedAt           = new \DateTimeImmutable();
 
@@ -150,34 +146,6 @@ class CarImportService
         $this->carEquipmentRepository->syncForCar($carId, $activeKeys);
     }
 
-    /**
-     * @param string[] $urls
-     * @return string[]
-     */
-    private function downloadImages(array $urls, string $carId): array
-    {
-        $localPaths = [];
-
-        foreach ($urls as $index => $url) {
-            $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
-            $filename = $carId . '_' . $index . '.' . $ext;
-            $dest     = self::IMAGE_DIR . $filename;
-
-            if (!file_exists($dest)) {
-                $data = @file_get_contents($url);
-                if ($data !== false) {
-                    file_put_contents($dest, $data);
-                } else {
-                    echo "  Warning: failed to download image $url\n";
-                    continue;
-                }
-            }
-
-            $localPaths[] = self::IMAGE_URL . $filename;
-        }
-
-        return $localPaths;
-    }
 
     /**
      * @return array{count: int, next: string|null, results: array}

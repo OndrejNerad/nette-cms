@@ -54,13 +54,8 @@ class GoogleReviewsImportService
 
         echo "Import done. $imported new review(s) saved.\n";
     }
-
     private function downloadImage(string $url, string $externalId): ?string
     {
-        if (!is_dir(self::IMAGE_DIR)) {
-            mkdir(self::IMAGE_DIR, 0755, true);
-        }
-
         $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
         $filename = $externalId . '.' . $ext;
         $dest     = self::IMAGE_DIR . $filename;

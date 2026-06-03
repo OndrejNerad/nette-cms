@@ -11,7 +11,7 @@
                         {/foreach}
                         <div class="thumb">
                             {if count($carImages)}
-                                <a href="{$carImages[0]}" data-fslightbox="gallery-detail">
+                                <a href="{$carImages[0]}" data-fslightbox="gallery-detail" data-type="image">
                                     <img src="{$carImages[0]}" alt="">
                                 </a>
                             {else}
@@ -19,20 +19,20 @@
                             {/if}
                         </div>
                         <div class="gallery" n:if="count($carImages) > 1">
-                            <a href="{$carImages[1]}" class="image" data-fslightbox="gallery-detail">
+                            <a href="{$carImages[1]}" class="image" data-fslightbox="gallery-detail" data-type="image">
                                 <img src="{$carImages[1]}" alt="{$car->znacka} {$car->model}">
                             </a>
-                            <a href="{$carImages[2]}" class="image" data-fslightbox="gallery-detail" n:if="$carImages[2]">
+                            <a href="{$carImages[2]}" class="image" data-fslightbox="gallery-detail" data-type="image" n:if="$carImages[2]">
                                 <img src="{$carImages[2]}" alt="{$car->znacka} {$car->model}">
                             </a>
-                            <a href="{$carImages[3]}" class="image" data-fslightbox="gallery-detail" n:if="$carImages[3]">
+                            <a href="{$carImages[3]}" class="image" data-fslightbox="gallery-detail" data-type="image" n:if="$carImages[3]">
                                 <div class="remaining" n:if="count($carImages) > 3">+{count($carImages) - 3}</div>
                                 <img src="{$carImages[3]}" alt="{$car->znacka} {$car->model}">
                             </a>
                             <div class="gallery-images">
                                 {foreach $carImages as $carImage}
                                     {continueIf $iterator->counter < 5}
-                                    <a href="{$carImage}" data-fslightbox="gallery-detail">
+                                    <a href="{$carImage}" data-fslightbox="gallery-detail" data-type="image">
                                         <img src="{$carImage}" alt="{$car->znacka} {$car->model}">
                                     </a>
                                 {/foreach}
@@ -413,7 +413,7 @@
                     <div class="product-photo">
                         <div class="thumb">
                             {if count($carImages)}
-                                <a href="{$carImages[0]}" data-fslightbox="gallery-detail">
+                                <a href="{$carImages[0]}" data-fslightbox="gallery-detail" data-type="image">
                                     <img src="{$carImages[0]}" alt="">
                                 </a>
                             {else}
@@ -421,20 +421,20 @@
                             {/if}
                         </div>
                         <div class="gallery" n:if="count($carImages) > 1">
-                            <a href="{$carImages[1]}" class="image" data-fslightbox="gallery-detail">
+                            <a href="{$carImages[1]}" class="image" data-fslightbox="gallery-detail" data-type="image">
                                 <img src="{$carImages[1]}" alt="{$car->znacka} {$car->model}">
                             </a>
-                            <a href="{$carImages[2]}" class="image" data-fslightbox="gallery-detail" n:if="$carImages[2]">
+                            <a href="{$carImages[2]}" class="image" data-fslightbox="gallery-detail" data-type="image" n:if="$carImages[2]">
                                 <img src="{$carImages[2]}" alt="{$car->znacka} {$car->model}">
                             </a>
-                            <a href="{$carImages[3]}" class="image" data-fslightbox="gallery-detail" n:if="$carImages[3]">
+                            <a href="{$carImages[3]}" class="image" data-fslightbox="gallery-detail" data-type="image" n:if="$carImages[3]">
                                 <div class="remaining" n:if="count($carImages) > 3">+{count($carImages) - 3}</div>
                                 <img src="{$carImages[3]}" alt="{$car->znacka} {$car->model}">
                             </a>
                             <div class="gallery-images">
                                 {foreach $carImages as $carImage}
                                     {continueIf $iterator->counter < 5}
-                                    <a href="{$carImage}" data-fslightbox="gallery-detail">
+                                    <a href="{$carImage}" data-fslightbox="gallery-detail" data-type="image">
                                         <img src="{$carImage}" alt="{$car->znacka} {$car->model}">
                                     </a>
                                 {/foreach}

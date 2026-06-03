@@ -6,5 +6,5 @@ namespace App\Components\Forms;
 
 interface ContactFormControlFactory
 {
-    public function create(): ContactFormControl;
+    public function create(string $lang): ContactFormControl;
 }

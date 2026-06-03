@@ -4,17 +4,17 @@
             <div class="row">
                 <div class="col-12 col-lg-4 offset-lg-4">
                     <div class="text-col">
-                        <h1 class="title title--h3">Poptat dovoz</h1>
-                        <div class="label">Chci poradit</div>
+                        <h1 class="title title--h3">Request an import</h1>
+                        <div class="label">Get advice</div>
                         <div class="text">
-                            Děkujeme za důvěru! Pojďme v pár krocích zjistit, jaké auto by se Vám hodilo.
+                            Thank you for your trust! Let's find out in a few steps what car would suit you.
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="btn-wrap">
                         <a href="#" class="btn btn--circle btn--circle--sm">
-                            <span class="text">Chci veterána</span>
+                            <span class="text">I want a classic car</span>
                             <span class="icon">
                                 <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M25.7071 8.07038C26.0976 7.67986 26.0976 7.0467 25.7071 6.65617L19.3431 0.292211C18.9526 -0.0983137 18.3195 -0.0983136 17.9289 0.292211C17.5384 0.682735 17.5384 1.3159 17.9289 1.70642L23.5858 7.36328L17.9289 13.0201C17.5384 13.4107 17.5384 14.0438 17.9289 14.4343C18.3195 14.8249 18.9526 14.8249 19.3431 14.4343L25.7071 8.07038ZM0 7.36328L1.43373e-07 8.36328L25 8.36328L25 7.36328L25 6.36328L-1.43373e-07 6.36328L0 7.36328Z" fill="#C41717"/>
@@ -31,278 +31,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-10 offset-lg-1">
-                    <div class="title title--h4 text-center">Jaké vozidlo?</div>
+                    <div class="title title--h4 text-center">What vehicle?</div>
                     <div class="progress">
                         <div class="progress-item active">
                             <div class="num">1</div>
-                            <div class="label">Cena</div>
+                            <div class="label">Price</div>
                         </div>
                         <div class="progress-item">
                             <div class="num">2</div>
-                            <div class="label">Info o vozidle</div>
+                            <div class="label">Vehicle info</div>
                         </div>
                         <div class="progress-item">
                             <div class="num">3</div>
-                            <div class="label">Doplňující info</div>
+                            <div class="label">Additional info</div>
                         </div>
                     </div>
-                    <div class="inquiry-wrap form-wrap">
-                        <div class="inquiry-step active" id="inquiryStepSt">
-                            <div class="inquiry-item">
-                                <div class="label">V jaké cenové hladině vybíráte?</div>
-                                <div class="inquiry-range">
-                                    <input type="text" inputmode="numeric" placeholder="10 000" name="priceMin">
-                                    <div class="range-bar">
-                                        <div class="fill">
-                                            <div class="point --start"></div>
-                                            <div class="point --end"></div>
-                                        </div>
-                                    </div>
-                                    <input type="text" inputmode="numeric" placeholder="20 000 000" name="priceMax">
-                                </div>
-                            </div>
-                            <div class="inquiry-item">
-                                <div class="label">Využijete možnost odpočtu DPH?</div>
-                                <div class="label">(Jste plátce DPH?)</div>
-                                <div class="inquiry-radio">
-                                    <fieldset class="--btns">
-                                        <label>
-                                            <input type="radio" name="dph" value="0">
-                                            <span class="ghost-radio --btn">Ano</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="dph" value="1">
-                                            <span class="ghost-radio --btn">Ne</span>
-                                        </label>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="inquiry-submit --next">
-                                <a href="#inquiryStepNd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryNd">Dále</a>
-                            </div>
-                        </div>
-                        <div class="inquiry-step" id="inquiryStepNd">
-                            <div class="inquiry-item">
-                                <div class="label">Jaká velikost vozidla a karoserie Vás zajímá?</div>
-                                <div class="inquiry-checkbox">
-                                    <fieldset>
-                                        <label>
-                                            <input type="checkbox" name="velikostVozidla" value="0">
-                                            <span class="ghost-checkbox">SUV</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="1">
-                                            <span class="ghost-checkbox">Kombi</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="2">
-                                            <span class="ghost-checkbox">Sedan</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="3">
-                                            <span class="ghost-checkbox">Liftback</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="4">
-                                            <span class="ghost-checkbox">Hatchback</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="5">
-                                            <span class="ghost-checkbox">Kupé</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="6">
-                                            <span class="ghost-checkbox">CUV</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="7">
-                                            <span class="ghost-checkbox">Pick-up</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="8">
-                                            <span class="ghost-checkbox">MPV</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="9">
-                                            <span class="ghost-checkbox">Kabriolet</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="velikostProvedeni" value="10">
-                                            <span class="ghost-checkbox">Crossover</span>
-                                        </label>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="inquiry-item --third">
-                                <div class="label">Velikost provedení</div>
-                                <div class="inquiry-radio">
-                                    <fieldset class="--btns">
-                                        <label>
-                                            <input type="radio" name="velikostProvedeni" value="0">
-                                            <span class="ghost-radio --btn">Velké</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="velikostProvedeni" value="1">
-                                            <span class="ghost-radio --btn">Malé</span>
-                                        </label>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="inquiry-item --third">
-                                <div class="label">Počet dveří</div>
-                                <div class="inquiry-radio">
-                                    <div class="radio-bar"></div>
-                                    <fieldset>
-                                        <label>
-                                            <input type="radio" name="pocetDveri" value="2" checked>
-                                            <span class="ghost-radio active">2</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="pocetDveri" value="3">
-                                            <span class="ghost-radio">3</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="pocetDveri" value="4">
-                                            <span class="ghost-radio">4</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="pocetDveri" value="5">
-                                            <span class="ghost-radio">5</span>
-                                        </label>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="inquiry-item --third">
-                                <div class="label">Počet míst</div>
-                                <div class="inquiry-radio">
-                                    <div class="radio-bar"></div>
-                                    <fieldset>
-                                        <label>
-                                            <input type="radio" name="count" value="2" checked>
-                                            <span class="ghost-radio active">2</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="count" value="3">
-                                            <span class="ghost-radio">3</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="count" value="4">
-                                            <span class="ghost-radio">4</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="count" value="5">
-                                            <span class="ghost-radio">5</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="count" value="6">
-                                            <span class="ghost-radio">6</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="count" value="7">
-                                            <span class="ghost-radio">7</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="count" value="8">
-                                            <span class="ghost-radio">8</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="count" value="9">
-                                            <span class="ghost-radio">9</span>
-                                        </label>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="inquiry-item">
-                                <div class="label">Máte preferované palivo?</div>
-                                <div class="inquiry-radio">
-                                    <fieldset class="--btns">
-                                        <label>
-                                            <input type="radio" name="palivo" value="0" checked>
-                                            <span class="ghost-radio --btn active">Benzín</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="palivo" value="1">
-                                            <span class="ghost-radio --btn">Diesel</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="palivo" value="2">
-                                            <span class="ghost-radio --btn">CNG</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="palivo" value="3">
-                                            <span class="ghost-radio --btn">LPG</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="palivo" value="4">
-                                            <span class="ghost-radio --btn">Hybrid</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="palivo" value="5">
-                                            <span class="ghost-radio --btn">Elektro</span>
-                                        </label>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="inquiry-submit --next">
-                                <a href="#inquiryStepSt" class="btn btn--outline inquiry-step-btn" id="backToInquirySt">Zpět</a>
-                                <a href="#inquiryStepRd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryRd">Dále</a>
-                            </div>
-                        </div>
-                        <div class="inquiry-step" id="inquiryStepRd">
-                            <div class="inquiry-item">
-                                <div class="inquiry-row">
-                                    <div class="label label--title">Kontakt</div>
-                                    <div class="form-row">
-                                        <div class="form-item third">
-                                            <label>
-                                                <span class="label label--sm">Jméno</span>
-                                                <input type="text" placeholder="Tomáš Novák">
-                                            </label>
-                                        </div>
-                                        <div class="form-item third">
-                                            <label>
-                                                <span class="label label--sm">Email</span>
-                                                <input type="email" placeholder="novak@tomas.cz">
-                                            </label>
-                                        </div>
-                                        <div class="form-item third">
-                                            <label>
-                                                <span class="label label--sm">Telefon</span>
-                                                <input type="text" placeholder="+420 777 666 555">
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inquiry-row">
-                                    <div class="label label--title label--mt">Chcete-li, můžete dodat ještě pár informací</div>
-                                    <div class="form-row">
-                                        <div class="form-item third">
-                                            <label>
-                                                <span class="label label--sm">Měl/a jste nějakou<br> špatnou zkušenost</span>
-                                                <textarea placeholder="Váš text..."></textarea>
-                                            </label>
-                                        </div>
-                                        <div class="form-item third">
-                                            <label>
-                                                <span class="label label--sm">Je vozidlo pořizováno<br> jako dárek?</span>
-                                                <textarea placeholder="Váš text..."></textarea>
-                                            </label>
-                                        </div>
-                                        <div class="form-item third">
-                                            <label>
-                                                <span class="label label--sm">Máte konkrétní termín,<br> ke kterému je potřeba vůz mít?</span>
-                                                <textarea placeholder="Váš text..."></textarea>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inquiry-submit --next">
-                                <a href="#inquiryStepNd" class="btn btn--outline inquiry-step-btn" id="backToInquiryNd">Zpět</a>
-                                <input type="submit" class="btn btn--outline" value="Odeslat">
-                            </div>
-                        </div>
-                    </div>
+                    {control inquiryForm}
                 </div>
             </div>
         </div>
@@ -313,8 +57,8 @@
             <div class="row">
                 <div class="col-12 col-lg-5">
                     <div class="text-col">
-                        <div class="title title--h3">Dovoz veteránů na klíč</div>
-                        <div class="subtitle">Automaton - Když chcete dovést auto s duší! <br>Veterán nebo youngtimer? To už je na Vás!</div>
+                        <div class="title title--h3">Turnkey classic car import</div>
+                        <div class="subtitle">Automaton - When you want a car with soul! <br>Classic or youngtimer? That's up to you!</div>
                         <div class="citation-wrap">
                             <div class="icon --top">
                                 <svg width="69" height="47" viewBox="0 0 69 47" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -322,7 +66,7 @@
                                 </svg>
                             </div>
                             <div class="citation-text">
-                                Jsme tým nadšenců, kteří se specializují na dovoz nových a zánovních aut z celé Evropy. Nicméně jsme i „autaři“… A máme rádi, když mají auta duši. Sami taková auta vlastníme nebo je hledáme. I proto víme, jak je složité najít youngtimer nebo veterán dle představ.
+                                We are a team of enthusiasts specialising in the import of new and nearly-new cars from across Europe. But we're also „car people“… and we love cars with soul. We own and seek out such cars ourselves. That's exactly why we know how hard it can be to find the right youngtimer or classic.
                             </div>
                             <div class="icon --bottom">
                                 <svg width="69" height="47" viewBox="0 0 69 47" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -347,8 +91,8 @@
                 <div class="col-12 col-lg-6 offset-lg-6">
                     <div class="text-wrap">
                         <div class="text">
-                            <p>Neznáme každý vůz a každé provedení, nicméně špičkovou detailní kontrolu pro Vás provedeme a následně jen Vy rozhodnete, zda-li je vůz dle Vašich představ.</p>
-                            <p>Co dělá Automaton jedinečným? Náš tým zkušených prodejců pro dovoz automobilů, který má bohaté zkušenosti v oblasti dovozu a je schopný vyhledat ty nejexkluzivnější klenoty automobilové historie. Náš technik se postará o pečlivou kontrolu veterána dle Vašeho přání, ať už je to youngtimer nebo klasický vůz z éry 30. let.</p>
+                            <p>We may not know every car and every variant, but we will carry out a top-quality detailed inspection for you — after that, only you decide whether the car meets your expectations.</p>
+                            <p>What makes Automaton unique? Our team of experienced specialists in car imports, with extensive expertise in the field and the ability to track down the most exclusive gems of automotive history. Our technician will carry out a thorough inspection of the classic to your exact requirements, whether it's a youngtimer or a vehicle from the 1930s.</p>
                         </div>
                         <div class="magnifier-box">
                             <div class="icon">
@@ -364,8 +108,8 @@
                                 </svg>
                             </div>
                             <div class="magnifier-text">
-                                <p>Co byste řekli na parťáka při dovozu Vašeho vysněného veteránu nebo youngtimeru ze Švédska nebo odjinud z celé Evropy, na kterého se můžete spolehnout?</p>
-                                <p>S vášní pro klasické automobily a know-how v oboru, jsme připraveni splnit vaše sny o vlastnictví skvostu na čtyřech kolech. Ať už bude Vaše přání jakékoliv!</p>
+                                <p>How about a reliable partner for importing your dream classic or youngtimer from Sweden or anywhere else across Europe?</p>
+                                <p>With a passion for classic cars and industry know-how, we are ready to make your dream of owning a four-wheeled gem come true — whatever your wish may be!</p>
                             </div>
                         </div>
                     </div>
@@ -378,7 +122,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-5">
-                    <div class="title title--h3">Jak proces<br> dovozu funguje?</div>
+                    <div class="title title--h3">How does the<br> import process work?</div>
                 </div>
             </div>
             <div class="row">
@@ -388,19 +132,19 @@
                             <div class="step-item">
                                 <div class="num">1</div>
                                 <div class="text">
-                                    Zašlete nám specifikaci hledaného vozu, případně odkaz na konkrétní vůz.
+                                    Send us the specification of the car you are looking for, or a link to a specific vehicle.
                                 </div>
                             </div>
                             <div class="step-item">
                                 <div class="num">2</div>
                                 <div class="text">
-                                    Zasíláme Vám nabídku včetně kalkulace našich služeb.
+                                    We send you an offer including a calculation of our services.
                                 </div>
                             </div>
                             <div class="step-item">
                                 <div class="num">3</div>
                                 <div class="text">
-                                    Když vůz odpovídá Vašemu přání, prověříme pro Vás dostupnost.
+                                    When the car matches your requirements, we check availability for you.
                                 </div>
                             </div>
                             <div class="step-item --empty"></div>
@@ -410,19 +154,19 @@
                             <div class="step-item">
                                 <div class="num">4</div>
                                 <div class="text">
-                                    Technik jede vozidlo osobně zkontrolovat – zasílá protokol o stavu vozidla, videa a fotografie. Prohlídka vozidla je zpoplatněna částkou 20.000 – 30.000 Kč dle místa kontroly.
+                                    A technician travels to inspect the vehicle in person — providing an inspection report, videos and photos. The inspection fee is 20,000 – 30,000 CZK depending on the location.
                                 </div>
                             </div>
                             <div class="step-item">
                                 <div class="num">5</div>
                                 <div class="text">
-                                    Pokud vůz splňuje Vaší představu, připravujeme kupní smlouvu dle dříve zaslané nabídky a zahajujeme dovoz. V případě, že stav vozu není dle Vašeho přání, hledáme dále.
+                                    If the car meets your expectations, we prepare a purchase contract in accordance with the previously sent offer and begin the import. If the vehicle's condition does not match your requirements, we continue searching.
                                 </div>
                             </div>
                             <div class="step-item">
                                 <div class="num">6</div>
                                 <div class="text">
-                                    Po dovozu Vašeho veterána do České republiky ho přihlašujeme na SPZ a předáváme.
+                                    After importing your classic car to the Czech Republic, we register it with licence plates and hand it over to you.
                                 </div>
                             </div>
                         </div>
@@ -437,13 +181,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-8 offset-lg-2">
-                    <h2 class="title">Potřebujete poradit s výběrem?</h2>
+                    <h2 class="title">Need help choosing?</h2>
                     <div class="text">
-                        Nejste si jistí, který vůz je pro vás ten pravý? Napište nám a rádi vám poradíme s výběrem. Společně vybereme auto, které bude sedět vašim potřebám i rozpočtu.
+                        Not sure which car is right for you? Write to us and we'll be happy to help you choose. Together we'll find a car that fits your needs and budget.
                     </div>
                     <div class="btn-wrap">
-                        <a href="#" class="btn btn--circle btn--circle--red btn--circle--sm">
-                            <span class="text">Kontakt</span>
+                        <a href="/en/contact" class="btn btn--circle btn--circle--red btn--circle--sm">
+                            <span class="text">Contact</span>
                             <span class="icon">
                                 <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M25.7071 8.07038C26.0976 7.67986 26.0976 7.0467 25.7071 6.65617L19.3431 0.292211C18.9526 -0.0983137 18.3195 -0.0983136 17.9289 0.292211C17.5384 0.682735 17.5384 1.3159 17.9289 1.70642L23.5858 7.36328L17.9289 13.0201C17.5384 13.4107 17.5384 14.0438 17.9289 14.4343C18.3195 14.8249 18.9526 14.8249 19.3431 14.4343L25.7071 8.07038ZM0 7.36328L1.43373e-07 8.36328L25 8.36328L25 7.36328L25 6.36328L-1.43373e-07 6.36328L0 7.36328Z" fill="white"/>

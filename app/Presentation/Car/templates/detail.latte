@@ -140,7 +140,7 @@
                         <div class="price-wrap product-info-col">
                             <div class="price-col">
                                 <div class="price" n:if="$car->cena">
-                                    {if $car->odpocet == 'A'}{$car->cena * .79}{else}{$car->cena}{/if} Kč
+                                    {if $car->odpocet == 'A'}{number_format((int)($car->cena * .79), 0, ',', ' ')}{else}{number_format((int)$car->cena, 0, ',', ' ')}{/if} Kč
                                 </div>
                                 <div class="note" n:if="$car->odpocet == 'A'">
                                     <div class="icon">
@@ -165,7 +165,7 @@
 {*                                </div>*}
 {*                            </div>*}
                             <div class="btn-col">
-                                <a href="#" class="btn full">Poptat</a>
+                                <a href="#car-inquiry-form" class="btn full">Poptat</a>
                             </div>
                         </div>
                         <div class="info-wrap product-info-col">
@@ -299,7 +299,7 @@
                                 </div>
                             </div>
                             <div class="btn-col">
-                                <a href="#" class="btn full">Koupit</a>
+                                <a href="#car-inquiry-form" class="btn full">Poptat</a>
                             </div>
                         </div>
                         <div class="info-wrap product-info-col">
@@ -455,6 +455,19 @@
         </div>
     </section>
 
+    <section id="car-inquiry-form" class="contact-form-block content-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <h2 class="title title--h3">Poptat vozidlo</h2>
+                    <div class="form-wrap">
+                        {control carInquiryForm}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="product-carousel-block --product-detail content-block">
         <div class="container">
             <div class="row">
@@ -477,12 +490,13 @@
                                         <div class="image" style="background-image: url('{if count($carImages)}{$carImages[0]}{else}/assets/img/placeholder.webp{/if}')"></div>
                                         <div class="text-content">
                                             <div class="name">{$carCarousel->znacka} {$carCarousel->model}</div>
-                                            <div class="price" n:if="$carCarousel->cena">{$carCarousel->cena} Kč</div>
+                                            <div class="price" n:if="$carCarousel->cena">{if $carCarousel->odpocet == 'A'}{number_format((int)($carCarousel->cena * .79), 0, ',', ' ')}{else}{number_format((int)$carCarousel->cena, 0, ',', ' ')}{/if} Kč</div>
                                             <div class="dph-note" n:if="$carCarousel->odpocet == 'A'">možnost odpočtu DPH</div>
                                             <div class="subtitle" n:if="$carCarousel->provedeni">{$carCarousel->provedeni}</div>
                                             <div class="text">
                                                 {foreach $carCarousel->equipment as $carCarouselequipment}
-                                                    {$carCarouselequipment->title}{if !$iterator->last}, {/if}
+                                                    {continueIf $iterator->counter > 12}
+                                                    {$carCarouselequipment->title}{if $iterator->counter < 12 && !$iterator->last}, {/if}
                                                 {/foreach}
                                             </div>
 

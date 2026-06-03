@@ -2,6 +2,9 @@
 
 namespace App\Model\Car;
 
+use Nextras\Orm\Collection\Functions\CompareGreaterThanEqualsFunction;
+use Nextras\Orm\Collection\Functions\CompareSmallerThanEqualsFunction;
+use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Repository\Repository;
 
 /**
@@ -24,4 +27,65 @@ class CarsRepository extends Repository
         return $this->getBy(['externalId' => $externalId]);
     }
 
+    public function findFiltered(array $filters): ICollection
+    {
+        $collection = $this->findAll();
+
+        if (!empty($filters['znacka'])) {
+            $collection = $collection->findBy(['znacka' => $filters['znacka']]);
+        }
+        if (!empty($filters['karoserie'])) {
+            $collection = $collection->findBy(['karoserie' => $filters['karoserie']]);
+        }
+        if (!empty($filters['palivo'])) {
+            $collection = $collection->findBy(['palivo' => $filters['palivo']]);
+        }
+        if (!empty($filters['stitek'])) {
+            $collection = $collection->findBy(['stitek' => $filters['stitek']]);
+        }
+        if (!empty($filters['odpocet'])) {
+            $collection = $collection->findBy(['odpocet' => 'A']);
+        }
+        if ($filters['yearFrom'] !== null) {
+            $collection = $collection->findBy([CompareGreaterThanEqualsFunction::class, 'rokVyroby', $filters['yearFrom']]);
+        }
+        if ($filters['yearTo'] !== null) {
+            $collection = $collection->findBy([CompareSmallerThanEqualsFunction::class, 'rokVyroby', $filters['yearTo']]);
+        }
+        if ($filters['kmFrom'] !== null) {
+            $collection = $collection->findBy([CompareGreaterThanEqualsFunction::class, 'tachometr', $filters['kmFrom']]);
+        }
+        if ($filters['kmTo'] !== null) {
+            $collection = $collection->findBy([CompareSmallerThanEqualsFunction::class, 'tachometr', $filters['kmTo']]);
+        }
+        // cena is varchar but stores plain numbers; passing int causes DBAL to use %i → unquoted literal → MySQL numeric comparison
+        if ($filters['priceFrom'] !== null) {
+            $collection = $collection->findBy([CompareGreaterThanEqualsFunction::class, 'cena', $filters['priceFrom']]);
+        }
+        if ($filters['priceTo'] !== null) {
+            $collection = $collection->findBy([CompareSmallerThanEqualsFunction::class, 'cena', $filters['priceTo']]);
+        }
+
+        return $collection;
+    }
+
+    public function findRandom(int $limit): \Nextras\Orm\Collection\ICollection
+    {
+        /** @var CarsMapper $mapper */
+        $mapper = $this->getMapper();
+        return $mapper->buildRandomCollection($limit);
+    }
+
+    public function getDistinctValues(string $property): array
+    {
+        $values = [];
+        foreach ($this->findAll() as $car) {
+            $val = $car->$property;
+            if ($val !== null && $val !== '') {
+                $values[$val] = $val;
+            }
+        }
+        ksort($values);
+        return array_values($values);
+    }
 }

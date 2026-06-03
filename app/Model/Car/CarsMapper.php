@@ -40,4 +40,11 @@ class CarsMapper extends DbalMapper
             ['car_id', 'equipment_id'],
         ];
     }
+
+    public function buildRandomCollection(int $limit): \Nextras\Orm\Collection\ICollection
+    {
+        $builder = $this->builder();
+        $builder->addOrderBy('RAND()');
+        return $this->toCollection($builder)->limitBy($limit);
+    }
 }

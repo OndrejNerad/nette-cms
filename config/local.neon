@@ -1,7 +1,58 @@
 parameters:
+
+    # -------------------------------------------------------
+    # DEV (Docker)
+    # -------------------------------------------------------
     database:
         host: db
         port: 3306
         name: cms
         user: cms
         password: cms
+    mail:
+        host: mailhog
+        port: 1025
+        username: ''
+        password: ''
+        encryption: null
+    adminEmail: 'dev.foo.bar.web@gmail.com'
+    recaptcha:
+        verify: false
+
+    # -------------------------------------------------------
+    # TEST (pomelogrep.eu)
+    # -------------------------------------------------------
+    #database:
+    #    host: localhost
+    #    port: 3306
+    #    name: your_test_db
+    #    user: your_test_user
+    #    password: your_test_password
+    #mail:
+    #    host: smtp.your-hosting.cz
+    #    port: 587
+    #    username: your@email.cz
+    #    password: your_smtp_password
+    #    encryption: tls
+    #adminEmail: 'poptavky@automaton.cz'
+    #recaptcha:
+    #    verify: true
+
+    # -------------------------------------------------------
+    # PRODUCTION (automaton.cz)
+    # -------------------------------------------------------
+    #database:
+    #    host: localhost
+    #    port: 3306
+    #    name: your_prod_db
+    #    user: your_prod_user
+    #    password: your_prod_password
+    #mail:
+    #    host: smtp.your-hosting.cz
+    #    port: 587
+    #    username: your@email.cz
+    #    password: your_smtp_password
+    #    encryption: tls
+    #adminEmail: 'poptavky@automaton.cz'
+    #recaptcha:
+    #    verify: true

@@ -1,11 +1,18 @@
 parameters:
     adminEmail: 'dev.foo.bar.web@gmail.com'
+    mail:
+        host: mailhog
+        port: 1025
+        username: ''
+        password: ''
+        encryption: null
     recaptcha:
         siteKey: '6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll'
         secretKey: '6LcjeOgsAAAAAD8kNp4cZ1_kgsCa8TewHfwro0lO'
+        verify: true
 
 application:
-    catchExceptions: false
+    catchExceptions: true
     errorPresenter:
         4xx: Error:Error4xx
         5xx: Error:Error5xx

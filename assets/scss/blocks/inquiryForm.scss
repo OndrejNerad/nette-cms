@@ -2,6 +2,13 @@
 
     .title--h4 { margin-bottom: 16px;}
 
+    .flash {
+        color: $white; text-align: center; padding: 20px; margin-bottom: 20px; font-weight: 700; font-size: 20px;
+
+        &.error { background: $red;}
+        &.success { background: $green;}
+    }
+
     .progress {
         display: flex; justify-content: space-between; background: transparent; height: auto; margin-bottom: 50px;
 
@@ -95,7 +102,7 @@
                 }
 
                 .range-bar {
-                    flex: 1 0 auto; height: 2px; background-color: #CECECE; margin: 0 18px;
+                    flex: 1 0 auto; height: 2px; background-color: #CECECE; margin: 0 18px; position: relative;
 
                     &::before, &::after {
                         content: ""; position: absolute; top: 50%; transform: translateY(-50%); display: block;
@@ -106,10 +113,10 @@
                     &::after { right: 0;}
 
                     .fill {
-                        height: 2px; background: $red; position: absolute; top: 0; left: 20%; right: 30%;
+                        height: 2px; background: $red; position: absolute; top: 0; left: 0%; right: 0%;
 
                         .point {
-                            position: absolute; top: 1px; width: 20px; height: 20px; display: block;
+                            position: absolute; top: 1px; width: 20px; height: 20px; display: block; z-index: 1;
                             background: $red; border-radius: 100%; transform: translate(-50%, -50%);
 
                             &.--start { left: 0;}

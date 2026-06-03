@@ -1,16 +1,14 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Components\Forms;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 
-final class ContactFormControl extends Control
+final class InquiryFormControl extends Control
 {
     public function __construct(
-        private readonly ContactFormFactory $factory,
+        private readonly InquiryFormFactory $factory,
         private readonly string $lang,
     ) {}
 
@@ -18,17 +16,17 @@ final class ContactFormControl extends Control
     {
         $this->template->recaptchaSiteKey = $this->factory->getSiteKey();
         $this->template->lang = $this->lang;
-        $this->template->render(__DIR__ . '/templates/contactForm.latte');
+        $this->template->render(__DIR__ . '/templates/inquiryForm.latte');
     }
 
-    protected function createComponentContactForm(): Form
+    protected function createComponentInquiryForm(): Form
     {
         $form = $this->factory->create(
             function (): void {
-                $this->presenter->flashMessage(FormTranslations::get($this->lang, 'contact_success'), 'success');
+                $this->presenter->flashMessage(FormTranslations::get($this->lang, 'inquiry_success'), 'success');
 
                 if ($this->presenter->isAjax()) {
-                    $this->redrawControl('contactFormSnippet');
+                    $this->redrawControl('inquiryFormSnippet');
                 } else {
                     $this->presenter->redirectUrl(
                         $this->presenter->getHttpRequest()->getUrl()->getAbsoluteUrl()
@@ -41,7 +39,7 @@ final class ContactFormControl extends Control
 
         $form->onSubmit[] = function () {
             if ($this->presenter->isAjax()) {
-                $this->redrawControl('contactFormSnippet');
+                $this->redrawControl('inquiryFormSnippet');
             }
         };
 

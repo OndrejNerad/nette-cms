@@ -2,21 +2,29 @@ services:
     mail.mailer:
         class: Nette\Mail\SmtpMailer
         arguments:
-            host: mailhog
-            port: 1025
-            username: ''
-            password: ''
-            encryption: null
+            host: %mail.host%
+            port: %mail.port%
+            username: %mail.username%
+            password: %mail.password%
+            encryption: %mail.encryption%
 
     - App\Core\RouterFactory::createRouter
 #    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%)
-    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%)
+    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)
+    - App\Components\Forms\InquiryFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)
+    - App\Components\Forms\PricingFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)
+    - App\Components\Forms\CarInquiryFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)
+    - App\Components\Forms\AutoInspectFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)
     - App\Command\ImportCarsCommand
     - App\Command\ImportSocialItemsCommand
     - App\Command\ImportGoogleReviewsCommand
     - App\Model\CarEquipment\CarEquipmentRepository
 
     - implement: App\Components\Forms\ContactFormControlFactory
+    - implement: App\Components\Forms\InquiryFormControlFactory
+    - implement: App\Components\Forms\PricingFormControlFactory
+    - implement: App\Components\Forms\CarInquiryFormControlFactory
+    - implement: App\Components\Forms\AutoInspectFormControlFactory
 
 search:
     - in: %appDir%

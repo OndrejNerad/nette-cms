@@ -1,0 +1,286 @@
+{snippet inquiryFormSnippet}
+    {foreach $presenter->getFlashSession() as $flash}
+        {foreach $flash as $message}
+            <div class="flash {$message->type}">{$message->message}</div>
+        {/foreach}
+    {/foreach}
+
+    {form inquiryForm, class => 'ajax'}
+        {foreach $form->getErrors() as $error}
+            <div class="flash error">{$error}</div>
+        {/foreach}
+
+        <div class="inquiry-wrap form-wrap">
+            <div class="inquiry-step active" id="inquiryStepSt">
+                <div class="inquiry-item">
+                    <div class="label">{if $lang === 'en'}What is your price range?{else}V jaké cenové hladině vybíráte?{/if}</div>
+                    <div class="inquiry-range">
+                        {input priceMin, type => 'text', inputmode => 'numeric', placeholder => '10 000'}
+                        <div class="range-bar">
+                            <div class="fill">
+                                <div class="point --start"></div>
+                                <div class="point --end"></div>
+                            </div>
+                        </div>
+                        {input priceMax, type => 'text', inputmode => 'numeric', placeholder => '20 000 000'}
+                    </div>
+                </div>
+                <div class="inquiry-item">
+                    <div class="label">{if $lang === 'en'}Do you need a VAT deduction?{else}Využijete možnost odpočtu DPH?{/if}</div>
+                    <div class="label">{if $lang === 'en'}(Are you VAT registered?){else}(Jste plátce DPH?){/if}</div>
+                    <div class="inquiry-radio">
+                        <fieldset class="--btns">
+                            <label>
+                                <input type="radio" name="{$form['dph']->getHtmlName()}" value="0">
+                                <span class="ghost-radio --btn">{if $lang === 'en'}Yes{else}Ano{/if}</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="{$form['dph']->getHtmlName()}" value="1">
+                                <span class="ghost-radio --btn">{if $lang === 'en'}No{else}Ne{/if}</span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="inquiry-submit --next">
+                    <a href="#inquiryStepNd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryNd">{if $lang === 'en'}Next{else}Dále{/if}</a>
+                </div>
+            </div>
+
+            <div class="inquiry-step" id="inquiryStepNd">
+                <div class="inquiry-item">
+                    <div class="label">{if $lang === 'en'}What body type are you interested in?{else}Jaká velikost vozidla a karoserie Vás zajímá?{/if}</div>
+                    <div class="inquiry-checkbox">
+                        <fieldset>
+                            {foreach ['SUV', 'Kombi', 'Sedan', 'Liftback', 'Hatchback', 'Kupé', 'CUV', 'Pick-up', 'MPV', 'Kabriolet', 'Crossover'] as $item}
+                                <label>
+                                    <input type="checkbox" name="karoserie[]" value="{$item}">
+                                    <span class="ghost-checkbox">{$item}</span>
+                                </label>
+                            {/foreach}
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="inquiry-item --third">
+                    <div class="label">{if $lang === 'en'}Vehicle size{else}Velikost provedení{/if}</div>
+                    <div class="inquiry-radio">
+                        <fieldset class="--btns">
+                            <label>
+                                <input type="radio" name="{$form['velikost']->getHtmlName()}" value="0">
+                                <span class="ghost-radio --btn">{if $lang === 'en'}Large{else}Velké{/if}</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="{$form['velikost']->getHtmlName()}" value="1">
+                                <span class="ghost-radio --btn">{if $lang === 'en'}Small{else}Malé{/if}</span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="inquiry-item --third">
+                    <div class="label">{if $lang === 'en'}Number of doors{else}Počet dveří{/if}</div>
+                    <div class="inquiry-radio">
+                        <div class="radio-bar"></div>
+                        <fieldset>
+                            {foreach [2, 3, 4, 5] as $n}
+                                <label>
+                                    <input type="radio" name="{$form['pocetDveri']->getHtmlName()}" value="{$n}"{if $n === 2} checked{/if}>
+                                    <span class="ghost-radio{if $n === 2} active{/if}">{$n}</span>
+                                </label>
+                            {/foreach}
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="inquiry-item --third">
+                    <div class="label">{if $lang === 'en'}Number of seats{else}Počet míst{/if}</div>
+                    <div class="inquiry-radio">
+                        <div class="radio-bar"></div>
+                        <fieldset>
+                            {foreach [2, 3, 4, 5, 6, 7, 8, 9] as $n}
+                                <label>
+                                    <input type="radio" name="{$form['pocetMist']->getHtmlName()}" value="{$n}"{if $n === 2} checked{/if}>
+                                    <span class="ghost-radio{if $n === 2} active{/if}">{$n}</span>
+                                </label>
+                            {/foreach}
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="inquiry-item">
+                    <div class="label">{if $lang === 'en'}Preferred fuel type?{else}Máte preferované palivo?{/if}</div>
+                    <div class="inquiry-radio">
+                        <fieldset class="--btns">
+                            {var $fuels = $lang === 'en'
+                                ? ['0' => 'Petrol', '1' => 'Diesel', '2' => 'CNG', '3' => 'LPG', '4' => 'Hybrid', '5' => 'Electric']
+                                : ['0' => 'Benzín', '1' => 'Diesel', '2' => 'CNG', '3' => 'LPG', '4' => 'Hybrid', '5' => 'Elektro']}
+                            {foreach $fuels as $val => $label}
+                                <label>
+                                    <input type="radio" name="{$form['palivo']->getHtmlName()}" value="{$val}"{if $val === '0'} checked{/if}>
+                                    <span class="ghost-radio --btn{if $val === '0'} active{/if}">{$label}</span>
+                                </label>
+                            {/foreach}
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="inquiry-submit --next">
+                    <a href="#inquiryStepSt" class="btn btn--outline inquiry-step-btn" id="backToInquirySt">{if $lang === 'en'}Back{else}Zpět{/if}</a>
+                    <a href="#inquiryStepRd" class="btn btn--outline inquiry-step-btn" id="nextToInquiryRd">{if $lang === 'en'}Next{else}Dále{/if}</a>
+                </div>
+            </div>
+
+            <div class="inquiry-step" id="inquiryStepRd">
+                <div class="inquiry-item">
+                    <div class="inquiry-row">
+                        <div class="label label--title">{if $lang === 'en'}Contact{else}Kontakt{/if}</div>
+                        <div class="form-row">
+                            <div class="form-item third">
+                                <label>
+                                    <span class="label label--sm">{label name /}</span>
+                                    {input name, placeholder => ($lang === 'en' ? 'John Smith' : 'Tomáš Novák')}
+                                </label>
+                                {inputError name}
+                            </div>
+                            <div class="form-item third">
+                                <label>
+                                    <span class="label label--sm">{label email /}</span>
+                                    {input email, placeholder => ($lang === 'en' ? 'john@smith.com' : 'novak@tomas.cz')}
+                                </label>
+                                {inputError email}
+                            </div>
+                            <div class="form-item third">
+                                <label>
+                                    <span class="label label--sm">{label phone /}</span>
+                                    {input phone, placeholder => '+420 777 666 555'}
+                                </label>
+                                {inputError phone}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inquiry-row">
+                        <div class="label label--title label--mt">{if $lang === 'en'}Optional additional information{else}Chcete-li, můžete dodat ještě pár informací{/if}</div>
+                        <div class="form-row">
+                            <div class="form-item third">
+                                <label>
+                                    <span class="label label--sm label--half">{if $lang === 'en'}Any bad experiences with car buying?{else}Měl/a jste nějakou špatnou zkušenost{/if}</span>
+                                    {input spatnaZkusenost, placeholder => ($lang === 'en' ? 'Your text...' : 'Váš text...')}
+                                </label>
+                            </div>
+                            <div class="form-item third">
+                                <label>
+                                    <span class="label label--sm label--half">{if $lang === 'en'}Is the car a gift?{else}Je vozidlo pořizováno jako dárek?{/if}</span>
+                                    {input darek, placeholder => ($lang === 'en' ? 'Your text...' : 'Váš text...')}
+                                </label>
+                            </div>
+                            <div class="form-item third">
+                                <label>
+                                    <span class="label label--sm label--half">{if $lang === 'en'}Do you have a specific deadline for the car?{else}Máte konkrétní termín, ke kterému je potřeba vůz mít?{/if}</span>
+                                    {input termin, placeholder => ($lang === 'en' ? 'Your text...' : 'Váš text...')}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {* honeypot — invisible to humans *}
+                <div style="display:none" aria-hidden="true">
+                    {input address}
+                </div>
+
+                <input type="hidden" name="recaptcha_token" id="recaptcha_token_inquiry">
+
+                <div class="inquiry-submit --next">
+                    <a href="#inquiryStepNd" class="btn btn--outline inquiry-step-btn" id="backToInquiryNd">{if $lang === 'en'}Back{else}Zpět{/if}</a>
+                    {input send, class => 'btn btn--outline'}
+                </div>
+            </div>
+        </div>
+    {/form}
+{/snippet}
+
+<script n:syntax="off">
+    function onRecaptchaLoad() {
+        grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'inquiry'}).then(function(token) {
+            document.getElementById('recaptcha_token_inquiry').value = token;
+        });
+    }
+
+    (function () {
+        var MIN = 0, MAX = 20000000;
+
+        var rangeEl = document.querySelector('.inquiry-range');
+        if (!rangeEl) return;
+
+        var bar        = rangeEl.querySelector('.range-bar');
+        var fill       = rangeEl.querySelector('.fill');
+        var ptStart    = rangeEl.querySelector('.point.--start');
+        var ptEnd      = rangeEl.querySelector('.point.--end');
+        var inputs     = rangeEl.querySelectorAll('input');
+        var inputMin   = inputs[0];
+        var inputMax   = inputs[1];
+
+        function parseVal(str) {
+            var n = parseInt(String(str).replace(/\s/g, ''), 10);
+            return isNaN(n) ? null : n;
+        }
+
+        function formatVal(n) {
+            return n === 0 ? '' : n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        function clamp(v, lo, hi) {
+            return Math.max(lo, Math.min(hi, v));
+        }
+
+        function updateSlider() {
+            var lo = clamp(parseVal(inputMin.value) || MIN, MIN, MAX);
+            var hi = clamp(parseVal(inputMax.value) || MAX, MIN, MAX);
+            if (lo > hi) hi = lo;
+            fill.style.left  = ((lo - MIN) / (MAX - MIN) * 100) + '%';
+            fill.style.right = ((MAX - hi) / (MAX - MIN) * 100) + '%';
+        }
+
+        function makeDraggable(point, isStart) {
+            function onMove(e) {
+                e.preventDefault();
+                var cx = e.touches ? e.touches[0].clientX : e.clientX;
+                var rect = bar.getBoundingClientRect();
+                var pct = clamp((cx - rect.left) / rect.width, 0, 1);
+                var val = Math.round(pct * (MAX - MIN) + MIN);
+
+                if (isStart) {
+                    var hi = clamp(parseVal(inputMax.value) || MAX, MIN, MAX);
+                    val = Math.min(val, hi);
+                    inputMin.value = formatVal(val);
+                } else {
+                    var lo = clamp(parseVal(inputMin.value) || MIN, MIN, MAX);
+                    val = Math.max(val, lo);
+                    inputMax.value = formatVal(val);
+                }
+                updateSlider();
+            }
+
+            function onUp() {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onUp);
+            }
+
+            function onDown(e) {
+                e.preventDefault();
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+                document.addEventListener('touchmove', onMove, { passive: false });
+                document.addEventListener('touchend', onUp);
+            }
+
+            point.addEventListener('mousedown', onDown);
+            point.addEventListener('touchstart', onDown, { passive: false });
+        }
+
+        makeDraggable(ptStart, true);
+        makeDraggable(ptEnd, false);
+
+        inputMin.addEventListener('input', updateSlider);
+        inputMax.addEventListener('input', updateSlider);
+
+        updateSlider();
+    })();
+</script>

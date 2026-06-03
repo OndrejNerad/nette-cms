@@ -1,14 +1,18 @@
-{snippet contactFormSnippet}
+{snippet carInquiryFormSnippet}
     {foreach $presenter->getFlashSession() as $flash}
         {foreach $flash as $message}
             <div class="flash {$message->type}">{$message->message}</div>
         {/foreach}
     {/foreach}
 
-    {form contactForm, class => 'ajax'}
+    {form carInquiryForm, class => 'ajax'}
         {foreach $form->getErrors() as $error}
             <div class="flash error">{$error}</div>
         {/foreach}
+
+        {if $carLabel}
+            <div class="form-car-label">{if $lang === 'en'}Car inquiry:{else}Poptávka vozidla:{/if} <strong>{$carLabel}</strong></div>
+        {/if}
 
         <div class="form-row">
             <div class="form-item third">
@@ -44,12 +48,11 @@
             </div>
         </div>
 
-        {* honeypot - invisible to humans, bots fill it *}
         <div style="display:none" aria-hidden="true">
             {input address}
         </div>
 
-        <input type="hidden" name="recaptcha_token" id="recaptcha_token_contact">
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token_car_inquiry">
 
         <div class="form-row submit">
             <div class="form-item">
@@ -57,13 +60,12 @@
             </div>
         </div>
     {/form}
-
 {/snippet}
 
 <script n:syntax="off">
     function onRecaptchaLoad() {
-        grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'contact'}).then(function(token) {
-            document.getElementById('recaptcha_token_contact').value = token;
+        grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'car_inquiry'}).then(function(token) {
+            document.getElementById('recaptcha_token_car_inquiry').value = token;
         });
     }
 </script>

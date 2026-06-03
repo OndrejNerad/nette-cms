@@ -1,11 +1,11 @@
-{snippet contactFormSnippet}
+{snippet autoInspectFormSnippet}
     {foreach $presenter->getFlashSession() as $flash}
         {foreach $flash as $message}
             <div class="flash {$message->type}">{$message->message}</div>
         {/foreach}
     {/foreach}
 
-    {form contactForm, class => 'ajax'}
+    {form autoInspectForm, class => 'ajax'}
         {foreach $form->getErrors() as $error}
             <div class="flash error">{$error}</div>
         {/foreach}
@@ -35,21 +35,30 @@
         </div>
 
         <div class="form-row">
-            <div class="form-item textarea">
+            <div class="form-item select">
                 <label>
-                    <span class="label">{label message /}</span>
-                    {input message, placeholder => ($lang === 'en' ? 'Your message...' : 'Váš text...')}
+                    <span class="label">{label package /}</span>
+                    {input package, id => 'autoInspectPackageSelect'}
                 </label>
-                {inputError message}
+                {inputError package}
             </div>
         </div>
 
-        {* honeypot - invisible to humans, bots fill it *}
+        <div class="form-row">
+            <div class="form-item textarea">
+                <label>
+                    <span class="label">{label note /}</span>
+                    {input note, placeholder => ($lang === 'en' ? 'Your text...' : 'Váš text...')}
+                </label>
+            </div>
+        </div>
+
+        {* honeypot *}
         <div style="display:none" aria-hidden="true">
             {input address}
         </div>
 
-        <input type="hidden" name="recaptcha_token" id="recaptcha_token_contact">
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token_autoinspect">
 
         <div class="form-row submit">
             <div class="form-item">
@@ -57,13 +66,22 @@
             </div>
         </div>
     {/form}
-
 {/snippet}
 
 <script n:syntax="off">
     function onRecaptchaLoad() {
-        grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'contact'}).then(function(token) {
-            document.getElementById('recaptcha_token_contact').value = token;
+        grecaptcha.execute('6LcjeOgsAAAAAEAEH4H39pFH488Ao1Y1XOxl--ll', {action: 'autoinspect'}).then(function(token) {
+            document.getElementById('recaptcha_token_autoinspect').value = token;
         });
     }
+
+    document.querySelectorAll('a[data-target]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var target = this.getAttribute('data-target');
+            var select = document.getElementById('autoInspectPackageSelect');
+            if (select && target) {
+                select.value = target;
+            }
+        });
+    });
 </script>

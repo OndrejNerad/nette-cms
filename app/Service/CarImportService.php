@@ -44,8 +44,10 @@ class CarImportService
                     $newHash = md5(json_encode($item['listing_values'] ?? []));
                     if ($car->rawHash === $newHash) {
                         if (empty($car->images) || $car->images === '[]') {
-                            $car->images = json_encode($item['images'] ?? [], JSON_THROW_ON_ERROR);
-                            $output->writeln("  Updated images for car #{$item['id']}");
+                            $localPaths = $this->downloadImages((string) $item['id'], $item['images'] ?? [], $output);
+                            $car->images = json_encode($localPaths, JSON_THROW_ON_ERROR);
+                            $this->orm->cars->persistAndFlush($car);
+                            $output->writeln("  Downloaded images for car #{$item['id']}");
                         }
                         $skipped++;
                         continue;
@@ -59,7 +61,9 @@ class CarImportService
             $this->orm->flush();
             $this->orm->clear();
 
-            $url = $response['next'];
+            $url = $response['next'] !== null
+                ? str_replace('http://', 'https://', $response['next'])
+                : null;
             $output->writeln("Imported: $imported, Skipped: $skipped");
 
         } while ($url !== null);
@@ -105,10 +109,12 @@ class CarImportService
         $car->model               = $values['model']                 ?? null;
         $car->znacka              = $values['znacka']                ?? null;
         $car->stitek              = $values['stitek']                ?? null;
+        $car->popis               = $values['popis']                 ?? null;
+        $car->vinVerejny          = $values['vin_verejny']           ?? null;
         $car->popisNabidky        = $values['popis_nabidky']         ?? null;
         $car->rawValues           = json_encode($values, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $car->rawHash             = md5(json_encode($values)); // ← add this
-        $car->images              = json_encode($images, JSON_THROW_ON_ERROR);
+        $car->images              = json_encode($this->downloadImages($car->externalId, $images), JSON_THROW_ON_ERROR);
 
         $car->updatedAt           = new \DateTimeImmutable();
 
@@ -170,6 +176,34 @@ class CarImportService
         }
 
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    private function downloadImages(string $externalId, array $s3Urls, ?OutputInterface $output = null): array
+    {
+        $dir = __DIR__ . '/../../www/images/cars/';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $localPaths = [];
+        foreach ($s3Urls as $index => $url) {
+            $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
+            $filename = $externalId . '_' . $index . '.' . $ext;
+            $dest     = $dir . $filename;
+
+            if (!file_exists($dest)) {
+                $data = @file_get_contents($url);
+                if ($data === false) {
+                    $output?->writeln("  WARNING: failed to download image $index for car #$externalId");
+                    continue;
+                }
+                file_put_contents($dest, $data);
+            }
+
+            $localPaths[] = '/images/cars/' . $filename;
+        }
+
+        return $localPaths;
     }
 
     private function generateDetailUrl(string $znacka, string $model, string $externalId): string

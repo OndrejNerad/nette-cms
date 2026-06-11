@@ -3,40 +3,40 @@ parameters:
     # -------------------------------------------------------
     # DEV (Docker)
     # -------------------------------------------------------
-    database:
-        host: db
-        port: 3306
-        name: cms
-        user: cms
-        password: cms
-    mail:
-        host: mailhog
-        port: 1025
-        username: ''
-        password: ''
-        encryption: null
-    adminEmail: 'dev.foo.bar.web@gmail.com'
-    recaptcha:
-        verify: false
+#    database:
+#        host: cms-db
+#        port: 3306
+#        name: cms
+#        user: cms
+#        password: cms
+#    mail:
+#        host: mailhog
+#        port: 1025
+#        username: ''
+#        password: ''
+#        encryption: null
+#    adminEmail: 'dev.foo.bar.web@gmail.com'
+#    recaptcha:
+#        verify: false
 
     # -------------------------------------------------------
     # TEST (pomelogrep.eu)
     # -------------------------------------------------------
-    #database:
-    #    host: md418.wedos.net
-    #    port: 3306
-    #    name: d375189_123
-    #    user: a375189_123
-    #    password: Ratata1324#
-    #mail:
-    #    host: wes1-smtp.wedos.net
-    #    port: 587
-    #    username: web@pomelogrep.eu
-    #    password: Ratata1324#
-    #    encryption: tls
-    #adminEmail: 'dev.foo.bar.web@gmail.com'
-    #recaptcha:
-    #    verify: true
+    database:
+        host: md418.wedos.net
+        port: 3306
+        name: d375189_123
+        user: a375189_123
+        password: Ratata1324#
+    mail:
+        host: wes1-smtp.wedos.net
+        port: 587
+        username: web@pomelogrep.eu
+        password: Ratata1324#
+        encryption: tls
+    adminEmail: 'dev.foo.bar.web@gmail.com'
+    recaptcha:
+        verify: true
 
     # -------------------------------------------------------
     # PRODUCTION (automaton.cz)

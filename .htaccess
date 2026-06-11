@@ -1,1 +1,11 @@
-Require all denied
+RewriteEngine On
+
+# Block direct access to sensitive directories
+RewriteRule ^(app|bin|config|log|temp|vendor)(/|$) - [F,L]
+RewriteRule ^(composer\.json|composer\.lock) - [F,L]
+
+# Prevent rewrite loop once already in www/
+RewriteRule ^www/ - [L]
+
+# Route everything to www/ (Nette public root)
+RewriteRule ^(.*)$ www/$1 [L]

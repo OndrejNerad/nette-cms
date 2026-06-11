@@ -1,4 +1,4 @@
-{layout '../../../Presentation/@layout.latte'}
+{layout '../../../../Presentation/@layout.latte'}
 {block content}
     <section class="product-detail content-block">
         <div class="container desktop">
@@ -9,6 +9,8 @@
                             {foreach json_decode($car->images ?? '[]') as $image}
                             {php $carImages[] = $image}
                         {/foreach}
+                        {* TEMPORARY (dev only): placeholder instead of real car photos — DELETE the line below for production *}
+                        {php $carImages = ['/assets/img/car-detail.webp', '/assets/img/car-gallery-1.webp', '/assets/img/car-gallery-2.webp', '/assets/img/car-gallery-3.webp', '/assets/img/car.webp']}
                         <div class="thumb">
                             {if count($carImages)}
                                 <a href="{$carImages[0]}" data-fslightbox="gallery-detail" data-type="image">
@@ -179,6 +181,14 @@
                                     <div class="label">Nájezd</div>
                                     <div class="text">{$car->tachometr} {if $car->tachometrJednotka}{$car->tachometrJednotka}{else}km{/if}</div>
                                 </div>
+                                <div class="info" n:if="$car->popis">
+                                    <div class="label">Stav</div>
+                                    <div class="text">{$car->popis}</div>
+                                </div>
+                                <div class="info" n:if="$car->vinVerejny">
+                                    <div class="label">VIN</div>
+                                    <div class="text">{$car->vinVerejny}</div>
+                                </div>
                             </div>
                             <div class="info-col">
                                 <div class="label--lg">Motor</div>
@@ -312,6 +322,14 @@
                                 <div class="info" n:if="$car->tachometr">
                                     <div class="label">Nájezd</div>
                                     <div class="text">{$car->tachometr} {if $car->tachometrJednotka}{$car->tachometrJednotka}{else}km{/if}</div>
+                                </div>
+                                <div class="info" n:if="$car->popis">
+                                    <div class="label">Stav</div>
+                                    <div class="text">{$car->popis}</div>
+                                </div>
+                                <div class="info" n:if="$car->vinVerejny">
+                                    <div class="label">VIN</div>
+                                    <div class="text">{$car->vinVerejny}</div>
                                 </div>
                             </div>
                             <div class="info-col">
@@ -485,9 +503,12 @@
                                 {foreach json_decode($carCarousel->images ?? '[]') as $image}
                                     {php $carImages[] = $image}
                                 {/foreach}
+                                {* TEMPORARY (dev only): placeholder instead of real car photos — DELETE the line below for production *}
+                                {php $carImages = ['/assets/img/car-detail.webp', '/assets/img/car-gallery-1.webp', '/assets/img/car-gallery-2.webp', '/assets/img/car-gallery-3.webp', '/assets/img/car.webp']}
                                 <div class="swiper-slide">
                                     <a n:href="Car:detail detailUrl => $carCarousel->detailUrl" class="product-slide">
-                                        <div class="image" style="background-image: url('{if count($carImages)}{$carImages[0]}{else}/assets/img/placeholder.webp{/if}')"></div>
+                                        {var $bgImg = count($carImages) ? $carImages[0] : '/assets/img/placeholder.webp'}
+                                        <div class="image" style="background-image: url('{$bgImg|noescape}')"></div>
                                         <div class="text-content">
                                             <div class="name">{$carCarousel->znacka} {$carCarousel->model}</div>
                                             <div class="price" n:if="$carCarousel->cena">{if $carCarousel->odpocet == 'A'}{number_format((int)($carCarousel->cena * .79), 0, ',', ' ')}{else}{number_format((int)$carCarousel->cena, 0, ',', ' ')}{/if} Kč</div>

@@ -1,21 +1,21 @@
-{layout '../../../Presentation/@layout.latte'}
+{layout '../../../../Presentation/@layout.latte'}
 {block content}
     <section class="product-list content-block">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="title--h3">Nabídka vozidel</h1>
+                    <h1 class="title--h3">Car Listings</h1>
                 </div>
                 <div class="col-12">
                     <div class="product-order">
-                        <div class="label">Řadit dle:</div>
+                        <div class="label">Sort by:</div>
                         <select name="order" id="order">
-                            <option value="DESC"{if $order == 'DESC'} selected="selected"{/if}>Nejnovějších</option>
-                            <option value="ASC"{if $order == 'ASC'} selected="selected"{/if}>Nejstarších</option>
+                            <option value="DESC"{if $order == 'DESC'} selected="selected"{/if}>Newest</option>
+                            <option value="ASC"{if $order == 'ASC'} selected="selected"{/if}>Oldest</option>
                         </select>
                         <div class="hidden-select">
-                            <a n:href="order! direction => 'DESC'" class="select-link" id="filter-DESC">Nejnovějších</a>
-                            <a n:href="order! direction => 'ASC'" class="select-link" id="filter-ASC">Nejstarších</a>
+                            <a n:href="order! direction => 'DESC'" class="select-link" id="filter-DESC">Newest</a>
+                            <a n:href="order! direction => 'ASC'" class="select-link" id="filter-ASC">Oldest</a>
                         </div>
                     </div>
                 </div>
@@ -27,19 +27,19 @@
                         <div class="filter-wrap">
                             <div class="filter-item">
                                 <label>
-                                    <span class="label">Kategorie</span>
+                                    <span class="label">Category</span>
                                     <select name="stitek" id="stitek">
-                                        <option value="">Nerozhoduje</option>
-                                        <option value="skladem"{if $filterStitek === 'skladem'} selected{/if}>Skladem</option>
-                                        <option value="dovoz"{if $filterStitek === 'dovoz'} selected{/if}>Na dovoz</option>
+                                        <option value="">Any</option>
+                                        <option value="skladem"{if $filterStitek === 'skladem'} selected{/if}>In stock</option>
+                                        <option value="dovoz"{if $filterStitek === 'dovoz'} selected{/if}>On order</option>
                                     </select>
                                 </label>
                             </div>
                             <div class="filter-item">
                                 <label>
-                                    <span class="label">Značka</span>
+                                    <span class="label">Brand</span>
                                     <select name="znacka" id="znacka">
-                                        <option value="">Nerozhoduje</option>
+                                        <option value="">Any</option>
                                         {foreach $brands as $brand}
                                             <option value="{$brand}"{if $filterZnacka === $brand} selected{/if}>{$brand}</option>
                                         {/foreach}
@@ -48,9 +48,9 @@
                             </div>
                             <div class="filter-item">
                                 <label>
-                                    <span class="label">Karoserie</span>
+                                    <span class="label">Body type</span>
                                     <select name="karoserie" id="karoserie">
-                                        <option value="">Nerozhoduje</option>
+                                        <option value="">Any</option>
                                         {foreach $bodyworks as $body}
                                             <option value="{$body}"{if $filterKaroserie === $body} selected{/if}>{$body|firstUpper}</option>
                                         {/foreach}
@@ -59,9 +59,9 @@
                             </div>
                             <div class="filter-item">
                                 <label>
-                                    <span class="label">Palivo</span>
+                                    <span class="label">Fuel</span>
                                     <select name="palivo" id="palivo">
-                                        <option value="">Nerozhoduje</option>
+                                        <option value="">Any</option>
                                         {foreach $fuels as $fuel}
                                             <option value="{$fuel}"{if $filterPalivo === $fuel} selected{/if}>{$fuel|firstUpper}</option>
                                         {/foreach}
@@ -69,35 +69,35 @@
                                 </label>
                             </div>
                             <div class="filter-item range">
-                                <label for="priceFrom">Cena (Kč)</label>
+                                <label for="priceFrom">Price (CZK)</label>
                                 <div class="range-wrap">
-                                    <input type="number" placeholder="Od" name="priceFrom" value="{$filterPriceFrom}">
-                                    <input type="number" placeholder="Do" name="priceTo" value="{$filterPriceTo}">
+                                    <input type="number" placeholder="From" name="priceFrom" value="{$filterPriceFrom}">
+                                    <input type="number" placeholder="To" name="priceTo" value="{$filterPriceTo}">
                                 </div>
                             </div>
                             <div class="filter-item range">
-                                <label for="yearFrom">1. registrace</label>
+                                <label for="yearFrom">1st registration</label>
                                 <div class="range-wrap">
-                                    <input type="number" placeholder="Od" name="yearFrom" value="{$filterYearFrom}">
-                                    <input type="number" placeholder="Do" name="yearTo" value="{$filterYearTo}">
+                                    <input type="number" placeholder="From" name="yearFrom" value="{$filterYearFrom}">
+                                    <input type="number" placeholder="To" name="yearTo" value="{$filterYearTo}">
                                 </div>
                             </div>
                             <div class="filter-item range">
-                                <label for="kmFrom">Nájezd (km)</label>
+                                <label for="kmFrom">Mileage (km)</label>
                                 <div class="range-wrap">
-                                    <input type="number" placeholder="Od" name="kmFrom" value="{$filterKmFrom}">
-                                    <input type="number" placeholder="Do" name="kmTo" value="{$filterKmTo}">
+                                    <input type="number" placeholder="From" name="kmFrom" value="{$filterKmFrom}">
+                                    <input type="number" placeholder="To" name="kmTo" value="{$filterKmTo}">
                                 </div>
                             </div>
                             <div class="filter-item half checkbox">
                                 <input type="checkbox" id="odpocet" name="odpocet" value="1"{if $filterOdpocet} checked{/if}>
-                                <label for="odpocet">Odpočet DPH</label>
+                                <label for="odpocet">VAT deductible</label>
                             </div>
                             <div class="filter-submit">
-                                <input type="submit" value="Vyhledat">
+                                <input type="submit" value="Search">
                             </div>
                             <div class="filter-clear">
-                                <a n:href="Car:list znacka => null, karoserie => null, palivo => null, stitek => null, priceFrom => null, priceTo => null, yearFrom => null, yearTo => null, kmFrom => null, kmTo => null, odpocet => null, page => 1" class="btn-text">Zrušit filtry</a>
+                                <a n:href="Car:list znacka => null, karoserie => null, palivo => null, stitek => null, priceFrom => null, priceTo => null, yearFrom => null, yearTo => null, kmFrom => null, kmTo => null, odpocet => null, page => 1" class="btn-text">Clear filters</a>
                             </div>
                         </div>
                         </form>
@@ -111,8 +111,11 @@
                             {foreach json_decode($car->images ?? '[]') as $image}
                                 {php $carImages[] = $image}
                             {/foreach}
+                            {* TEMPORARY (dev only): placeholder instead of real car photos — DELETE the line below for production *}
+                            {php $carImages = ['/assets/img/car-detail.webp', '/assets/img/car-gallery-1.webp', '/assets/img/car-gallery-2.webp', '/assets/img/car-gallery-3.webp', '/assets/img/car.webp']}
                             <a n:href="Car:detail detailUrl => $car->detailUrl" class="product-item">
-                                <div class="product-image" style="background-image: url('{if count($carImages)}{$carImages[0]}{else}/assets/img/placeholder.webp{/if}')"></div>
+                                {var $bgImg = count($carImages) ? $carImages[0] : '/assets/img/placeholder.webp'}
+                                <div class="product-image" style="background-image: url('{$bgImg|noescape}')"></div>
                                 <div class="product-content">
                                     <div class="product-head">
                                         <div class="title-col">
@@ -121,9 +124,9 @@
                                         </div>
                                         <div class="price-col">
                                             <div class="price" n:if="$car->cena">
-                                                {if $car->odpocet == 'A'}{number_format((int)($car->cena * .79), 0, ',', ' ')}{else}{number_format((int)$car->cena, 0, ',', ' ')}{/if} Kč
+                                                {if $car->odpocet == 'A'}{number_format((int)($car->cena * .79), 0, ',', ' ')}{else}{number_format((int)$car->cena, 0, ',', ' ')}{/if} CZK
                                             </div>
-                                            <div class="note" n:if="$car->odpocet == 'A'">možnost odpočtu DPH</div>
+                                            <div class="note" n:if="$car->odpocet == 'A'">VAT deductible</div>
                                         </div>
                                     </div>
                                     <div class="product-body">
@@ -219,14 +222,14 @@
                             <div class="product-cta">
                                 <div class="full-bck" style="background-image: url('/assets/img/cta.webp')"></div>
                                 <div class="text-col">
-                                    <h3 class="title">Potřebujete poradit s výběrem?</h3>
+                                    <h3 class="title">Need help choosing?</h3>
                                     <div class="text">
-                                        Nejste si jistí, který vůz je pro vás ten pravý? Napište nám a rádi vám poradíme s výběrem. Společně vybereme auto, které bude sedět vašim potřebám i rozpočtu.
+                                        Not sure which vehicle is right for you? Get in touch and we'll be happy to help you choose. Together we'll find a car that fits your needs and budget.
                                     </div>
                                 </div>
                                 <div class="btn-col">
-                                    <a href="/cs/kontakt" class="btn btn--circle btn--circle--red btn--circle--sm">
-                                        <span class="text">Kontakt</span>
+                                    <a href="/en/contact" class="btn btn--circle btn--circle--red btn--circle--sm">
+                                        <span class="text">Contact</span>
                                         <span class="icon">
                                         <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M25.7071 8.07038C26.0976 7.67986 26.0976 7.0467 25.7071 6.65617L19.3431 0.292211C18.9526 -0.0983137 18.3195 -0.0983136 17.9289 0.292211C17.5384 0.682735 17.5384 1.3159 17.9289 1.70642L23.5858 7.36328L17.9289 13.0201C17.5384 13.4107 17.5384 14.0438 17.9289 14.4343C18.3195 14.8249 18.9526 14.8249 19.3431 14.4343L25.7071 8.07038ZM0 7.36328L1.43373e-07 8.36328L25 8.36328L25 7.36328L25 6.36328L-1.43373e-07 6.36328L0 7.36328Z" fill="white"/>
@@ -244,25 +247,20 @@
                                     </a>
 
                                     <div class="dots" n:if="$numOfPages > 1">
-                                        {* Always show page 1 *}
                                         <a n:href="showPage! page => 1" class="dot{if $page == 1} active{/if}">1</a>
 
-                                        {* Dots after 1 if window doesn't touch start *}
                                         {if $page > 4}
                                             <span class="dots">...</span>
                                         {/if}
 
-                                        {* Window of 2 around current page *}
                                         {for $i = max(2, $page - 2); $i <= min($numOfPages - 1, $page + 2); $i++}
                                             <a n:href="showPage! page => $i" class="dot{if $i == $page} active{/if}">{$i}</a>
                                         {/for}
 
-                                        {* Dots before last if window doesn't touch end *}
                                         {if $page < $numOfPages - 3}
                                             <span class="dots">...</span>
                                         {/if}
 
-                                        {* Always show last page *}
                                         <a n:href="showPage! page => $numOfPages" class="dot{if $page == $numOfPages} active{/if}">{$numOfPages}</a>
                                     </div>
 

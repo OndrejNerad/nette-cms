@@ -162,6 +162,8 @@
                                 {foreach json_decode($car->images ?? '[]') as $image}
                                     {php $carImages[] = $image}
                                 {/foreach}
+                                {* TEMPORARY (dev only): placeholder instead of real car photos — DELETE the line below for production *}
+                                {php $carImages = ['/assets/img/car-detail.webp', '/assets/img/car-gallery-1.webp', '/assets/img/car-gallery-2.webp', '/assets/img/car-gallery-3.webp', '/assets/img/car.webp']}
                                 <div class="swiper-slide">
                                     <a n:href="Car:detail detailUrl => $car->detailUrl" class="product-slide">
                                         <div class="image" style="background-image: url('{if count($carImages)}{$carImages[0]}{else}/assets/img/placeholder.webp{/if}')"></div>

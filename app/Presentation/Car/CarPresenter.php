@@ -159,7 +159,7 @@ class CarPresenter extends Presenter
     public function formatTemplateFiles(): array
     {
         $name = $this->getAction();
-        return [__DIR__ . "/templates/$name.latte"];
+        return [__DIR__ . "/templates/{$this->lang}/$name.latte"];
     }
 
     public function handleOrder($direction)

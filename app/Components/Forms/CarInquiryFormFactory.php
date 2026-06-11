@@ -3,6 +3,7 @@
 namespace App\Components\Forms;
 
 use Nette\Application\UI\Form;
+use Nette\Mail\Message;
 
 final class CarInquiryFormFactory extends BaseFormFactory
 {

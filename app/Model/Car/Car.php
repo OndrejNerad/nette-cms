@@ -41,6 +41,8 @@ use App\Model\Equipment\EquipmentItem;
  * @property string|null        $model
  * @property string|null        $znacka
  * @property string|null        $stitek
+ * @property string|null        $popis
+ * @property string|null        $vinVerejny
  * @property string|null        $popisNabidky
  *
  * @property string|null        $images

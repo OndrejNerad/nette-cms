@@ -9,7 +9,6 @@ services:
             encryption: %mail.encryption%
 
     - App\Core\RouterFactory::createRouter
-#    - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%)
     - App\Components\Forms\ContactFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)
     - App\Components\Forms\InquiryFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)
     - App\Components\Forms\PricingFormFactory(@mail.mailer, %adminEmail%, %recaptcha.siteKey%, %recaptcha.secretKey%, %recaptcha.verify%)

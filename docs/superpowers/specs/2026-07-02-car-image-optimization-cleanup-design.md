@@ -36,11 +36,11 @@ apt-get install -y libjpeg-dev libpng-dev \
 
 Constants alongside the existing `API_URL`/`API_TOKEN` pattern:
 ```php
-private const IMAGE_MAX_DIMENSION = 1600; // px, longest side
+private const IMAGE_MAX_DIMENSION = 1400; // px, longest side
 private const IMAGE_QUALITY       = 78;   // JPEG quality
 ```
 
-Resize call uses `Image::SHRINK_ONLY` so images already smaller than 1600px are never upscaled. All output files are normalized to `.jpg` regardless of the source extension (source may be `.jpg`/`.png`/etc.; we always re-encode to JPEG now), so the stored filename becomes `{externalId}_{index}.jpg`.
+Resize call uses `Image::SHRINK_ONLY` so images already smaller than 1400px are never upscaled. All output files are normalized to `.jpg` regardless of the source extension (source may be `.jpg`/`.png`/etc.; we always re-encode to JPEG now), so the stored filename becomes `{externalId}_{index}.jpg`.
 
 If `Image::fromString()`/resize fails on a corrupt/unsupported download, catch and fall back to writing the original bytes as-is (with a warning logged), rather than losing the photo entirely.
 

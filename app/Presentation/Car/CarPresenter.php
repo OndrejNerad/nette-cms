@@ -57,6 +57,9 @@ class CarPresenter extends Presenter
     /** @persistent */
     public ?string $odpocet = null;
 
+    /** @persistent */
+    public array $equipment = [];
+
     public function __construct(
         private readonly Orm $orm,
         private readonly CarEquipmentRepository $carEquipmentRepository,
@@ -72,6 +75,21 @@ class CarPresenter extends Presenter
             }
         }
         parent::loadState($params);
+
+        // drop non-string elements first (a crafted URL like equipment[a][]=x can smuggle
+        // a nested array through the persistent-parameter binding), then dedupe and bound
+        // the input generously so a crafted URL can't force an unbounded existence-check
+        // query, without letting stale ids crowd out valid ones before we know which is which
+        $ids = array_filter($this->equipment, static fn ($id): bool => is_string($id) && $id !== '');
+        $ids = array_slice(array_values(array_unique($ids)), 0, 200);
+
+        // drop equipment ids that no longer exist in equipment_items (e.g. removed from feed),
+        // then cap the actually-applied filter to 50 items
+        $existing = $this->orm->equipmentItems->findMapByIds($ids);
+        $this->equipment = array_slice(array_values(array_filter(
+            $ids,
+            fn (string $id): bool => isset($existing[$id]),
+        )), 0, 50);
     }
 
     public function beforeRender(): void
@@ -97,6 +115,7 @@ class CarPresenter extends Presenter
             'kmTo'      => $this->kmTo,
             'priceFrom' => $this->priceFrom,
             'priceTo'   => $this->priceTo,
+            'equipment' => $this->equipment,
         ];
 
         $filtered = $this->orm->cars->findFiltered($filters);
@@ -128,6 +147,36 @@ class CarPresenter extends Presenter
         $this->template->filterKmFrom    = $this->kmFrom;
         $this->template->filterKmTo      = $this->kmTo;
         $this->template->filterOdpocet   = $this->odpocet;
+
+        $allEquipment   = $this->orm->equipmentItems->findAllOrdered();
+        $allEquipmentById = [];
+        foreach ($allEquipment as $item) {
+            $allEquipmentById[$item->id] = $item;
+        }
+
+        // resolve popular/filter items from the already-fetched $allEquipment instead of
+        // issuing two more findMapByIds() queries on every page load
+        $popularIds       = $this->carEquipmentRepository->findPopularEquipmentIds(15);
+        $popularEquipment = array_values(array_filter(array_map(
+            fn (string $id) => $allEquipmentById[$id] ?? null,
+            $popularIds,
+        )));
+
+        $filterEquipment = array_values(array_filter(array_map(
+            fn (string $id) => $allEquipmentById[$id] ?? null,
+            $this->equipment,
+        )));
+
+        $toJson = fn (array $items): string => json_encode(array_map(
+            fn ($item) => ['id' => $item->id, 'title' => $item->title],
+            $items,
+        ), JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR);
+
+        $this->template->allEquipment        = $allEquipment;
+        $this->template->popularEquipment    = $popularEquipment;
+        $this->template->filterEquipment     = $filterEquipment;
+        $this->template->allEquipmentJson     = $toJson($allEquipment);
+        $this->template->popularEquipmentJson = $toJson($popularEquipment);
     }
 
     public function renderDetail(string $detailUrl): void

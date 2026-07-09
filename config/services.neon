@@ -17,6 +17,7 @@ services:
     - App\Command\ImportCarsCommand
     - App\Command\ImportSocialItemsCommand
     - App\Command\ImportGoogleReviewsCommand
+    - App\Command\ReprocessCarImagesCommand
     - App\Model\CarEquipment\CarEquipmentRepository
 
     - implement: App\Components\Forms\ContactFormControlFactory

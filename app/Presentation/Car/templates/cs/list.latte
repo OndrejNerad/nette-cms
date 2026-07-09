@@ -68,6 +68,28 @@
                                     </select>
                                 </label>
                             </div>
+                            <div class="filter-item equipment-filter">
+                                <label>
+                                    <span class="label">Vybavení</span>
+                                    <input type="text" id="equipment-search" placeholder="Hledat vybavení..." autocomplete="off">
+                                </label>
+                                <div class="equipment-dropdown" id="equipment-dropdown"></div>
+                                <div class="equipment-chips" id="equipment-chips">
+                                    {foreach $filterEquipment as $item}
+                                        <span class="chip" data-id="{$item->id}">
+                                            {$item->title}
+                                            <i class="remove">&times;</i>
+                                            <input type="hidden" name="equipment[]" value="{$item->id}">
+                                        </span>
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <script>
+                                window.EQUIPMENT_DATA = {
+                                    all: {$allEquipmentJson|noescape},
+                                    popular: {$popularEquipmentJson|noescape}
+                                };
+                            </script>
                             <div class="filter-item range">
                                 <label for="priceFrom">Cena (Kč)</label>
                                 <div class="range-wrap">
@@ -97,7 +119,7 @@
                                 <input type="submit" value="Vyhledat">
                             </div>
                             <div class="filter-clear">
-                                <a n:href="Car:list znacka => null, karoserie => null, palivo => null, stitek => null, priceFrom => null, priceTo => null, yearFrom => null, yearTo => null, kmFrom => null, kmTo => null, odpocet => null, page => 1" class="btn-text">Zrušit filtry</a>
+                                <a n:href="Car:list znacka => null, karoserie => null, palivo => null, stitek => null, priceFrom => null, priceTo => null, yearFrom => null, yearTo => null, kmFrom => null, kmTo => null, odpocet => null, equipment => [], page => 1" class="btn-text">Zrušit filtry</a>
                             </div>
                         </div>
                         </form>

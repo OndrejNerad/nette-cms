@@ -8,6 +8,7 @@ $container = $bootstrap->bootCliApplication();
 
 $app = new Symfony\Component\Console\Application('CMS', '1.0');
 $app->add($container->getByType(App\Command\ImportCarsCommand::class));
+$app->add($container->getByType(App\Command\ReprocessCarImagesCommand::class));
 //$app->add($container->getByType(App\Command\ImportSocialItemsCommand::class));
 //$app->add($container->getByType(App\Command\ImportGoogleReviewsCommand::class));
 $app->run();

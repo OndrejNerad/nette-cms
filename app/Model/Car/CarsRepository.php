@@ -2,9 +2,12 @@
 
 namespace App\Model\Car;
 
+use App\Model\CarEquipment\CarEquipmentRepository;
 use Nextras\Orm\Collection\Functions\CompareGreaterThanEqualsFunction;
 use Nextras\Orm\Collection\Functions\CompareSmallerThanEqualsFunction;
 use Nextras\Orm\Collection\ICollection;
+use Nextras\Orm\Mapper\IMapper;
+use Nextras\Orm\Repository\IDependencyProvider;
 use Nextras\Orm\Repository\Repository;
 
 /**
@@ -12,6 +15,14 @@ use Nextras\Orm\Repository\Repository;
  */
 class CarsRepository extends Repository
 {
+    public function __construct(
+        IMapper $mapper,
+        ?IDependencyProvider $dependencyProvider,
+        private readonly CarEquipmentRepository $carEquipmentRepository,
+    ) {
+        parent::__construct($mapper, $dependencyProvider);
+    }
+
     public static function getEntityClassNames(): array
     {
         return [Car::class];
@@ -25,6 +36,18 @@ class CarsRepository extends Repository
     public function findByExternalId(string $externalId): ?Car
     {
         return $this->getBy(['externalId' => $externalId]);
+    }
+
+    /**
+     * @param string[] $externalIds
+     */
+    public function findNotIn(array $externalIds): ICollection
+    {
+        if ($externalIds === []) {
+            return $this->findAll()->limitBy(0);
+        }
+
+        return $this->findAll()->findBy(['externalId!=' => $externalIds]);
     }
 
     public function findFiltered(array $filters): ICollection
@@ -64,6 +87,10 @@ class CarsRepository extends Repository
         }
         if ($filters['priceTo'] !== null) {
             $collection = $collection->findBy([CompareSmallerThanEqualsFunction::class, 'cena', $filters['priceTo']]);
+        }
+        if (!empty($filters['equipment'])) {
+            $carIds = $this->carEquipmentRepository->findCarIdsWithAllEquipment($filters['equipment']);
+            $collection = $collection->findBy(['id' => $carIds ?: [0]]);
         }
 
         return $collection;

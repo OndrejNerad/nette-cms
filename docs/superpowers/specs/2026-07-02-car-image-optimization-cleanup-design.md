@@ -1,17 +1,6 @@
 # Car Import — Image Optimization & Inactive Cleanup Design
 
 **Date:** 2026-07-02
-
-## Problem
-
-`CarImportService::downloadImages()` (`app/Service/CarImportService.php:181-207`) writes car photos straight from the feed's S3 URLs to `www/images/cars/{externalId}_{index}.{ext}` with plain `file_get_contents`/`file_put_contents` — no resizing, no recompression. Feed originals are typically multi-MB DSLR/phone photos; at production scale (5,114+ cars) this is heading toward tens of GB of disk usage.
-
-Two compounding problems:
-
-1. **No compression** — every photo is stored at full original size/quality forever.
-2. **Orphan accumulation** — `downloadImages()` only skips writing a file if that exact filename (`{externalId}_{index}.{ext}`) already exists. If a car's photo set changes on a later import (fewer photos, reordered, different extension), the old files for that car are never removed — they just pile up alongside the new ones, forever. This is a bigger long-term risk than raw file size, since it compounds on every re-import.
-3. **No cleanup of removed listings** — the feed has no active/status field, and nothing today detects when a car disappears from the feed or removes its DB row/images. `CarsRepository` has no delete method; the import loop only ever upserts.
-
 ## Solution Overview
 
 1. Resize + recompress every downloaded image to JPEG before writing to disk.

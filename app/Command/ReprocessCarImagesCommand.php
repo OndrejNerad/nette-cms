@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ImportCarsCommand extends Command
+class ReprocessCarImagesCommand extends Command
 {
     public function __construct(
         private readonly CarImportService $carImportService,
@@ -18,21 +18,15 @@ class ImportCarsCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('app:import-cars');
-        $this->setDescription('Import cars from external API');
-        $this->addOption('dry-run', null, InputOption::VALUE_NONE, 'Run the import without persisting or writing any changes');
+        $this->setName('app:reprocess-car-images');
+        $this->setDescription('Backfill: re-compress existing car images on disk and normalize them to JPEG');
+        $this->addOption('dry-run', null, InputOption::VALUE_NONE, 'Run without writing or deleting any files');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('<info>Starting car import...</info>');
-        $this->carImportService->import($output, (bool) $input->getOption('dry-run'));
+        $output->writeln('<info>Reprocessing existing car images...</info>');
+        $this->carImportService->reprocessExistingImages($output, (bool) $input->getOption('dry-run'));
         return Command::SUCCESS;
     }
-
-    // PUVODNI METODA
-//    public function run(): void
-//    {
-//        $this->carImportService->import();
-//    }
 }

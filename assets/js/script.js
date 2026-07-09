@@ -6,6 +6,7 @@ import 'fslightbox';
 import naja from 'naja';
 
 import './inquiry.js';
+import './equipment-filter.js';
 
 $(function () {
     naja.initialize();

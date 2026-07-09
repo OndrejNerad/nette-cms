@@ -16,49 +16,83 @@ class CarImportService
 //    private const API_TOKEN = 'YdiDcv6jbjKDAanL1aZi22vvANnPmTVL-s4_D621zy-1ZnNkzgXeC_-gdImyJsgM5kg';
     private const API_TOKEN =  "hfm!tobl0a7csgk73==5os5l%urmh@%g(()-%)1%7vbjv@l4oa";
 
+    private const IMAGE_MAX_DIMENSION = 1400; // px, longest side
+    private const IMAGE_QUALITY       = 78;   // JPEG quality
+
     public function __construct(
         private readonly Orm                      $orm,
         private readonly CarEquipmentRepository   $carEquipmentRepository,
         private readonly EquipmentItemsRepository $equipmentItemsRepository,
+        private readonly ImageOptimizerService     $imageOptimizerService,
     ) {
     }
 
-    public function import(?OutputInterface $output = null): void
+    public function import(?OutputInterface $output = null, bool $dryRun = false): void
     {
         $output ??= new NullOutput();
+
+        if ($dryRun) {
+            $output->writeln('<comment>Running in dry-run mode: no changes will be persisted.</comment>');
+        }
 
         set_time_limit(0);
         ini_set('memory_limit', '512M');
 
-        $url      = self::API_URL;
-        $imported = 0;
-        $skipped  = 0;
+        $url                = self::API_URL;
+        $imported           = 0;
+        $skipped            = 0;
+        $seenExternalIds    = [];
+        $dryRunProcessedIds = [];
 
         do {
             $response = $this->fetchPage($url);
 
             foreach ($response['results'] as $item) {
-                $car = $this->orm->cars->findByExternalId((string) $item['id']);
+                $externalId        = (string) $item['id'];
+                $seenExternalIds[] = $externalId;
+
+                // in dry-run mode nothing is persisted, so a duplicate id within the
+                // same run can't be found via findByExternalId; track it ourselves so
+                // the preview counts don't double-count it as a fresh import.
+                if ($dryRun && isset($dryRunProcessedIds[$externalId])) {
+                    $skipped++;
+                    continue;
+                }
+
+                $car = $this->orm->cars->findByExternalId($externalId);
 
                 if ($car !== null) {
                     $newHash = md5(json_encode($item['listing_values'] ?? []));
                     if ($car->rawHash === $newHash) {
                         if (empty($car->images) || $car->images === '[]') {
-                            $localPaths = $this->downloadImages((string) $item['id'], $item['images'] ?? [], $output);
-                            $car->images = json_encode($localPaths, JSON_THROW_ON_ERROR);
-                            $this->orm->cars->persistAndFlush($car);
-                            $output->writeln("  Downloaded images for car #{$item['id']}");
+                            $localPaths = $this->downloadImages((string) $item['id'], $item['images'] ?? [], $output, $dryRun);
+                            if (!$dryRun) {
+                                $car->images = json_encode($localPaths, JSON_THROW_ON_ERROR);
+                                $this->orm->cars->persistAndFlush($car);
+                            }
+                            $message = $dryRun
+                                ? "  [dry-run] would download images for car #{$item['id']}"
+                                : "  Downloaded images for car #{$item['id']}";
+                            $output->writeln($message);
                         }
                         $skipped++;
+                        if ($dryRun) {
+                            $dryRunProcessedIds[$externalId] = true;
+                        }
                         continue;
                     }
                 }
 
-                $this->upsert($item);
+                $this->upsert($item, $dryRun);
                 $imported++;
+                if ($dryRun) {
+                    $dryRunProcessedIds[$externalId] = true;
+                }
             }
 
-            $this->orm->flush();
+            if (!$dryRun) {
+                $this->orm->flush();
+            }
             $this->orm->clear();
 
             $url = $response['next'] !== null
@@ -69,9 +103,44 @@ class CarImportService
         } while ($url !== null);
 
         $output->writeln("Import done. Total imported: $imported, skipped: $skipped.");
+
+        if ($seenExternalIds !== []) {
+            $this->cleanupRemovedCars($seenExternalIds, $output, $dryRun);
+        }
     }
 
-    private function upsert(array $item): void
+    private function cleanupRemovedCars(array $seenExternalIds, OutputInterface $output, bool $dryRun = false): void
+    {
+        $removedCars  = $this->orm->cars->findNotIn($seenExternalIds);
+        $removedCount = 0;
+
+        foreach ($removedCars as $car) {
+            if ($dryRun) {
+                $output->writeln("  [dry-run] would remove car #{$car->externalId} (no longer in feed)");
+                $removedCount++;
+                continue;
+            }
+
+            $images = json_decode($car->images ?? '[]', true) ?: [];
+            foreach ($images as $imagePath) {
+                $absolutePath = __DIR__ . '/../../www' . $imagePath;
+                if (is_file($absolutePath)) {
+                    unlink($absolutePath);
+                }
+            }
+
+            $output->writeln("  Removing car #{$car->externalId} (no longer in feed)");
+            $this->orm->cars->removeAndFlush($car);
+            $removedCount++;
+        }
+
+        if ($removedCount > 0) {
+            $verb = $dryRun ? 'would be removed' : 'removed';
+            $output->writeln("Cleanup done. $removedCount car(s) no longer present in feed $verb.");
+        }
+    }
+
+    private function upsert(array $item, bool $dryRun = false): void
     {
         $values    = $item['listing_values'] ?? [];
         $equipment = $item['equipment']      ?? [];
@@ -114,7 +183,7 @@ class CarImportService
         $car->popisNabidky        = $values['popis_nabidky']         ?? null;
         $car->rawValues           = json_encode($values, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $car->rawHash             = md5(json_encode($values)); // ← add this
-        $car->images              = json_encode($this->downloadImages($car->externalId, $images), JSON_THROW_ON_ERROR);
+        $car->images              = json_encode($this->downloadImages($car->externalId, $images, null, $dryRun), JSON_THROW_ON_ERROR);
 
         $car->updatedAt           = new \DateTimeImmutable();
 
@@ -126,6 +195,10 @@ class CarImportService
 
         if (!$car->isPersisted()) {
             $car->createdAt = new \DateTimeImmutable();
+        }
+
+        if ($dryRun) {
+            return;
         }
 
         // persist + flush so car gets an ID before syncEquipment
@@ -178,18 +251,28 @@ class CarImportService
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }
 
-    private function downloadImages(string $externalId, array $s3Urls, ?OutputInterface $output = null): array
+    private function downloadImages(string $externalId, array $s3Urls, ?OutputInterface $output = null, bool $dryRun = false): array
     {
         $dir = __DIR__ . '/../../www/images/cars/';
-        if (!is_dir($dir)) {
+        if (!$dryRun && !is_dir($dir)) {
             mkdir($dir, 0755, true);
         }
 
-        $localPaths = [];
+        $keepFilenames = [];
+        $localPaths    = [];
+
         foreach ($s3Urls as $index => $url) {
-            $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
-            $filename = $externalId . '_' . $index . '.' . $ext;
-            $dest     = $dir . $filename;
+            $filename        = $externalId . '_' . $index . '.jpg';
+            $keepFilenames[] = $filename;
+            $dest            = $dir . $filename;
+
+            if ($dryRun) {
+                if (!file_exists($dest)) {
+                    $output?->writeln("  [dry-run] would download image $index for car #$externalId");
+                }
+                $localPaths[] = '/images/cars/' . $filename;
+                continue;
+            }
 
             if (!file_exists($dest)) {
                 $data = @file_get_contents($url);
@@ -197,13 +280,113 @@ class CarImportService
                     $output?->writeln("  WARNING: failed to download image $index for car #$externalId");
                     continue;
                 }
-                file_put_contents($dest, $data);
+
+                $optimized = $this->imageOptimizerService->optimize($data, self::IMAGE_MAX_DIMENSION, self::IMAGE_QUALITY);
+                if ($optimized === null) {
+                    $output?->writeln("  WARNING: could not process image $index for car #$externalId (unsupported/corrupt format)");
+                    continue;
+                }
+                file_put_contents($dest, $optimized);
             }
 
             $localPaths[] = '/images/cars/' . $filename;
         }
 
+        $this->removeOrphanedImages($dir, $externalId, $keepFilenames, $output, $dryRun);
+
         return $localPaths;
+    }
+
+    private function removeOrphanedImages(string $dir, string $externalId, array $keepFilenames, ?OutputInterface $output = null, bool $dryRun = false): void
+    {
+        $existingFiles = glob($dir . $externalId . '_*') ?: [];
+
+        foreach ($existingFiles as $path) {
+            if (!in_array(basename($path), $keepFilenames, true)) {
+                if ($dryRun) {
+                    $output?->writeln("  [dry-run] would remove orphaned image " . basename($path));
+                    continue;
+                }
+                unlink($path);
+                $output?->writeln("  Removed orphaned image " . basename($path));
+            }
+        }
+    }
+
+    public function reprocessExistingImages(?OutputInterface $output = null, bool $dryRun = false): void
+    {
+        $output ??= new NullOutput();
+        $dir      = __DIR__ . '/../../www/images/cars/';
+
+        set_time_limit(0);
+        ini_set('memory_limit', '512M');
+
+        $processedFiles = 0;
+        $updatedCars    = 0;
+
+        foreach ($this->orm->cars->findAll() as $car) {
+            $images = json_decode($car->images ?? '[]', true) ?: [];
+            if ($images === []) {
+                continue;
+            }
+
+            $newImages = [];
+            $changed   = false;
+
+            foreach ($images as $imagePath) {
+                $oldAbsolute = __DIR__ . '/../../www' . $imagePath;
+
+                if (!is_file($oldAbsolute)) {
+                    continue;
+                }
+
+                $data = file_get_contents($oldAbsolute);
+                if ($data === false) {
+                    $newImages[] = $imagePath;
+                    continue;
+                }
+
+                $optimized = $this->imageOptimizerService->optimize($data, self::IMAGE_MAX_DIMENSION, self::IMAGE_QUALITY);
+
+                if ($optimized === null) {
+                    $output->writeln("  WARNING: could not process " . basename($oldAbsolute) . " (unsupported/corrupt format), leaving as-is");
+                    $newImages[] = $imagePath;
+                    continue;
+                }
+
+                $newFilename = pathinfo($oldAbsolute, PATHINFO_FILENAME) . '.jpg';
+                $newRelative = '/images/cars/' . $newFilename;
+                $newAbsolute = $dir . $newFilename;
+
+                if ($optimized === $data && $newAbsolute === $oldAbsolute) {
+                    $newImages[] = $imagePath;
+                    continue;
+                }
+
+                if (!$dryRun) {
+                    file_put_contents($newAbsolute, $optimized);
+                    if ($newAbsolute !== $oldAbsolute) {
+                        unlink($oldAbsolute);
+                    }
+                }
+
+                $output->writeln(($dryRun ? '  [dry-run] would reprocess ' : '  Reprocessed ') . basename($oldAbsolute));
+                $newImages[] = $newRelative;
+                $changed     = true;
+                $processedFiles++;
+            }
+
+            if ($changed) {
+                if (!$dryRun) {
+                    $car->images = json_encode($newImages, JSON_THROW_ON_ERROR);
+                    $this->orm->cars->persistAndFlush($car);
+                }
+                $updatedCars++;
+            }
+        }
+
+        $verb = $dryRun ? 'would be' : 'were';
+        $output->writeln("Reprocess done. $processedFiles file(s) across $updatedCars car(s) $verb updated.");
     }
 
     private function generateDetailUrl(string $znacka, string $model, string $externalId): string

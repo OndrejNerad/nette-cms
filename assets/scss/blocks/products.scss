@@ -43,6 +43,35 @@
                         & + input { margin-left: 10px;}
                     }
                 }
+
+                &.equipment-filter {
+                    position: relative;
+
+                    .equipment-dropdown {
+                        display: none; position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 10;
+                        background-color: $white; border-radius: 8px; box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+                        max-height: 220px; overflow-y: auto;
+
+                        &.open { display: block;}
+
+                        .equipment-dropdown-item {
+                            padding: 10px 12px; font-size: 16px; cursor: pointer;
+
+                            &:hover { background-color: #F4F4F4;}
+                        }
+                    }
+
+                    .equipment-chips {
+                        display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; margin-bottom: 20px;
+
+                        .chip {
+                            display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px;
+                            background-color: #F4F4F4; border-radius: 20px; font-size: 14px;
+
+                            .remove { cursor: pointer; font-style: normal; line-height: 1;}
+                        }
+                    }
+                }
             }
 
             .filter-submit { flex: 0 0 100%; text-align: center; margin-top: 36px;
